@@ -10,4 +10,6 @@ public class test2 {
 		System.out.println("test");
 	}
 	
+	// hey look it's a comment! -kristini
+	
 }
