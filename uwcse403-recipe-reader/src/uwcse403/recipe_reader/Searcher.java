@@ -25,7 +25,7 @@ public class Searcher {
 
 	// Queries
 	private static final String SEARCH_SQL =
-		"SELECT (name, rating, img_loc) FROM zfr_table WHERE id = ?";
+		"SELECT name, rating, img_loc FROM zfr_table WHERE id = ?";
 	private PreparedStatement searchStatement;
 
 
