@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, testActivity!</string>
-    <string name="app_name">Uwcse403-recipe-reader</string>
-
+    <string name="hello">Hello World!</string>
+    <string name="app_name">RecipeReader</string>
+<string-array name="categories">
+    <item>Appetizers ></item>
+    <item>Salads ></item>
+    <item>Soups ></item>
+    <item>Main Courses ></item>
+    <item>Desserts ></item>
+</string-array>
+    <string name="Search">Search</string>
+    <string name="Search_Types">Recipes, ingredients, etc.</string>
 </resources>
