@@ -7,10 +7,10 @@ package uwcse403.recipe_reader;
 
 public class RecipeOverview {
 	private String name;
-	private int image;
+	private String image;
 	private Boolean favorite;
 	
-	public RecipeOverview(String name, int image, Boolean favorite) {
+	public RecipeOverview(String name, String image, Boolean favorite) {
 		this.name = name;
 		this.image = image;
 		this.favorite = favorite;
@@ -20,7 +20,7 @@ public class RecipeOverview {
 		return name;
 	}
 	
-	public int getImage() {
+	public String getImage() {
 		return image;
 	}
 	

@@ -65,23 +65,22 @@ public class Searcher {
 
     /**********************************************************/
   
-	public void transaction_getRecipeOverviewById(int id)
+	public RecipeOverview transaction_getRecipeOverviewById(int id)
 			throws Exception {
-		
 		searchStatement.clearParameters();
 		searchStatement.setInt(1, id);
 		ResultSet recipe = searchStatement.executeQuery();
-		
+		String name = "";
+		int rating = 0;
+		String imgUrl = "";
 		while (recipe.next()){
-			String name = recipe.getString(1);
-			System.out.println("recipe name: " + name);
-			int rating = recipe.getInt(2);
-			System.out.println("recipe rating: " + rating);
-			String imgUrl = recipe.getString(3);
-			System.out.println("recipe imgUrl: " + imgUrl);
-
+			name = recipe.getString(1);
+			rating = recipe.getInt(2);
+			imgUrl = recipe.getString(3);
 		}
+		boolean favorite = (rating > 50);
 		recipe.close();
+		return new RecipeOverview(name, imgUrl, favorite);
 	}
 
 }
