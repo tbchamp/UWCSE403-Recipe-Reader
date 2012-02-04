@@ -4,8 +4,9 @@
  */
 package uwcse403.recipe_reader;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,8 @@ public class HomeTab extends Fragment {
 		private Fragment resultsFragment;
 
 		public void onClick(View v) {
-			FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+			FragmentTransaction ft = 
+				((FragmentActivity)getActivity()).getSupportFragmentManager().beginTransaction();
 			if (resultsFragment == null) {
 				resultsFragment = Fragment.instantiate(getActivity(), SearchResultsScreen.class.getName());
 			}

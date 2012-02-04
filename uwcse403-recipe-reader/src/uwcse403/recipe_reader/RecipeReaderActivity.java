@@ -5,15 +5,17 @@
 package uwcse403.recipe_reader;
 
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
+import android.support.v4.app.ActionBar;
+import android.support.v4.app.ActionBar.Tab;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
 
-public class RecipeReaderActivity extends Activity {
+public class RecipeReaderActivity extends FragmentActivity {
 	
     /** Called when the activity is first created. */
     @Override
@@ -26,10 +28,10 @@ public class RecipeReaderActivity extends Activity {
      * Add tabs to action bar, add listeners for each tab, and show bar.
      */
     private void setUpTabs() {
-    	ActionBar bar = getActionBar();
+    	ActionBar bar = getSupportActionBar();
+    	bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setDisplayShowTitleEnabled(false);
         bar.setDisplayShowHomeEnabled(true);
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         BarTabListener tabListener = new BarTabListener<HomeTab>(this, "Home", HomeTab.class);
         Tab tab = bar.newTab().setIcon(R.drawable.home).setTabListener(tabListener);
         bar.addTab(tab);
@@ -45,7 +47,6 @@ public class RecipeReaderActivity extends Activity {
         tabListener = new BarTabListener<SettingsTab>(this, "Settings", SettingsTab.class);
         tab = bar.newTab().setIcon(R.drawable.settings).setTabListener(tabListener);
         bar.addTab(tab);
-        
         bar.show();
     }
     
@@ -73,7 +74,11 @@ public class RecipeReaderActivity extends Activity {
             if (fragment == null) {
                 fragment = Fragment.instantiate(activity, tabClass.getName());
             }
+
+            FragmentManager fragMgr = getSupportFragmentManager();
+            ft = fragMgr.beginTransaction();
             ft.replace(android.R.id.content, fragment);
+            ft.commit();
         }
 
         /**

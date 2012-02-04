@@ -6,17 +6,12 @@ package uwcse403.recipe_reader;
 
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
+import android.support.v4.app.Fragment;
 
 
-public class SettingsTab extends PreferenceFragment {
+public class SettingsTab extends Fragment {
 	
-	@Override
-	/** Inflate XML on fragment creation */
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.layout.preferences);
-    }
+
 
 }
 
