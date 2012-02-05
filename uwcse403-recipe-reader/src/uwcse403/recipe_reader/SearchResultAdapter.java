@@ -42,9 +42,9 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
                     if (title != null) {
                           title.setText(recipe.getName());    
                     }
-                    if (image != null) {
-                        image.setImageResource(recipe.getImage());    
-                    }
+//                    if (image != null) {
+//                        image.setImageResource(recipe.getImage());    
+//                    }
                     if (favoriteStar != null && recipe.getFavorite()) {
                         favoriteStar.setImageResource(R.drawable.star);    
                     }
