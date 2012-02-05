@@ -1,85 +1,72 @@
 package uwcse403.recipe_reader;
-import java.util.Properties;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.ArrayList;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.apache.http.*;
+import org.apache.http.client.*;
+import org.apache.http.client.entity.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.impl.client.*;
+import org.apache.http.message.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Runs queries against a back-end database
  */
 
 public class Searcher {
-	private String configFilename;
-	private Properties configProps = new Properties();
 
-	private String mysqlDriver;
-	private String mysqlUrl;
-	private String mysqlUser;
-	private String mysqlPassword;
-	
-	// DB Connection
-	private Connection conn;
-
-	// Queries
-	private static final String SEARCH_SQL =
-		"SELECT name, rating, img_loc FROM zfr_table WHERE id = ?";
-	private PreparedStatement searchStatement;
-
-
-	public Searcher(String configFilename) {
-		this.configFilename = configFilename;
+	public Searcher() {
 	}
 
-    /* Connections to mysql */
+	/* Connections to mysql */
 
-	public void openConnection() throws Exception {
-		configProps.load(new FileInputStream(configFilename));
-
-		mysqlDriver   = configProps.getProperty("recipereader.jdbc_driver");
-		mysqlUrl	   = configProps.getProperty("recipereader.url");
-		mysqlUser	   = configProps.getProperty("recipereader.username");
-		mysqlPassword = configProps.getProperty("recipereader.password");
-
-
-		/* load jdbc drivers */
-		Class.forName(mysqlDriver).newInstance();
-
-		/* open connections to the database */
-
-		conn = DriverManager.getConnection(mysqlUrl, // database
-				mysqlUser, // user
-				mysqlPassword); // password
-	}
-
-	public void closeConnection() throws Exception {
-		conn.close();
-	}
-
-
-	public void prepareStatements() throws Exception {
-		searchStatement = conn.prepareStatement(SEARCH_SQL);
-	}
-
-    /**********************************************************/
-  
+	String result = "";
 	public RecipeOverview transaction_getRecipeOverviewById(int id)
 			throws Exception {
-		searchStatement.clearParameters();
-		searchStatement.setInt(1, id);
-		ResultSet recipe = searchStatement.executeQuery();
+
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("id","1"));
+		//http post
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost("http://students.washington.edu/zacheva/cse403/temp.php");
+		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		HttpResponse response = httpclient.execute(httppost);
+		HttpEntity entity = response.getEntity();
+		InputStream is = entity.getContent();
+
+		//convert response to string
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			sb.append(line + "\n");
+		}
+		is.close();
+		result=sb.toString();
+
 		String name = "";
 		int rating = 0;
 		String imgUrl = "";
-		while (recipe.next()){
-			name = recipe.getString(1);
-			rating = recipe.getInt(2);
-			imgUrl = recipe.getString(3);
+		//parse json data
+		try{
+			JSONArray jArray = new JSONArray(result);
+			for (int i = 0; i < jArray.length(); i++) {
+				JSONObject json_data = jArray.getJSONObject(i);
+				rating = json_data.getInt("rating");
+				name = json_data.getString("name");
+				imgUrl = json_data.getString("img_loc");
+			}
+		} catch (JSONException e){
+			System.out.println("json nosj");
 		}
 		boolean favorite = (rating > 50);
-		recipe.close();
 		return new RecipeOverview(name, imgUrl, favorite);
 	}
 

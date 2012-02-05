@@ -8,12 +8,10 @@ public class test2 {
 	//comment added by zaphans
 
 	public static void main(String [] args) {
-		Searcher s = new Searcher(".\\src\\uwcse403\\recipe_reader\\dbconn.properties");
+		Searcher s = new Searcher();
 		try {
-			s.openConnection();
-			s.prepareStatements();
-			s.transaction_getRecipeOverviewById(1);
-			s.closeConnection();
+			RecipeOverview ro = s.transaction_getRecipeOverviewById(1);
+			System.out.println("Success!\n Recipe Title: " + ro.getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
