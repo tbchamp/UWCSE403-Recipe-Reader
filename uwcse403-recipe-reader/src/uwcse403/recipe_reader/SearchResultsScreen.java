@@ -25,10 +25,10 @@ public class SearchResultsScreen extends ListFragment {
 		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
 		Searcher s = new Searcher();
 		try {
-			s.openConnection();
-			s.prepareStatements();
+			//s.openConnection();
+			//s.prepareStatements();
 			recipeList.add(s.transaction_getRecipeOverviewById(1));
-			s.closeConnection();
+			//s.closeConnection();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Log.i("MYNOTE", "error: " + e);

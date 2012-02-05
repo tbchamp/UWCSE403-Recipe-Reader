@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Zach/git/uwcse403-recipe-reader/bin/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Zach/git/uwcse403-recipe-reader/bin/httpcore-4.1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Zach/git/uwcse403-recipe-reader/bin/httpclient-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Zach/git/uwcse403-recipe-reader/bin/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="./bin/java-json.jar"/>
+	<classpathentry kind="lib" path="./bin/httpcore-4.1.4.jar"/>
+	<classpathentry kind="lib" path="./bin/httpclient-4.1.2.jar"/>
+	<classpathentry kind="lib" path="./bin/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
