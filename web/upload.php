@@ -56,42 +56,16 @@
     </aside>
   <!-- end .sidebar1 --></div>
   <article class="content">
-    <h1>About Recipe Reader</h1>
+    <h1>Upload Recipes:</h1>
     <section>
-     <h2>Main Features</h2>
-      <p>Recipe Readers allows users to: </p>
-      <ul>
-        <li> Upload Recipes </li>
-        <li> Save Favoite Recipes </li>
-        <li> Search our collection of Recipes </li>
-        <li> See whats trending </li>
-        <li> Easy ingredient view for quick shopping </li>
-        <li> Use your voice to navigate the direction </li>
-        <li> Directions are read to you </li>
-      </ul>
-      <p> Recipe Reader is your kitchen cooking assistant so you can follow recipies without having to stop and clean your hands! </p>
+     <h2>Fill out the form below:</h2>
     </section>
     <section>
-      <h2>Installing</h2>
-      <p> Recipe Reader is easy to install on your android device. </p>
-      <p> All Android devices 2.3 (Gingerbread) and higher are supported </p>
-      <p> Here is the link to the <a href="RecipeReader.apk">.apk file</a> and the <a href="install.html">installation instructions</a> </p>
-    </section>
-    <section>
-      <h2>Upleading Recipes:</h2>
-      <p>There are 2 ways to upload a recipe to the Recipe Reader Collection </p>
-      <p> 1. Fill out the <a href="upload.php">recipe form</a>. </p>
-      <p> 2. Use our <a href="upload.php">allrecipes.com import tool</a>. </p>
+      <h2>Import from allrecipes.com:</h2>
+      <p> Enter the URL to an allrecipes.com recipe into the box below: </p>
+      <p> Example: <a href="http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx">http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx</a> </p>
     </section>
   <!-- end .content --></article>
-  
-  <!-- don't use right side -->
-  <aside>
-    <h4>Quick Help:</h4>
-    <p><a href="RecipeReader.apk">.apk file</a></p>
-    <p><a href="upload.php">upload page</a></p>
-  </aside>
-  <!-- right side -->
   
   <footer>
     <p>Recipe Reader by HuskySoft a CSE 403 winter quarter production.</p>
