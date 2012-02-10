@@ -1,0 +1,51 @@
+Android SDK setup:
+	-http://developer.android.com/sdk/installing.html
+
+Git setup:
+
+Set Up Git (http://help.github.com/mac-set-up-git/)
+	-Download and Install Git (http://git-scm.com/)
+	-Make a github account (https://github.com/)
+	-Generate a new SSH key and Add your SSH key to GitHub (see instructions at link above for you OS)
+
+Set your username and email. (http://help.github.com/set-your-user-name-email-and-github-token/)
+	-git config --global user.name "Firstname Lastname"
+	-git config --global user.email "your_email@youremail.com"
+
+Set your GitHub token.
+	-On the GitHub site Click “Account Settings” > Click “Account Admin.”
+	-git config --global github.user username
+	-git config --global github.token 0123456789yourf0123456789token
+
+Install elclipse Egit plugin
+	-go to eclipse marketplace or website (http://eclipse.org/egit/)
+	-install plugin
+	-Android sdk manager -> make sure tools folder and 2.3.3 folder (sdk platform and samples for sdk) installed
+
+Setup Egit with project
+	-(http://wiki.eclipse.org/EGit/User_Guide#Starting_from_existing_Git_Repositories)
+	-(http://blog.doityourselfandroid.com/2010/08/14/git-github-and-egit-eclipse-integration/)
+	-file->import->git->projects from git-> next -> clone
+	-URI = git+ssh://git@github.com/tbchamp/UWCSE403-Recipe-Reader.git
+	-protical = ssh
+	-next
+	-make sure master checked
+	-next
+	-directory = /user/git/**empty**
+	-initial branch = master
+	-remote name = origin
+	-import project -> choose imort existing project
+	
+	
+	
+	if android errors:
+	fix: prefrances android select right version apply->
+	also right click on left -> android tools -> fix project properties
+	
+notes:
+	-great online interface
+	-shows changes in different versions
+	-bug tracking online and with comments:
+		-closes #35
+		-This commit references #35
+	-online wiki with github - use it for documentation and notes to the team
