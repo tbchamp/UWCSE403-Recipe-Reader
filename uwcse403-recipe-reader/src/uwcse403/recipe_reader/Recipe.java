@@ -1,5 +1,9 @@
 package uwcse403.recipe_reader;
 
+/**
+ * Contains all the information about a specific recipe
+ * Jonathan Ramaswamy
+ */
 import java.util.List;
 
 public class Recipe {
