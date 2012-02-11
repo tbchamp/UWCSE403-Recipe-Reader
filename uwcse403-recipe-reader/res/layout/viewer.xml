@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+	<FrameLayout
+            android:id="@+id/frag"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+	<LinearLayout 
+    	android:layout_height="fill_parent" 
+    	android:layout_width="fill_parent"
+    	android:id="@+id/linearLayout1"
+    	android:gravity="bottom">
+   		<Button 
+   			android:id="@+id/recipe_image"
+   			android:text="@string/Image" 
+   			android:layout_height="wrap_content" 
+   			android:layout_width="0px" 
+   			android:clickable="true"
+   			android:layout_weight="1"></Button>
+   		<Button 
+   			android:id="@+id/ingredients"
+   			android:text="@string/Ingredients" 
+   			android:layout_height="wrap_content" 
+   			android:layout_width="0px" 
+   			android:clickable="true"
+   			android:layout_weight="1"></Button>
+   		<Button 
+   			android:id="@+id/instructions"
+   			android:text="@string/Instructions" 
+   			android:layout_height="wrap_content" 
+   			android:layout_width="0px"
+   			android:clickable="true"
+   			android:layout_weight="1"></Button>
+    </LinearLayout>
+</LinearLayout>

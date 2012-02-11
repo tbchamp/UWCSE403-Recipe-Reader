@@ -7,6 +7,7 @@ package uwcse403.recipe_reader;
 import java.util.ArrayList;
 
 import android.support.v4.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,8 @@ public class FavoritesTab extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO: implement opening recipe-view activity when recipe selected
+		Intent i = new Intent(this.getActivity().getApplicationContext(), RecipeViewActivity.class);
+		startActivity(i);
 	}
 
 }
