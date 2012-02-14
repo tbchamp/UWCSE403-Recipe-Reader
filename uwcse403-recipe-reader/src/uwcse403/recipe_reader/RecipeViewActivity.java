@@ -11,6 +11,7 @@ import android.widget.Button;
 
 public class RecipeViewActivity extends FragmentActivity {
 
+	private Recipe recipe;
 	
     /** Called when the activity is first created. */
     @Override
