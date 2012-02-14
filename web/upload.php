@@ -64,6 +64,7 @@
       <h2>Import from allrecipes.com:</h2>
       <p> Enter the URL to an allrecipes.com recipe into the box below: </p>
       <p> Example: <a href="http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx">http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx</a> </p>
+      <p> <input type="text" size="60" /> <input type="submit" value="fetch recipe" /> </p>
     </section>
   <!-- end .content --></article>
   
