@@ -4,26 +4,32 @@
     android:orientation="horizontal" 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_gravity="center_vertical"
     android:padding="10dp">
     
-     <ImageView android:id="@+id/imgIcon"
-        android:layout_width="wrap_content"
+     <ImageView android:id="@+id/categoryIcon"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
         
-     <TextView android:id="@+id/name"
-        android:layout_width="wrap_content"
+      <ImageView android:id="@+id/favoriteStar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_weight="2"/>
+      
+      <TextView android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
+        android:textSize="16dp"
+        android:layout_weight="10"/>
+      
+      <TextView android:id="@+id/rating"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16dp"
-        android:paddingLeft="4dp"
-        android:paddingTop="10dp"
-        android:layout_weight="10"/>
-        
-        <ImageView android:id="@+id/favoriteStar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:paddingTop="10dp"
         android:layout_weight="1"/>
         
 </LinearLayout>

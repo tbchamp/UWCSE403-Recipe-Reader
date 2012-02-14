@@ -6,6 +6,8 @@ package uwcse403.recipe_reader;
 
 import java.util.ArrayList;
 
+import uwcse403.recipe_reader.RecipeOverview.Category;
+
 import android.support.v4.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,8 +25,8 @@ public class FavoritesTab extends ListFragment {
 		
 		// Temporary hard-coded data: to be replaced by List of RecipeOverviews from Searcher.java(?) 
 		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
-		recipeList.add(new RecipeOverview("Very Delicious Hamburgers", "hamburger", true));
-		recipeList.add(new RecipeOverview("Mediocre Hamburgers", "hamburger", true));
+		recipeList.add(new RecipeOverview("Very Delicious Hamburgers", Category.MAIN_COURSE, true, 5.0));
+		recipeList.add(new RecipeOverview("Mediocre Hamburgers", Category.MAIN_COURSE, true, 5.0));
 		//
 		
 		
