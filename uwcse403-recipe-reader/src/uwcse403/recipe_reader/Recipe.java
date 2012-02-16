@@ -9,6 +9,7 @@ import java.util.List;
 public class Recipe {
 
 	private RecipeOverview overview;
+	private String name;
 	private String prep;
 	private String cook;
 	private String yield;
@@ -21,5 +22,6 @@ public class Recipe {
 
 	public Recipe(RecipeOverview overview) {
 		this.overview = overview;
+		name = overview.getName();
 	}
 }
