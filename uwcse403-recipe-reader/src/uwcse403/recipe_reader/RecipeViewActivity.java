@@ -18,10 +18,18 @@ public class RecipeViewActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewer);
+        Bundle extras = getIntent().getExtras();
+        if (extras!= null) {
+        	String test = extras.getString("name");
+        	if (test != null) {
+        		Button b = (Button) findViewById(R.id.recipe_image);
+        		b.setText(test);
+        	}
+        }
         attachButtonListeners();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		Fragment resultsFragment = Fragment.instantiate(this, 
-				LandingFragment.class.getName());
+				LandingFragment.class.getName(), getIntent().getExtras());
 		ft.replace(R.id.frag, resultsFragment);
 		ft.commit();
     }

@@ -39,6 +39,7 @@ public class FavoritesTab extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(this.getActivity().getApplicationContext(), RecipeViewActivity.class);
+		i.putExtra("A Hamburger", "name");
 		startActivity(i);
 	}
 
