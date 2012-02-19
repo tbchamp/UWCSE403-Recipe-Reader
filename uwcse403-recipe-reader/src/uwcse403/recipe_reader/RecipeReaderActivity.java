@@ -30,7 +30,7 @@ public class RecipeReaderActivity extends FragmentActivity {
     private void setUpTabs() {
     	ActionBar bar = getSupportActionBar();
     	bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        bar.setDisplayShowTitleEnabled(false);
+        bar.setDisplayShowTitleEnabled(true);
         bar.setDisplayShowHomeEnabled(true);
         BarTabListener tabListener = new BarTabListener<HomeTab>(this, "Home", HomeTab.class);
         Tab tab = bar.newTab().setIcon(R.drawable.home).setTabListener(tabListener);

@@ -15,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uwcse403.recipe_reader.RecipeOverview.Category;
+
 /**
  * Runs queries against a back-end database
  */
@@ -67,7 +69,7 @@ public class Searcher {
 			System.out.println("json nosj");
 		}
 		boolean favorite = (rating > 50);
-		return new RecipeOverview(name, imgUrl, favorite);
+		return new RecipeOverview(name, Category.MAIN_COURSE, favorite);
 	}
 
 }

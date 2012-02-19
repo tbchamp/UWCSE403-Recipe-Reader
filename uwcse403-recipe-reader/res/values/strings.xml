@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World!</string>
-    <string name="app_name">RecipeReader</string>
+    <string name="app_name">Recipe Reader</string>
+    <string name="Image">Image</string>
+    <string name="Instructions">Instructions</string>
+    <string name="Ingredients">Ingredients</string>
 <string-array name="categories">
     <item>Appetizers ></item>
     <item>Salads ></item>
@@ -9,6 +12,18 @@
     <item>Main Courses ></item>
     <item>Desserts ></item>
 </string-array>
+<string-array name="ingredients">
+    <item>1 cup something or other</item>
+    <item>4 ounces something else</item>
+    <item>¼ tsp this or that</item>
+</string-array>
+<string-array name="instructions">
+    <item>1. Do something</item>
+    <item>2. Do something else</item>
+    <item>3. Eat</item>
+</string-array>
     <string name="Search">Search</string>
     <string name="Search_Types">Recipes, ingredients, etc.</string>
+    <string name="Step_Back">Back</string>
+    <string name="Step_Forward">Forward</string>
 </resources>

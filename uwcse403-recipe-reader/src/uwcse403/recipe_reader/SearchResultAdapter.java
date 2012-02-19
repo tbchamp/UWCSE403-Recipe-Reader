@@ -36,17 +36,21 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
             }
             RecipeOverview recipe = recipes.get(position);
             if (recipe != null) {
+            		ImageView image = (ImageView) v.findViewById(R.id.categoryIcon);
+            		ImageView favoriteStar = (ImageView) v.findViewById(R.id.favoriteStar);
                     TextView title = (TextView) v.findViewById(R.id.name);
-                    ImageView image = (ImageView) v.findViewById(R.id.imgIcon);
-                    ImageView favoriteStar = (ImageView) v.findViewById(R.id.favoriteStar);
+                    TextView rating = (TextView) v.findViewById(R.id.rating);
                     if (title != null) {
                           title.setText(recipe.getName());    
                     }
-//                    if (image != null) {
-//                        image.setImageResource(recipe.getImage());    
-//                    }
+                    if (image != null) {
+                        image.setImageResource(recipe.getCategory().getIcon());    
+                    }
                     if (favoriteStar != null && recipe.getFavorite()) {
                         favoriteStar.setImageResource(R.drawable.star);    
+                    }
+                    if (rating != null) {
+                        rating.setText("" + recipe.getRating());    
                     }
             }
             return v;
