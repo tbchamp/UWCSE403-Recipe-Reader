@@ -1,6 +1,7 @@
 package uwcse403.recipe_reader;
 
 import android.os.Bundle;
+import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -18,14 +19,11 @@ public class RecipeViewActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewer);
+        ActionBar bar = getSupportActionBar();
         Bundle extras = getIntent().getExtras();
-        if (extras!= null) {
-        	String test = extras.getString("name");
-        	if (test != null) {
-        		Button b = (Button) findViewById(R.id.recipe_image);
-        		b.setText(test);
-        	}
-        }
+        String recipeName = extras.getString("recipeName");
+        bar.setTitle(recipeName);
+        recipe = new Recipe(recipeName);
         attachButtonListeners();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		Fragment resultsFragment = Fragment.instantiate(this, 

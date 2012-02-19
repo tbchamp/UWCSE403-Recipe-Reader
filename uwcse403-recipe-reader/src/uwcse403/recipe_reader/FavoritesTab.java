@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class FavoritesTab extends ListFragment {
 	
@@ -39,7 +40,11 @@ public class FavoritesTab extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(this.getActivity().getApplicationContext(), RecipeViewActivity.class);
-		i.putExtra("A Hamburger", "name");
+		Bundle b = new Bundle();
+		RecipeOverview ro = (RecipeOverview) l.getItemAtPosition(position);
+		String rn = ro.getName();
+		b.putString("recipeName", rn);
+		i.putExtras(b);
 		startActivity(i);
 	}
 

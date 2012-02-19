@@ -24,6 +24,7 @@
 </string-array>
     <string name="Search">Search</string>
     <string name="Search_Types">Recipes, ingredients, etc.</string>
+    <string name="Log_Out">Log Out</string>
     <string name="Step_Back">Back</string>
     <string name="Step_Forward">Forward</string>
 </resources>
