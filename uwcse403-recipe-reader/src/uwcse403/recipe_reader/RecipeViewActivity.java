@@ -1,5 +1,10 @@
 package uwcse403.recipe_reader;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,9 +14,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class RecipeViewActivity extends FragmentActivity {
+public class RecipeViewActivity extends FragmentActivity implements Observer {
 
 	private Recipe recipe;
+	
+	private VoiceRecognition vr; 
 	
     /** Called when the activity is first created. */
     @Override
@@ -26,6 +33,9 @@ public class RecipeViewActivity extends FragmentActivity {
         		b.setText(test);
         	}
         }
+        
+        vr = new VoiceRecognition(this);
+        
         attachButtonListeners();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		Fragment resultsFragment = Fragment.instantiate(this, 
@@ -62,4 +72,24 @@ public class RecipeViewActivity extends FragmentActivity {
 			ft.commit();
 		}
     }
+
+    /**
+     * Comments are coming
+     */
+	public void update(Observable obj, Object arg) {
+		String result = (String) arg;
+		this.finish();
+		// Update app status based on result
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Command recieved: " + result)
+		       .setCancelable(false)
+		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   dialog.cancel();
+		           }
+		       });
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
 }
