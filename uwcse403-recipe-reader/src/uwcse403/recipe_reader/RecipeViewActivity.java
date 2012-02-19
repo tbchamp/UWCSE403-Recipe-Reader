@@ -6,6 +6,7 @@ import java.util.Observer;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +26,8 @@ public class RecipeViewActivity extends FragmentActivity implements Observer {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewer);
+        ActionBar bar = getSupportActionBar();
+        bar.setTitle("Name of Recipe Here");
         Bundle extras = getIntent().getExtras();
         if (extras!= null) {
         	String test = extras.getString("name");

@@ -1,19 +1,30 @@
-<PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <PreferenceCategory
-            android:title="Preferences">
-            
-        <CheckBoxPreference
-                android:key="checkbox_preference"
-                android:title="Star all recipes I upload"/>
-        <CheckBoxPreference
-                android:key="checkbox_preference"
-                android:title="Prioritize my favorite recipes"/>
-               
-        <Preference
-                android:title="Log out" />
-            
-    </PreferenceCategory>
-      
-</PreferenceScreen>
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/prefsLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+	    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:id="@+id/prefsLayout2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="top"	
+	        android:padding="4dp">	
+	        <TextView
+			    xmlns:android="http://schemas.android.com/apk/res/android"
+			    android:id="@+id/userName"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:textSize="18dp" 
+			    android:layout_weight="3"
+			    android:layout_gravity="center"
+			    android:text="" />
+		<Button 
+	   			android:id="@+id/logOutButton"
+	   			android:text="@+string/Log_Out" 
+	   			android:layout_height="wrap_content" 
+	   			android:layout_width="0dp" 
+	   			android:layout_weight="1"
+	   			android:layout_gravity="center"
+	   			android:clickable="true"></Button>
+	    </LinearLayout>
+    </LinearLayout>
