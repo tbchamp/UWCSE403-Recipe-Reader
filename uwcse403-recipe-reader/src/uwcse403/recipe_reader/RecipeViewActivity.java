@@ -1,10 +1,5 @@
 package uwcse403.recipe_reader;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -15,11 +10,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class RecipeViewActivity extends FragmentActivity implements Observer {
+public class RecipeViewActivity extends FragmentActivity {
 
 	private Recipe recipe;
-	
-	private VoiceRecognition vr; 
 	
     /** Called when the activity is first created. */
     @Override
@@ -27,18 +20,9 @@ public class RecipeViewActivity extends FragmentActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewer);
         ActionBar bar = getSupportActionBar();
-        bar.setTitle("Name of Recipe Here");
         Bundle extras = getIntent().getExtras();
-        if (extras!= null) {
-        	String test = extras.getString("name");
-        	if (test != null) {
-        		Button b = (Button) findViewById(R.id.recipe_image);
-        		b.setText(test);
-        	}
-        }
-        
-        vr = new VoiceRecognition(this);
-        
+        String recipeName = extras.getString("recipeName");
+        bar.setTitle(recipeName);
         attachButtonListeners();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		Fragment resultsFragment = Fragment.instantiate(this, 
@@ -75,24 +59,4 @@ public class RecipeViewActivity extends FragmentActivity implements Observer {
 			ft.commit();
 		}
     }
-
-    /**
-     * Comments are coming
-     */
-	public void update(Observable obj, Object arg) {
-		String result = (String) arg;
-		this.finish();
-		// Update app status based on result
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Command recieved: " + result)
-		       .setCancelable(false)
-		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   dialog.cancel();
-		           }
-		       });
-		AlertDialog alert = builder.create();
-		alert.show();
-	}
 }
