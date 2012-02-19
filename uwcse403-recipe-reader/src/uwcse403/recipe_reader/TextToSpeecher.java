@@ -31,10 +31,10 @@ public class TextToSpeecher implements OnInitListener {
 	/**
 	 * Accepts a string and speaks it in the application
 	 * 
-	 * @param text - the string (length > 0) to be spoken in the application
+	 * @param text - the string (not null and length > 0) to be spoken in the application
 	 */
 	public void speak(String text){
-		if(text.length() > 0) {
+		if(text != null && text.length() > 0) {
 			tts.speak(text, TextToSpeech.QUEUE_ADD, null);
 		}
 	}
