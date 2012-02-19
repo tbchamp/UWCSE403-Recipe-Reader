@@ -23,6 +23,7 @@ public class RecipeViewActivity extends FragmentActivity {
         Bundle extras = getIntent().getExtras();
         String recipeName = extras.getString("recipeName");
         bar.setTitle(recipeName);
+        recipe = new Recipe(recipeName);
         attachButtonListeners();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		Fragment resultsFragment = Fragment.instantiate(this, 

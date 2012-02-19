@@ -41,8 +41,8 @@ public class FavoritesTab extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(this.getActivity().getApplicationContext(), RecipeViewActivity.class);
 		Bundle b = new Bundle();
-		TextView tv = (TextView) v.findViewById(R.id.name);
-		String rn = (String) tv.getText();
+		RecipeOverview ro = (RecipeOverview) l.getItemAtPosition(position);
+		String rn = ro.getName();
 		b.putString("recipeName", rn);
 		i.putExtras(b);
 		startActivity(i);
