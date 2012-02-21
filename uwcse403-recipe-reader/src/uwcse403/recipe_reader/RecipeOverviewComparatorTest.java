@@ -1,7 +1,7 @@
 /**
  * Tests for 3 comparators for sorting recipe overview objects
  * that contain the information needed to display a list of
- * search results.
+ * search results. White-box test.
  * Kristin Ivarson (kristini@cs)
  */
 
