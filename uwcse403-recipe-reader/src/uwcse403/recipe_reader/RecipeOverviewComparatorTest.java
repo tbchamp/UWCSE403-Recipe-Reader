@@ -17,7 +17,7 @@ import junit.framework.TestCase;
 
 public class RecipeOverviewComparatorTest extends TestCase {
 	
-	//@Test(timeout = 1000)
+	@Test(timeout = 1000)
 	public void testSortByTitle() {
 		List<RecipeOverview> actual = new ArrayList<RecipeOverview>();
 		RecipeOverview o1 = new RecipeOverview("C", RecipeOverview.Category.SOUPS, true);
@@ -35,7 +35,7 @@ public class RecipeOverviewComparatorTest extends TestCase {
 		assertEquals("Sorted alphabetically", expected.toString(), actual.toString());
 	}
 	
-	//@Test(timeout = 1000)
+	@Test(timeout = 1000)
 	public void testSortByCategory() {
 		List<RecipeOverview> actual = new ArrayList<RecipeOverview>();
 		RecipeOverview o1 = new RecipeOverview("C", RecipeOverview.Category.APPETIZER, true);
@@ -53,7 +53,7 @@ public class RecipeOverviewComparatorTest extends TestCase {
 		assertEquals("Sorted by category", expected.toString(), actual.toString());
 	}
 	
-	//@Test(timeout = 1000)
+	@Test(timeout = 1000)
 	public void testSortByCategoryAndAlphabeticallyWithinCategory() {
 		List<RecipeOverview> actual = new ArrayList<RecipeOverview>();
 		RecipeOverview o1 = new RecipeOverview("C", RecipeOverview.Category.SOUPS, true);
@@ -72,7 +72,7 @@ public class RecipeOverviewComparatorTest extends TestCase {
 				expected.toString(), actual.toString());
 	}
 	
-	//@Test(timeout = 1000)
+	@Test(timeout = 1000)
 	public void testSortByRating() {
 		List<RecipeOverview> actual = new ArrayList<RecipeOverview>();
 		RecipeOverview o1 = new RecipeOverview("C", RecipeOverview.Category.SOUPS, true, 5.0);
@@ -90,7 +90,7 @@ public class RecipeOverviewComparatorTest extends TestCase {
 		assertEquals("Sorted by rating", expected.toString(), actual.toString());
 	}
 	
-	//@Test(timeout = 1000)
+	@Test(timeout = 1000)
 	public void testSortByRatingAndAlphabeticallyWithinRating() {
 		List<RecipeOverview> actual = new ArrayList<RecipeOverview>();
 		RecipeOverview o1 = new RecipeOverview("C", RecipeOverview.Category.SOUPS, true, 5.0);
