@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="fill_parent"
+    	android:id="@+id/sortOptionsLayout"
+    	android:padding="4dp"
+    	android:gravity="top">
+   		<Button 
+   			android:id="@+id/sort_title"
+   			android:text="@string/Sort_Title" 
+   			android:layout_height="wrap_content" 
+   			android:layout_width="0px" 
+   			android:clickable="true"
+   			android:layout_weight="1"></Button>
+   		<Button 
+   			android:id="@+id/sort_category"
+   			android:text="@string/Sort_Cat" 
+   			android:layout_height="wrap_content" 
+   			android:layout_width="0px" 
+   			android:clickable="true"
+   			android:layout_weight="1"></Button>
+   		<Button 
+   			android:id="@+id/sort_rating"
+   			android:text="@string/Sort_Rating" 
+   			android:layout_height="wrap_content" 
+   			android:layout_width="0px"
+   			android:clickable="true"
+   			android:layout_weight="1"></Button>
+    </LinearLayout>
+	<FrameLayout
+            android:id="@+id/list_frag"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+</LinearLayout>
