@@ -4,27 +4,39 @@
  */
 package uwcse403.recipe_reader;
 
+import java.util.ArrayList;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SearchResultsScreen extends Fragment {
-
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.results_screen, container, false);
-		FragmentTransaction ft =
-			((FragmentActivity)getActivity()).getSupportFragmentManager().beginTransaction();
-		Fragment resultsFragment = Fragment.instantiate(getActivity(),
-				SearchResultsList.class.getName());
-		ft.replace(R.id.list_frag, resultsFragment, "Search Results");
-		ft.commit();
-		return v;
+public class SearchResultsScreen extends ListFragment {
+	
+	
+	@Override
+	/** When view is created, create adapter with data to populate list. */
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+		
+		
+		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
+		Searcher s = new Searcher();
+		try {
+			recipeList.add(s.transaction_getRecipeOverviewById(1));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Log.i("MYNOTE", "error: " + e);
+		}
+		//
+		Log.i("MYNOTE", recipeList.toString());
+		setListAdapter(new SearchResultAdapter(
+				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
+		
+		return super.onCreateView(inflater, container, savedInstanceState);
 	}
-}
 
+}

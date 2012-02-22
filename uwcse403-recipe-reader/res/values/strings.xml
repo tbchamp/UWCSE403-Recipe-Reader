@@ -5,9 +5,6 @@
     <string name="Image">Image</string>
     <string name="Instructions">Instructions</string>
     <string name="Ingredients">Ingredients</string>
-    <string name="Sort_Title">Sort by Title</string>
-    <string name="Sort_Cat">Sort by Category</string>
-    <string name="Sort_Rating">Sort by Rating</string>
 <string-array name="categories">
     <item>Appetizers ></item>
     <item>Salads ></item>

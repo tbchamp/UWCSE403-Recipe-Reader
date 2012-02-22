@@ -1,5 +1,5 @@
 /**
- * Recipe Overview object contains data necessary to
+ * Recipe Overview object contains data necessary to 
  * populate an item in a list of recipes.
  * Kristin Ivarson (kristini@cs)
  */
@@ -12,7 +12,7 @@ public class RecipeOverview {
 	private Boolean favorite;
 	private int rating;
 	private String description;
-
+	
 	public RecipeOverview(String name, Category category, Boolean favorite,
 			int rating, String description, int id) {
 		this.name = name;
@@ -22,7 +22,7 @@ public class RecipeOverview {
 		this.setDescription(description);
 		this.id = id;
 	}
-
+	
 	public RecipeOverview(String name, Category category, Boolean favorite, String description, int id) {
 		this(name, category, favorite, 50, description, id);
 	}
@@ -30,19 +30,19 @@ public class RecipeOverview {
 	public String getName() {
 		return name;
 	}
-
+	
 	public Category getCategory() {
 		return category;
 	}
-
+	
 	public Boolean getFavorite() {
 		return favorite;
 	}
-
+	
 	public int getRating() {
 		return rating;
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
@@ -58,5 +58,5 @@ public class RecipeOverview {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 }
