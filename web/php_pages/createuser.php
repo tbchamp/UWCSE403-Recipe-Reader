@@ -10,10 +10,10 @@ $result = mysql_query("insert into user(username, password, unique_id) values( '
 if (!$result) {
 	print("Create User Failed!");
 } else {
-	$q=mysql_query("select unique_id from user where username = '" . $safe_username . "' and password = '" . hash("sha256", $safe_password) . "'");
+	$q=mysql_query("select id, unique_id from user where username = '" . $safe_username . "'");
 	while($e=mysql_fetch_assoc($q))
 	        $output[]=$e;
-	
+
 	print(json_encode($output));
 }
 
