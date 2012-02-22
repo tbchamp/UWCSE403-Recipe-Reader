@@ -39,6 +39,11 @@ public class Recipe {
 		this.setOverview(overview);
 	}
 	
+	public Recipe(String name) {
+		//TODO: write this
+		// Stub added so stuff would compile
+	}
+	
 	public Recipe(String name, int prep, int cook, int yield, Set<Ingredient> ingredients,
 			Directions directions, List<String> notes, List<String> keywords, int calories, 
 			int fat, int cholesterol, Category category, boolean isFavoriteOfUser, 

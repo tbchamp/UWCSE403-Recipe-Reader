@@ -74,7 +74,7 @@ public class VoiceRecognition extends Observable {
 		 
 		 rReference = current;
 		 
-		 this.addObserver((Observer) rReference);
+		 //this.addObserver((Observer) rReference);
 		 
 		// initialize the SoundMeter
         Sensor = new SoundMeter();
@@ -131,7 +131,7 @@ public class VoiceRecognition extends Observable {
         }
         // restart the sound meter
         nmStart();
-        //super.onActivityResult(requestCode, resultCode, data);
+        // rReference.super.onActivityResult(requestCode, resultCode, data);
     }
     
     /**
