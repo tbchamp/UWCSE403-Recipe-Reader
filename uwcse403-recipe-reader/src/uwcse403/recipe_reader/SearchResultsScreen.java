@@ -14,16 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class SearchResultsScreen extends Fragment {
- 
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.results_screen, container, false);
-		FragmentTransaction ft = 
+		FragmentTransaction ft =
 			((FragmentActivity)getActivity()).getSupportFragmentManager().beginTransaction();
-		Fragment resultsFragment = Fragment.instantiate(getActivity(), 
+		Fragment resultsFragment = Fragment.instantiate(getActivity(),
 				SearchResultsList.class.getName());
 		ft.replace(R.id.list_frag, resultsFragment, "Search Results");
 		ft.commit();
 		return v;
 	}
 }
+
