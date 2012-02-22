@@ -162,15 +162,15 @@ public class Settings {
 		return true;
 	}
 	
-	public int getUserId(){
+	public int getUserId() {
 		return user.getId();
 	}
 	
-	public String getUserUniqueId(){
+	public String getUserUniqueId() {
 		return user.getUniqueId();
 	}
 	
-	public void signOut(){
+	public void signOut() {
 		this.user = null;
 	}
 	
