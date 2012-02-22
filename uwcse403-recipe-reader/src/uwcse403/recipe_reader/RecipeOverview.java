@@ -6,21 +6,25 @@
 package uwcse403.recipe_reader;
 
 public class RecipeOverview {
+	private int id;
 	private String name;
 	private Category category;
 	private Boolean favorite;
-	private Double rating;
+	private int rating;
+	private String description;
 	
 	public RecipeOverview(String name, Category category, Boolean favorite,
-			Double rating) {
+			int rating, String description, int id) {
 		this.name = name;
 		this.category = category;
 		this.favorite = favorite;
 		this.rating = rating;
+		this.setDescription(description);
+		this.id = id;
 	}
 	
-	public RecipeOverview(String name, Category category, Boolean favorite) {
-		this(name, category, favorite, 5.0);
+	public RecipeOverview(String name, Category category, Boolean favorite, String description, int id) {
+		this(name, category, favorite, 50, description, id);
 	}
 
 	public String getName() {
@@ -35,25 +39,24 @@ public class RecipeOverview {
 		return favorite;
 	}
 	
-	public Double getRating() {
+	public int getRating() {
 		return rating;
 	}
 	
-	public enum Category {
-		APPETIZER(R.drawable.icon),
-		SALADS(R.drawable.icon),
-		SOUPS(R.drawable.icon),
-		MAIN_COURSE(R.drawable.icon),
-		DESSERTS(R.drawable.icon);
-		
-		private final int icon;
-		Category(int icon) {
-			this.icon = icon;
-		}
-		
-		public int getIcon() {
-			return this.icon;
-		}
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
