@@ -65,6 +65,10 @@ public class Recipe {
 	public RecipeOverview getOverview() {
 		return overview;
 	}
+	
+	public String getName() {
+		return overview.getName();
+	}
 
 	public void setOverview(RecipeOverview overview) {
 		this.overview = overview;

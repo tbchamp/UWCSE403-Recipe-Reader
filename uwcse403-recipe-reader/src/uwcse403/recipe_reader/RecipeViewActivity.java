@@ -1,5 +1,7 @@
 package uwcse403.recipe_reader;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,7 +22,7 @@ import android.widget.Button;
 
 public class RecipeViewActivity extends FragmentActivity {
 
-	private Recipe recipe;
+	private static Recipe recipe;
 	
 	private VoiceRecognition vr;
 	
@@ -36,10 +38,18 @@ public class RecipeViewActivity extends FragmentActivity {
         ActionBar bar = getSupportActionBar();
         Bundle extras = getIntent().getExtras();
         String recipeName = extras.getString("recipeName");
-        bar.setTitle(recipeName);
         
         // field initialization
-        recipe = new Recipe(recipeName);
+        RecipeOverview ro = new RecipeOverview(recipeName, new Category(6, "Breakfast"), true, "good", 1);
+        Generator g = new Generator();
+		try {
+			recipe = g.getRecipe(ro);
+		} catch (Exception e) {
+			recipe = new Recipe("failed");
+		}
+		bar.setTitle(recipe.getName());
+		List<String> notes = Arrays.asList("Testing this feature", "Hope it works");
+		recipe.setNotes(notes);
         vr = new VoiceRecognition(this);
         currentStep = 1;
         
@@ -64,6 +74,10 @@ public class RecipeViewActivity extends FragmentActivity {
     	
     	Button instructions = (Button) findViewById(R.id.instructions);
     	instructions.setOnClickListener(new ButtonListener(this, InstructionsFragment.class));
+    }
+    
+    public Recipe getRecipe() {
+    	return recipe;
     }
     
     /**

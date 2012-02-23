@@ -21,7 +21,7 @@ public class SearchResultsList extends ListFragment {
 		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
 		Searcher s = new Searcher();
 		try {
-			recipeList.add(s.transaction_getRecipeOverviewById(1));
+			//recipeList.add(s.transaction_getRecipeOverviewById(1));
 		} catch (Exception e) {
 			Log.i("MYNOTE", "error: " + e);
 		}

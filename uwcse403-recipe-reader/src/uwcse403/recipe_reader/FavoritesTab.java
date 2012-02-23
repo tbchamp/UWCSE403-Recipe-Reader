@@ -5,8 +5,10 @@
 package uwcse403.recipe_reader;
 
 import java.util.ArrayList;
-
-import uwcse403.recipe_reader.RecipeOverview.Category;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import android.support.v4.app.ListFragment;
 import android.content.Intent;
@@ -25,11 +27,17 @@ public class FavoritesTab extends ListFragment {
                              Bundle savedInstanceState) {
 		
 		// Temporary hard-coded data: to be replaced by List of RecipeOverviews from Searcher.java(?) 
+		User u = RecipeReaderActivity.settings.getUser();
 		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
-		recipeList.add(new RecipeOverview("Very Delicious Hamburgers", Category.MAIN_COURSE, true, 5.0));
-		recipeList.add(new RecipeOverview("Mediocre Hamburgers", Category.MAIN_COURSE, true, 5.0));
+		try {
+			recipeList = (ArrayList<RecipeOverview>) Searcher.getFavoritesByUser(u);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//
-		
+		RecipeOverview ro = new RecipeOverview("cereal", new Category(6, "Breakfast"), true, "good", 1);
+		recipeList.add(ro);
 		
 		setListAdapter(new SearchResultAdapter(
 				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));

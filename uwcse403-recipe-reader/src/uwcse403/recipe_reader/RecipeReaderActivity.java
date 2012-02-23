@@ -5,6 +5,11 @@
 package uwcse403.recipe_reader;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import android.support.v4.app.ActionBar;
 import android.support.v4.app.ActionBar.Tab;
 import android.support.v4.app.FragmentActivity;
@@ -17,11 +22,43 @@ import android.os.Bundle;
 
 public class RecipeReaderActivity extends FragmentActivity {
 	
+	public static Settings settings;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settings = new Settings();
+        try {
+			settings.createUser("Jeremy Lin", "Linsanity");
+			settings.signIn("Jeremy Lin", "Linsanity");
+			Set<Ingredient> ing = new HashSet<Ingredient>();
+			ing.add(new Ingredient("Lucky Charms", 1, "Bag"));
+			ing.add(new Ingredient("Milk", 1, "Carton"));
+			List<String> dir = new ArrayList<String>();
+			dir.add("Mix lucky charms and milk");
+			dir.add("Eat while watching cartoons");
+			Directions d = new Directions(dir);
+			List<String> key = new ArrayList<String>();
+			key.add("cereal");
+			key.add("milk");
+			key.add("lucky charms");
+			List<String> notes = new ArrayList<String>();
+			notes.add("Best when paired with Pokemon or Dragon Ball Z");
+			Category cat = new Category(6, "Breakfast");
+			Recipe r = new Recipe("Cereal", 1, 1, 1, ing, d, notes, key, 10, 10, 10, cat, true, "Magically Delicious", "Breakfast");
+			if (!r.addToDatabase(settings.getUser())){
+				System.out.println("fail");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         setUpTabs();
+    }
+    
+    public Settings getSettings() {
+    	return settings;
     }
     
     /**

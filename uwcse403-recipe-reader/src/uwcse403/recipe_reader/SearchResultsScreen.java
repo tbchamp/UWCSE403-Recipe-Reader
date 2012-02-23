@@ -5,6 +5,7 @@
 package uwcse403.recipe_reader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.support.v4.app.ListFragment;
 import android.os.AsyncTask;
@@ -24,9 +25,9 @@ public class SearchResultsScreen extends ListFragment {
 		
 		
 		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
-		Searcher s = new Searcher();
 		try {
-			recipeList.add(s.transaction_getRecipeOverviewById(1));
+			User u = new User("Jeremy Lin", 17, "Linsanity");
+			recipeList = (ArrayList<RecipeOverview>) Searcher.getRecipeOverviewsByKeywords(Arrays.asList("hamburger"), u);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Log.i("MYNOTE", "error: " + e);
