@@ -64,7 +64,12 @@
       <h2>Import from allrecipes.com:</h2>
       <p> Enter the URL to an allrecipes.com recipe into the box below: </p>
       <p> Example: <a href="http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx">http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx</a> </p>
-      <p> <input type="text" size="60" /> <input type="submit" value="fetch recipe" /> </p>
+      <form action="http://cubist.cs.washington.edu/projects/12wi/cse403/r/cgi/allrecipes_scraper.py" method="get" >
+        <p>
+          <input type="text" size="60" name="input" />
+          <input type="submit" value="fetch recipe" />
+        </p>
+      </form>
     </section>
   <!-- end .content --></article>
   
