@@ -1,21 +1,8 @@
-/* 
- * Copyright (C) 2008 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
+/**
  * @author aosobov
- * This class is responsible for Speach to Text processing
- * 
+ * This class is responsible for Speech to Text processing
+ * Some of this code is taken directly from an android demo showing an example
+ * of using the speach processing intent
  */
 
 package uwcse403.recipe_reader;
@@ -28,54 +15,68 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
-import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Sample code that invokes the speech recognition intent API.
  */
 public class VoiceRecognition extends Observable {
     
+	// an enum of the possible commands the user can give to the application
+	public enum Command {NEXT, PREVIOUS, REPEAT, UNKNOWN}
+	
     private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
     
+    // a reference to the RecipeViewActivity that this object was instantiated in
     private Activity rReference;
     
     // Noise Monitor variables --------------------------------------------------------------------
-	 private static final int POLL_INTERVAL = 300;
+	 // how often the SoundMeter object should check to see if a loud noise was made  
+     private static final int POLL_INTERVAL = 300;
+     // the threshold used to determine how loud a noise needs to be to trigger voice recognition
 	 private int THRESHOLD = 5;
 	 
+	 // Possible words the user may say to mean one of the Commands
 	 private String[] next_arr = {"next", "text", "nice", "post", "max", "thanks", "maxed", "next stop", "next up", "next feb", "forward", "foreign"};
 	 private String[] prev_arr = {"previous", "prius", "please", "previous stop", "previous top", "back", "go back", "goback", "go bak"};
 	 private String[] repeat_arr = {"repeat", "repeater", "repeat it", "repeats", "again"};
 	 
+	 // Lists that will contain the possible words for easy searching and manipulation
 	 private List<String> next;
 	 private List<String> prev;
 	 private List<String> repeat;
 	 
+	 // The handler that will be responsible for checking the max amplitude every POLL_INTERVAL milliseconds
 	 private Handler Handler = new Handler();
-	 
+	 // The SoundMeter object used to monitor the noise level
 	 private SoundMeter Sensor;
 	 
 	 //---------------------------------------------------------------------------------------------
 
+	 /**
+	  * Will do nothing and the object will not be instantiated
+	  * You have to use the constructor that accepts an Activity as a parameter
+	  */
 	 public VoiceRecognition() {
 		 return;
 	 }
 	 
+	 /**
+	  * Create a new instance of the VoiceRecognition object. 
+	  * @param current - a reference to the RecipeViewActivity that instantiated an instance of this object
+	  * If the activity passed is null, nothing will instantiate and the object will be unusable
+	  */
 	 public VoiceRecognition(Activity current) {
 		 if(current == null) {
 			 return;
 		 }
 		 
 		 rReference = current;
-		 
-		 //this.addObserver((Observer) rReference);
-		 
+
 		// initialize the SoundMeter
         Sensor = new SoundMeter();
 
@@ -89,8 +90,7 @@ public class VoiceRecognition extends Observable {
         List<ResolveInfo> activities = pm.queryIntentActivities(
                 new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
         if (activities.size() != 0) {
-        	// YES. Start the noise monitoring
-        	nmStart();
+        	// YES
         } else {
     		AlertDialog.Builder builder = new AlertDialog.Builder(rReference);
     		builder.setMessage("Voice Recognition not supported")
@@ -119,45 +119,46 @@ public class VoiceRecognition extends Observable {
     /**
      * Handle the results from the recognition activity.
      */
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // Fill the list view with the strings the recognizer thought it could have heard
             ArrayList<String> matches = data.getStringArrayListExtra(
                     RecognizerIntent.EXTRA_RESULTS);            
-            String res = processResults(matches);
-             
+            Command res = processResults(matches);
+            
+            // notify the observers and pass them the Command detected
             setChanged();
             notifyObservers(res);
         }
         // restart the sound meter
-        nmStart();
-        // rReference.super.onActivityResult(requestCode, resultCode, data);
+        start();
     }
     
     /**
-     * 
-     * @param res
-     * @return
+     * Process the results from the voice recognition activity and determine which command
+     * the user was trying to use
+     * @param res - A list of possible words the user may have said
+     * @return a Command thought to be the one most likely wanted by the user
      */
-    private String processResults(List<String> res) {
+    private Command processResults(List<String> res) {
     	
     	int nextSize = intersectionCount(res, next);
     	int prevSize = intersectionCount(res, prev);
     	int repSize = intersectionCount(res, repeat);
     	
     	if(nextSize > prevSize && nextSize > repSize) {
-    		return "Next";
+    		return Command.NEXT;
     	} else if (prevSize > nextSize && prevSize > repSize) {
-    		return "Previous";
+    		return Command.PREVIOUS;
     	} else if (repSize > prevSize && repSize > nextSize) {
-    		return "Repeat";
+    		return Command.REPEAT;
     	} else {
-    		return "Not Sure";
+    		return Command.UNKNOWN;
     	}
     }
     
     /**
-     *
+     * @return returns the size of the intersection of the two sets passed as parameters
      */
     private int intersectionCount(List<String> a, List<String> b) {
     	int count = 0;
@@ -182,7 +183,7 @@ public class VoiceRecognition extends Observable {
 			 double amp = Sensor.getAmplitude();
 			 //speakButton.setText("Amplitude is " + amp + ", h: " + HitCount);
 			 if (amp > THRESHOLD) {
-					 nmStop();
+					 stop();
 					 startVoiceRecognitionActivity();
 					 return;
 			 }
@@ -194,7 +195,7 @@ public class VoiceRecognition extends Observable {
 	 /**
 	  *  Start a new cycle of noise monitoring
 	  */
-	 private void nmStart() {
+	 public void start() {
 		 //speakButton.setText("Listening");
 		 Sensor.start();
 		 Handler.postDelayed(PollTask, POLL_INTERVAL);
@@ -203,7 +204,7 @@ public class VoiceRecognition extends Observable {
 	 /**
 	  * Stop the current cycle of noise monitoring
 	  */
-	 private void nmStop() {
+	 public void stop() {
 		 //speakButton.setText("Not Listening");
 		 Handler.removeCallbacks(PollTask);
 		 Sensor.stop();
@@ -211,14 +212,13 @@ public class VoiceRecognition extends Observable {
 	 
 	 /**
 	  * Adjust the sensitivity of the loud noise detector
-	  * 
 	  * @param level - sensitivity level for the loud noise detector. The lower the number, the higher
-	  * the sensitivity. Ranges from 1 to 15
+	  * the sensitivity. Ranges from 1 to 10
 	  * @throws IllegalArgumentException if level is not within the expected range
 	  */
 	 public void setSensitivity(int level) {
-		 if (level < 1 || level > 15) {
-			 throw new IllegalArgumentException("Level must be between 1 and 15");
+		 if (level < 1 || level > 10) {
+			 throw new IllegalArgumentException("Level must be between 1 and 10");
 		 }
 		 THRESHOLD = level;
 	 }
