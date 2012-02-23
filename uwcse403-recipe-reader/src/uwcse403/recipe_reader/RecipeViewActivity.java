@@ -11,7 +11,6 @@ import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -56,10 +55,13 @@ public class RecipeViewActivity extends FragmentActivity {
     private void attachButtonListeners() {
     	Button start = (Button) findViewById(R.id.recipe_image);
     	start.setOnClickListener(new ButtonListener(this, LandingFragment.class));
+    	
     	Button ingredients = (Button) findViewById(R.id.ingredients);
     	ingredients.setOnClickListener(new ButtonListener(this, IngredientsFragment.class));
+    	
     	Button instructions = (Button) findViewById(R.id.instructions);
     	instructions.setOnClickListener(new ButtonListener(this, InstructionsFragment.class));
+    	instructions.setOnClickListener(new VoiceStartListener(vr));
     }
     
     private class ButtonListener implements OnClickListener {
@@ -80,8 +82,29 @@ public class RecipeViewActivity extends FragmentActivity {
 			ft.replace(R.id.frag, fragment);
 			ft.commit();
 		}
+		
+    }
+    
+    /**
+     * @author aosobov
+     * Used for handling the start of the voice recognition
+     */
+    private class VoiceStartListener implements OnClickListener {
+    	VoiceRecognition v;
+    	
+    	private VoiceStartListener(VoiceRecognition v) {
+    		this.v = v;
+    	}
+    	
+		public void onClick(View arg0) {
+			v.start();
+		}
     }
 	
+    /**
+     * @author aosobov
+     * Used to get info from the VoiceRecognition object when there is some new piece of user voice interaction
+     */
     private class VoiceRecObserver implements Observer {
     	private Activity parent;
     	
