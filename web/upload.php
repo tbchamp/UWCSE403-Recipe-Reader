@@ -68,20 +68,27 @@
         <p>
           Meal:
           <select name="meal">
-            <option value="none">none</option>
-            <option value="breakfast">breakfast</option>
-            <option value="lunch">lunch</option>
-            <option value="dinner">dinner</option>
-            <option value="desert">desert</option>
+            <option value="Other">Other</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+            <option value="Supper">Supper</option>
+            <option value="Dessert">Dessert</option>
           </select>
           Category:
           <select name="category">
-            <option value="none">none</option>
-            <option value="cat1">cat1</option>
-            <option value="cat2">cat2</option>
+            <option value="Other">Other</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Gluten Free">Gluten Free</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Beverage">Beverage</option>
+            <option value="Entree">Entree</option>
+            <option value="Side Dish">Side Dish</option>
           </select>
           keyword:
-          <input type="text" size="20" name="keyword" />
+          <input type="text" size="20" name="keyword" value="allrecipes"/>
         </p>
         <p>
           URL:
