@@ -10,6 +10,7 @@ import recipe_reader.model.Generator;
 import recipe_reader.model.Recipe;
 import recipe_reader.model.RecipeOverview;
 import recipe_reader.sound.VoiceRecognition;
+import recipe_reader.sound.TextToSpeecher;
 import recipe_reader.sound.VoiceRecognition.Command;
 
 import uwcse403.recipe_reader.R;
@@ -35,8 +36,12 @@ public class RecipeViewActivity extends FragmentActivity {
 	
 	private VoiceRecognition vr;
 	
+	private TextToSpeecher tts;
+	private InstructionsFragment instructFrag;	// necessary for some Text-To-Speech stuff
+	
 	// the recipe step that were currently on (is highlighted)
-	// initialized to 1 and updated by vr as the user talks to the app
+	// initialized to 0 and updated by vr as the user talks to the app
+	// Note: List of instructions is zero-based array
 	private int currentStep;
 	
     /** Called when the activity is first created. */
@@ -60,8 +65,9 @@ public class RecipeViewActivity extends FragmentActivity {
 		List<String> notes = Arrays.asList("Testing this feature", "Hope it works");
 		recipe.setNotes(notes);
         vr = new VoiceRecognition(this);
-        currentStep = 1;
-        
+        tts = new TextToSpeecher(this);
+        currentStep = 0;
+
         // attach a new observer to the VoiceRecognition object
         VoiceRecObserver obs = new VoiceRecObserver(this);
         vr.addObserver(obs);
@@ -98,7 +104,7 @@ public class RecipeViewActivity extends FragmentActivity {
     	if (c == Command.NEXT) {
     		currentStep++;
     	} else if (c == Command.PREVIOUS) {
-    		if (currentStep > 1) {
+    		if (currentStep > 0) {
     			currentStep--;
     		}
     	} else if (c == Command.REPEAT) {
@@ -125,14 +131,31 @@ public class RecipeViewActivity extends FragmentActivity {
 				fragment = Fragment.instantiate(activity, classFrag.getName());
 			}
 			ft.replace(R.id.frag, fragment);
+			
 			ft.commit();
 			
-			// Checks if the instruction button was clicked, if so start voice recognition
+			// Checks if the instruction button was clicked. If so, start voice recognition
 			// Otherwise, stop voice recognition because user left instructions fragment
+			//
+			// Also, store instance of InstructionsFragment. For use in reading TextToSpeech stuff.
 			if(v.getId() == R.id.instructions) {
+				instructFrag = (InstructionsFragment) fragment;
 				vr.start();
 			} else {
 				vr.stop();
+			}
+			
+			// Retrieves the ListView of the InstructionsFragment so that the TextToSpeecher can
+			//  read off the different steps.
+			// Notes:
+			// 	- If this is clicked before the Instructions button is clicked, it will break the app
+			//  - I assume the Image button is going to become the Start button after clicking on the
+			//		Ingredients or Instructions button. If incorrect, just copy code inside if/else
+			//		loop and paste in the Start button's onClick method or however that is going to be
+			//		implemented
+			if(v.getId() == R.id.recipe_image) {
+				tts.setListView(instructFrag.getListView());
+				tts.speakInstruction(0);	// Reads first instruction
 			}
 		}	
     }
