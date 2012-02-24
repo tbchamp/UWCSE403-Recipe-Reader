@@ -43,7 +43,6 @@ public class RecipeViewActivity extends FragmentActivity {
 	private VoiceRecognition vr;
 	
 	private TextToSpeecher tts;
-	private ExecuteRecipeScreen instructFrag;	// necessary for some Text-To-Speech stuff
 	
 	// the recipe step that were currently on (is highlighted)
 	// initialized to 0 and updated by vr as the user talks to the app
@@ -150,10 +149,9 @@ public class RecipeViewActivity extends FragmentActivity {
 			//
 			// Also, store instance of InstructionsFragment. For use in reading TextToSpeech stuff.
 			if(v.getId() == R.id.start) {
-				instructFrag = (ExecuteRecipeScreen) fragment;
 				vr.start();
-				//tts.setListView(recipe.getDirections().getDirectionList());
-				//tts.speakInstruction(0);
+				tts.setInstructionsList(recipe.getDirections().getDirectionList());
+				tts.speakInstruction(0);
 			} else {
 				vr.stop();
 			}
