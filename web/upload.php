@@ -63,13 +63,35 @@
     <section>
       <h2>Import from allrecipes.com:</h2>
       <p> Enter the URL to an allrecipes.com recipe into the box below: </p>
-      <p> Example: <a href="http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx">http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx</a> </p>
+      
       <form action="http://cubist.cs.washington.edu/projects/12wi/cse403/r/cgi/allrecipes_scraper.py" method="get" >
         <p>
+          Meal:
+          <select name="meal">
+            <option value="none">none</option>
+            <option value="breakfast">breakfast</option>
+            <option value="lunch">lunch</option>
+            <option value="dinner">dinner</option>
+            <option value="desert">desert</option>
+          </select>
+          Category:
+          <select name="category">
+            <option value="none">none</option>
+            <option value="cat1">cat1</option>
+            <option value="cat2">cat2</option>
+          </select>
+          keyword:
+          <input type="text" size="20" name="keyword" />
+        </p>
+        <p>
+          URL:
           <input type="text" size="60" name="input" />
           <input type="submit" value="fetch recipe" />
         </p>
       </form>
+      
+      <p> Example: <a href="http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx">http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx</a> </p>
+      
     </section>
   <!-- end .content --></article>
   
