@@ -58,7 +58,7 @@ public class Searcher {
 		}
 		is.close();
 		result=sb.toString();
-		if (result.equals("search failed\n")){
+		if (result.equals("search failed\n") || result.equals("null\n")){
 			return null;
 		}
 		List<Integer> ids = new ArrayList<Integer>();
@@ -129,8 +129,7 @@ public class Searcher {
 		
 		RecipeOverview ov = new RecipeOverview(name, category, favorite, rating, description, id);
 		return ov;
-	}
-	
+	}	
 	
 	public static boolean isFavorite(User u, int recipeId) throws Exception{
 		String result = "";
@@ -339,11 +338,11 @@ public class Searcher {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				Category m = new Category(json_data.getInt("id"), json_data.getString("name"));
+				Category m = new Category(json_data.getInt("id"), json_data.getString("cat"));
 				categories.add(m);
 			}
 		} catch (JSONException e){
-			System.out.println("6json nosj");
+			System.out.println("6json nosj" + e.getMessage());
 		}
 		return categories;
 	}
@@ -379,10 +378,10 @@ public class Searcher {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				ids.add(json_data.getInt("recipe_id"));
+				ids.add(json_data.getInt("id"));
 			}
 		} catch (JSONException e){
-			System.out.println("7json nosj");
+			System.out.println("7json nosj" + e.getMessage());
 		}
 		List<RecipeOverview> ovs = new ArrayList<RecipeOverview>();
 		for (int i = 0; i < ids.size() && i < 20; i++){

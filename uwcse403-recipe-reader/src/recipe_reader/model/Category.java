@@ -1,7 +1,6 @@
 package recipe_reader.model;
 
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.drawable;
 
 public class Category {
 	private int icon;

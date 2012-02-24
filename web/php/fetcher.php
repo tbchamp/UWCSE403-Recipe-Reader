@@ -9,7 +9,7 @@ $safe_recipeid = mysql_real_escape_string($unsafe_recipeid);
 
 if (strcmp($type, 'getMain') == 0){
 	$q=mysql_query("select r.prep_time, r.cook_time, r.yield,
-		r.calories, r.fat, r.cholesterol, m.name from recipe r, meal m
+		r.calories, r.fat, r.cholesterol, m.name, r.ready_time, r.img_loc from recipe r, meal m
 		where r.id = " . $safe_recipeid . " and m.id = r.meal_id");
 	if (!$q){
 		print("get main recipe failed");
@@ -19,7 +19,7 @@ if (strcmp($type, 'getMain') == 0){
 		print(json_encode($output));
 	}
 } elseif (strcmp($type, 'ingredients') == 0){
-	$q = mysql_query("select type, amount, unit from ingredients
+	$q = mysql_query("select text from ingredients
 		where recipe_id = " . $safe_recipeid);
 	if (!$q){
 		print("get ingredients failed");

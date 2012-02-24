@@ -24,9 +24,9 @@ import org.apache.http.message.BasicNameValuePair;
 public class Recipe {
 
 	private RecipeOverview overview;
-	private int prep;
-	private int cook;
-	private int yield;
+	private String prep;
+	private String cook;
+	private String yield;
 	private Set<Ingredient> ingredients;
 	private Directions directions;
 	private List<String> notes;
@@ -35,6 +35,8 @@ public class Recipe {
 	private int fat;
 	private int cholesterol;
 	private String meal;
+	private String readytime;
+	private String imgLoc;
 
 	public Recipe(RecipeOverview overview) {
 		this.setOverview(overview);
@@ -45,10 +47,10 @@ public class Recipe {
 		// Stub added so stuff would compile
 	}
 	
-	public Recipe(String name, int prep, int cook, int yield, Set<Ingredient> ingredients,
+	public Recipe(String name, String prep, String cook, String yield, Set<Ingredient> ingredients,
 			Directions directions, List<String> notes, List<String> keywords, int calories, 
 			int fat, int cholesterol, Category category, boolean isFavoriteOfUser, 
-			String description, String meal) {
+			String description, String meal, String readytime, String imgLoc) {
 		setOverview(new RecipeOverview(name, category, isFavoriteOfUser, description, 0));
 		this.setPrep(prep);
 		this.setCook(cook);
@@ -61,6 +63,8 @@ public class Recipe {
 		this.setFat(fat);
 		this.setCholesterol(cholesterol);
 		this.setMeal(meal);
+		this.setReadytime(readytime);
+		this.setImgLoc(imgLoc);
 	}
 
 	public RecipeOverview getOverview() {
@@ -75,27 +79,27 @@ public class Recipe {
 		this.overview = overview;
 	}
 
-	public int getPrep() {
+	public String getPrep() {
 		return prep;
 	}
 
-	public void setPrep(int prep) {
+	public void setPrep(String prep) {
 		this.prep = prep;
 	}
 
-	public int getCook() {
+	public String getCook() {
 		return cook;
 	}
 
-	public void setCook(int cook) {
+	public void setCook(String cook) {
 		this.cook = cook;
 	}
 
-	public int getYield() {
+	public String getYield() {
 		return yield;
 	}
 
-	public void setYield(int yield) {
+	public void setYield(String yield) {
 		this.yield = yield;
 	}
 
@@ -161,13 +165,15 @@ public class Recipe {
 		nameValuePairs.add(new BasicNameValuePair("name", overview.getName()));
 		nameValuePairs.add(new BasicNameValuePair("description", overview.getDescription()));
 		nameValuePairs.add(new BasicNameValuePair("rating", ""+overview.getRating()));
-		nameValuePairs.add(new BasicNameValuePair("preptime","" + prep));
-		nameValuePairs.add(new BasicNameValuePair("cooktime","" + cook));
-		nameValuePairs.add(new BasicNameValuePair("yield","" + yield));
+		nameValuePairs.add(new BasicNameValuePair("preptime",prep));
+		nameValuePairs.add(new BasicNameValuePair("cooktime",cook));
+		nameValuePairs.add(new BasicNameValuePair("yield",yield));
 		nameValuePairs.add(new BasicNameValuePair("calories","" + calories));
 		nameValuePairs.add(new BasicNameValuePair("fat","" + fat));
 		nameValuePairs.add(new BasicNameValuePair("cholesterol","" + cholesterol));
 		nameValuePairs.add(new BasicNameValuePair("meal",meal));
+		nameValuePairs.add(new BasicNameValuePair("img_loc",imgLoc));
+		nameValuePairs.add(new BasicNameValuePair("readytime",readytime));
 		nameValuePairs.add(new BasicNameValuePair("category",overview.getCategory().getName()));
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
@@ -187,6 +193,7 @@ public class Recipe {
 		}
 		is.close();
 		result=sb.toString();
+		System.out.println(result);
 		if (result.equals("Recipe Create Failed!") || result.equals("Invalid Meal Name") 
 				|| result.equals("Add Meal Failed") || result.equals("Invalid Category Name")
 				|| result.equals("Add Category Failed")){
@@ -344,6 +351,22 @@ public class Recipe {
 
 	public void setMeal(String meal) {
 		this.meal = meal;
+	}
+
+	public String getReadytime() {
+		return readytime;
+	}
+
+	public void setReadytime(String readytime) {
+		this.readytime = readytime;
+	}
+
+	public String getImgLoc() {
+		return imgLoc;
+	}
+
+	public void setImgLoc(String imgLoc) {
+		this.imgLoc = imgLoc;
 	}
 
 }

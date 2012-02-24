@@ -31,8 +31,15 @@ public class Generator {
 	private Directions directions;
 	private List<String> notes;
 	private List<String> keywords;
+	 * @throws Exception 
 
 	 */
+	
+	public Recipe getRecipe(int id, User searcher) throws Exception {
+		RecipeOverview temp = Searcher.getOverviewFromId(id, searcher);
+		return getRecipe(temp);
+	}
+	
 	public Recipe getRecipe(RecipeOverview overview) throws Exception {
 		String result = "";
 		int id = overview.getId();
@@ -64,13 +71,15 @@ public class Generator {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				r.setPrep(json_data.getInt("r.prep_time"));
-				r.setCook(json_data.getInt("r.cook_time"));
-				r.setYield(json_data.getInt("r.yield"));
+				r.setPrep(json_data.getString("r.prep_time"));
+				r.setCook(json_data.getString("r.cook_time"));
+				r.setYield(json_data.getString("r.yield"));
+				r.setReadytime(json_data.getString(r.getReadytime()));
 				r.setCalories(json_data.getInt("r.calories"));
 				r.setFat(json_data.getInt("r.fat"));
 				r.setCholesterol(json_data.getInt("r.cholesterol"));
 				r.setMeal(json_data.getString("m.name"));
+				r.setImgLoc(json_data.getString("r.img_loc"));
 			}
 		} catch (JSONException e){
 			System.out.println("11json nosj");

@@ -65,9 +65,9 @@ if (strcmp($type, 'standard') == 0){
 	$safe_categoryid = mysql_real_escape_string($categoryid);
 	$mealid = $_REQUEST['mealid'];
 	$safe_mealid = mysql_real_escape_string($mealid);
-	$q = mysql_query("select recipe_id, rating from recipe where meal_id = "
+	$q = mysql_query("select id, rating from recipe where meal_id = "
 		. $safe_mealid . " and category_id = " . $safe_categoryid
-		. "order by rating desc");
+		. " order by rating desc");
 	if (!$q) {
 		print("get overviews by category and meal failed");
 	} else {
