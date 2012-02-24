@@ -15,6 +15,7 @@ import recipe_reader.model.Category;
 import recipe_reader.model.Generator;
 import recipe_reader.model.Recipe;
 import recipe_reader.model.RecipeOverview;
+import recipe_reader.model.Searcher;
 import recipe_reader.sound.VoiceRecognition;
 import recipe_reader.sound.TextToSpeecher;
 import recipe_reader.sound.VoiceRecognition.Command;
@@ -57,9 +58,19 @@ public class RecipeViewActivity extends FragmentActivity {
         ActionBar bar = getSupportActionBar();
         Bundle extras = getIntent().getExtras();
         String recipeName = extras.getString("recipeName");
+        int id = extras.getInt("recipeID");
         
         // field initialization
-        RecipeOverview ro = new RecipeOverview(recipeName, new Category(6, "Breakfast"), true, "good", 1);
+        RecipeOverview ro = null;
+        try {
+			ro = Searcher.getOverviewFromId(id, null);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        if (ro == null) {
+            ro = new RecipeOverview("Chicken Curry", new Category(6, "Entree"), true, "It's curry", id);
+        }
         Generator g = new Generator();
 		try {
 			recipe = g.getRecipe(ro);
@@ -67,8 +78,6 @@ public class RecipeViewActivity extends FragmentActivity {
 			recipe = new Recipe("failed");
 		}
 		bar.setTitle(recipe.getName());
-		List<String> notes = Arrays.asList("Testing this feature", "Hope it works");
-		recipe.setNotes(notes);
         vr = new VoiceRecognition(this);
         tts = new TextToSpeecher(this);
         currentStep = 0;

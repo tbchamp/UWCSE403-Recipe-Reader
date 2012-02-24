@@ -17,12 +17,6 @@ public class IngredientsFragment extends ListFragment {
 	/** @inheritDoc */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        
-        
-       /* List<String> list = Arrays.asList(	"1 cup something or other", 
-        									"4 ounces something else",
-        									"¼ tsp this or that");*/
         RecipeViewActivity rva = (RecipeViewActivity) this.getActivity();
         Recipe r = rva.getRecipe();
         ArrayList<String> ingredients = new ArrayList<String>(r.getNotes());

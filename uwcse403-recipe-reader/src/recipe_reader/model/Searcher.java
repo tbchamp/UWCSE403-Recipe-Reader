@@ -83,7 +83,7 @@ public class Searcher {
 		return ovs;
 	}
 
-	private static RecipeOverview getOverviewFromId(int id, User searcher) throws Exception{
+	public static RecipeOverview getOverviewFromId(int id, User searcher) throws Exception{
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","getOverview"));

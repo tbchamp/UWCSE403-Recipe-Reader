@@ -19,7 +19,7 @@ public class test2 {
 	//comment added by zaphans
 
 	public static void main(String [] args) throws Exception {
-		Settings settings = new Settings();
+		/*Settings settings = new Settings();
 		settings.signIn("john", "test");
 		Set<Ingredient> ing = new HashSet<Ingredient>();
 		ing.add(new Ingredient("Cheese", 1, "Pound"));
@@ -47,7 +47,7 @@ public class test2 {
 				System.out.println("It is named: " + rec.getName());
 				System.out.println();
 			}
-		}
+		}*/
 	}
 
 	// hey look it's a comment! -kristini
