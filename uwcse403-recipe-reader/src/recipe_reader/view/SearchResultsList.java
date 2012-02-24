@@ -1,11 +1,18 @@
+/**
+ * Fragment for displaying list of recipes with 
+ * information like name, rating, and whether it
+ * is one of the user's favorites.
+ * @author Kristin Ivarson
+ */
 package recipe_reader.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import recipe_reader.model.RecipeOverview;
 import recipe_reader.model.Searcher;
+import recipe_reader.model.User;
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -15,24 +22,34 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class SearchResultsList extends ListFragment {
-
+	private List<String> searchKeywords;
 
 	@Override
-	/** When view is created, create adapter with data to populate list. */
+	/** @inheritDoc */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 
-		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
-		Searcher s = new Searcher();
+		List<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
+		
 		try {
-			//recipeList.add(s.transaction_getRecipeOverviewById(1));
+			User user = ((RecipeReaderActivity) this.getActivity()).getSettings().getUser();
+			recipeList = 
+				Searcher.getRecipeOverviewsByKeywords(searchKeywords, user);
 		} catch (Exception e) {
 			Log.i("MYNOTE", "error: " + e);
 		}
 		setListAdapter(new SearchResultAdapter(
 				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
 		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	
+	/**
+	 * @param phrase List of keywords to search for 
+	 * and display matches.
+	 */
+	public void setSearchPhrase(List<String> phrase) {
+		searchKeywords = phrase;
 	}
 
 }

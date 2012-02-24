@@ -1,21 +1,16 @@
 /**
  * Fragment for displaying list of user's favorites.
- * Kristin Ivarson (kristini@cs)
+ * @author Kristin Ivarson
  */
 package recipe_reader.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import recipe_reader.model.Category;
 import recipe_reader.model.RecipeOverview;
 import recipe_reader.model.Searcher;
 import recipe_reader.model.User;
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.layout;
 
 import android.support.v4.app.ListFragment;
 import android.content.Intent;
@@ -24,12 +19,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class FavoritesTab extends ListFragment {
 	
 	@Override
-	/** When view is created, */
+	/** @inheritDoc */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 		
@@ -39,7 +33,6 @@ public class FavoritesTab extends ListFragment {
 		try {
 			recipeList = (ArrayList<RecipeOverview>) Searcher.getFavoritesByUser(u);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//
@@ -53,6 +46,7 @@ public class FavoritesTab extends ListFragment {
     }
 	
 	@Override
+	/** @inheritDoc */
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(this.getActivity().getApplicationContext(), RecipeViewActivity.class);
 		Bundle b = new Bundle();

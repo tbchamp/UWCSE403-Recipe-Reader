@@ -1,12 +1,12 @@
 /**
  * Fragment for searching/browsing recipes by category
- * Kristin Ivarson (kristini@cs)
+ * @author Kristin Ivarson
  */
 package recipe_reader.view;
 
+import recipe_reader.model.Category;
+import recipe_reader.model.Searcher;
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.array;
-import uwcse403.recipe_reader.R.layout;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,8 +21,13 @@ public class PowerSearchTab extends ListFragment{
 	/** When view is created, set adapter for displaying categories. */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-		setListAdapter(ArrayAdapter.createFromResource(this.getActivity().getApplicationContext(),
-                R.array.categories, R.layout.power_search_item));
+		
+		try {
+			setListAdapter(new ArrayAdapter<Category>(this.getActivity().getApplicationContext(),
+			        R.layout.power_search_item, Searcher.getCategories()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return super.onCreateView(inflater, container, savedInstanceState);
     }

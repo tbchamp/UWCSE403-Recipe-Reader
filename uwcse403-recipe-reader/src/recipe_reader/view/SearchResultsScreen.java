@@ -1,49 +1,47 @@
 /**
  * Fragment for displaying list of recipe search results.
- * Kristin Ivarson (kristini@cs)
+ * @author Kristin Ivarson
  */
 package recipe_reader.view;
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
-
-import recipe_reader.model.RecipeOverview;
-import recipe_reader.model.Searcher;
-import recipe_reader.model.User;
+import java.util.List;
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.layout;
-
-import android.support.v4.app.ListFragment;
-import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SearchResultsScreen extends ListFragment {
-	
+public class SearchResultsScreen extends Fragment {
+	private List<String> searchKeywords;
 	
 	@Override
-	/** When view is created, create adapter with data to populate list. */
+	/** @inheritDoc */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.results_screen, container, false);
+		FragmentTransaction ft = 
+			((FragmentActivity) getActivity()).getSupportFragmentManager().beginTransaction();
+		Fragment resultsFragment = Fragment.instantiate(getActivity(), 
+				SearchResultsList.class.getName());
+		((SearchResultsList) resultsFragment).setSearchPhrase(searchKeywords);
+		ft.replace(R.id.list_frag, resultsFragment, "Search Results");
+		ft.commit();
+		return v;
 		
 		
-		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
-		try {
-			User u = new User("Jeremy Lin", 17, "Linsanity");
-			recipeList = (ArrayList<RecipeOverview>) Searcher.getRecipeOverviewsByKeywords(Arrays.asList("hamburger"), u);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			Log.i("MYNOTE", "error: " + e);
-		}
-		//
-		Log.i("MYNOTE", recipeList.toString());
-		setListAdapter(new SearchResultAdapter(
-				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
-		
-		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	
+	/**
+	 * Set phrase to search and display results for.
+	 * @param phrase String to search for.
+	 */
+	public void setSearchPhrase(String phrase) {
+		searchKeywords = Arrays.asList(phrase.split(" "));
 	}
 
 }

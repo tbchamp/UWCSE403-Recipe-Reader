@@ -14,7 +14,7 @@
     	android:layout_centerHorizontal="true">
         <EditText 
         	android:layout_weight="1" 
-        	android:id="@+id/editText1" 
+        	android:id="@+id/searchBox" 
         	android:layout_height="wrap_content" 
         	android:layout_width="200dp"></EditText>
    		<Button 

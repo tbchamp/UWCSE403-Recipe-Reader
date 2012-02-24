@@ -1,12 +1,10 @@
 /**
  * Fragment shown on application load, with search box.
- * Kristin Ivarson (kristini@cs)
+ * @author Kristin Ivarson
  */
 package recipe_reader.view;
 
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.id;
-import uwcse403.recipe_reader.R.layout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
@@ -15,11 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class HomeTab extends Fragment {
 	
 	@Override
-	/** When view is created, inflate layout and add listener to button. */
+	/** @inheritDoc */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.home_screen, container, false);
@@ -34,12 +33,16 @@ public class HomeTab extends Fragment {
 	private class ClickListener implements View.OnClickListener {
 		private Fragment resultsFragment;
 
+		/** @inheritDoc */
 		public void onClick(View v) {
 			FragmentTransaction ft = 
 				((FragmentActivity)getActivity()).getSupportFragmentManager().beginTransaction();
 			if (resultsFragment == null) {
 				resultsFragment = Fragment.instantiate(getActivity(), SearchResultsScreen.class.getName());
 			}
+			View box = ((View) v.getParent()).findViewById(R.id.searchBox);
+			String search = ((TextView) box).getText().toString();
+			((SearchResultsScreen) resultsFragment).setSearchPhrase(search);
 			ft.replace(android.R.id.content, resultsFragment, "Search Results");
 			ft.commit();
 		}

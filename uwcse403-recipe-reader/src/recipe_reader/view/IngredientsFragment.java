@@ -1,18 +1,20 @@
+/**
+ * Fragment for displaying list of ingredients for recipe.
+ * @author Kristin Ivarson
+ */
+
 package recipe_reader.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import recipe_reader.model.Recipe;
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.layout;
-
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 
 public class IngredientsFragment extends ListFragment {
+	
 	@Override
+	/** @inheritDoc */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         

@@ -1,11 +1,11 @@
 /**
  * Adapter for populating a list of recipes with images and names
  * into the XML.
- * Kristin Ivarson (kristini@cs)
+ * @author Kristin Ivarson
  */
 package recipe_reader.view;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import recipe_reader.model.RecipeOverview;
 import uwcse403.recipe_reader.R;
@@ -21,19 +21,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
-	private ArrayList<RecipeOverview> recipes;
+	private List<RecipeOverview> recipes;
 	private Context context;
 	
-	/** Create adapter with context and recipe data. */
+	/** @inheritDoc
+	 *  Create adapter with context and recipe data. */
 	public SearchResultAdapter(Context context, int textViewResourceId,
-				ArrayList<RecipeOverview> recipes) {
+				List<RecipeOverview> recipes) {
 		super(context, textViewResourceId, recipes);	
 		this.context = context;
 		this.recipes = recipes;
 	}
 	
 	@Override
-	/** When view is needed, populate view with appropriate data and return. */
+	/** @inheritDoc 
+	 *  When view is needed, populate view with appropriate data and return. */
     public View getView(int position, View convertView, ViewGroup parent) {
             View v = convertView;
             if (v == null) {

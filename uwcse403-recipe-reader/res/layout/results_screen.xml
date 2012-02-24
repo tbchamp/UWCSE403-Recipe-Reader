@@ -11,18 +11,21 @@
     	android:gravity="top">
    		<Button 
    			android:id="@+id/sort_title"
+   			android:text="@+string/sort_title"
    			android:layout_height="wrap_content" 
    			android:layout_width="0px" 
    			android:clickable="true"
    			android:layout_weight="1"></Button>
    		<Button 
    			android:id="@+id/sort_category"
+   			android:text="@+string/sort_cat"
    			android:layout_height="wrap_content" 
    			android:layout_width="0px" 
    			android:clickable="true"
    			android:layout_weight="1"></Button>
    		<Button 
    			android:id="@+id/sort_rating"
+   			android:text="@+string/sort_rating"
    			android:layout_height="wrap_content" 
    			android:layout_width="0px"
    			android:clickable="true"

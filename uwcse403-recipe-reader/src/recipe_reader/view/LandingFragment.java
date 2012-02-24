@@ -1,8 +1,11 @@
+/**
+ * Fragment for displaying an image and name for a 
+ * recipe when it's first viewed.
+ * @author Kristin Ivarson
+ */
 package recipe_reader.view;
 
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.id;
-import uwcse403.recipe_reader.R.layout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

@@ -2,9 +2,12 @@
 <resources>
     <string name="hello">Hello World!</string>
     <string name="app_name">Recipe Reader</string>
-    <string name="Image">Image</string>
+    <string name="Start">Start</string>
     <string name="Instructions">Instructions</string>
     <string name="Ingredients">Ingredients</string>
+    <string name="sort_title">Sort by \nTitle</string>
+    <string name="sort_cat">Sort by \nCategory</string>
+    <string name="sort_rating">Sort by \nRating</string>
 <string-array name="categories">
     <item>Appetizers ></item>
     <item>Salads ></item>
@@ -26,5 +29,7 @@
     <string name="Search_Types">Recipes, ingredients, etc.</string>
     <string name="Log_Out">Log Out</string>
     <string name="Step_Back">Back</string>
+    <string name="Repeat_Step">Repeat step</string>
     <string name="Step_Forward">Forward</string>
+    <string name="Threshold">Set threshold</string>
 </resources>

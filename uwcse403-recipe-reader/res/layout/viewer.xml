@@ -3,29 +3,6 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	        android:layout_width="0dp"
-	        android:layout_height="0dp"
-	        android:layout_gravity="top"	
-	        android:padding="4dp">	
-	        <TextView
-			    xmlns:android="http://schemas.android.com/apk/res/android"
-			    android:id="@+id/progressBar"
-			    android:layout_width="0dp"
-			    android:layout_height="wrap_content"
-			    android:textSize="18dp" 
-			    android:layout_weight="7"
-			    android:layout_gravity="center"
-			    android:text="temp text" />
-		<Button 
-	   			android:id="@+id/logOutButton"
-	   			android:text="Set threshold" 
-	   			android:layout_height="wrap_content" 
-	   			android:layout_width="0dp" 
-	   			android:layout_weight="4"
-	   			android:layout_gravity="center"
-	   			android:clickable="true"></Button>
-	    </LinearLayout>
 	<FrameLayout
             android:id="@+id/frag"
             android:layout_width="fill_parent"
@@ -36,8 +13,8 @@
     	android:id="@+id/linearLayout1"
     	android:gravity="bottom">
    		<Button 
-   			android:id="@+id/recipe_image"
-   			android:text="@string/Image" 
+   			android:id="@+id/start"
+   			android:text="@string/Start" 
    			android:layout_height="wrap_content" 
    			android:layout_width="0px" 
    			android:clickable="true"

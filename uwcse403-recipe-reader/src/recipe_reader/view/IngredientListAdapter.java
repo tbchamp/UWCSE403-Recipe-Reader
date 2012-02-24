@@ -1,22 +1,18 @@
 /**
- * Adapter for populating a list of recipes with images and names
+ * Adapter for populating a list of ingredients with amounts and names
  * into the XML.
- * Kristin Ivarson (kristini@cs)
+ * @author Kristin Ivarson
  */
 package recipe_reader.view;
 
 import java.util.ArrayList;
 
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.id;
-import uwcse403.recipe_reader.R.layout;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class IngredientListAdapter extends ArrayAdapter<String> {
@@ -40,8 +36,6 @@ public class IngredientListAdapter extends ArrayAdapter<String> {
                 v = vi.inflate(R.layout.ingredient_item, null);
             }
             String ingredient = ingredients.get(position);
-            Log.i("MYNOTE", "ingredient is:" + ingredient);
-            Log.i("MYNOTE", "view is " + v);
             if (ingredient != null) {
             		String[] values = ingredient.split(" ");
                     TextView amount = (TextView) v.findViewById(R.id.amount);
@@ -49,15 +43,12 @@ public class IngredientListAdapter extends ArrayAdapter<String> {
                     TextView type = (TextView) v.findViewById(R.id.type);
                     if (amount != null) {
                     	amount.setText(values[0]); 
-                    	Log.i("MYNOTE", "set amount");
                     }
                     if (measure != null) {
                         measure.setText(values[1]);   
-                        Log.i("MYNOTE", "set measure");
                     }
                     if (type != null) {
                         type.setText(values[2]);
-                        Log.i("MYNOTE", "set type");
                     }
             }
             return v;
