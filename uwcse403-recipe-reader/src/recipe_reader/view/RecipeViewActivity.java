@@ -1,3 +1,9 @@
+/**
+ * Activity for viewing a single recipe, and for executing
+ * the recipe via voice commands.
+ * @author Kristin Ivarson
+ */
+
 package recipe_reader.view;
 
 import java.util.Arrays;
@@ -13,8 +19,6 @@ import recipe_reader.sound.VoiceRecognition;
 import recipe_reader.sound.VoiceRecognition.Command;
 
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.R.id;
-import uwcse403.recipe_reader.R.layout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,6 +29,7 @@ import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -39,7 +44,7 @@ public class RecipeViewActivity extends FragmentActivity {
 	// initialized to 1 and updated by vr as the user talks to the app
 	private int currentStep;
 	
-    /** Called when the activity is first created. */
+    /** @inheritDoc */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +79,10 @@ public class RecipeViewActivity extends FragmentActivity {
 		ft.commit();
     }
     
+    //Attach listeners to buttons for displaying 3 screens.
     private void attachButtonListeners() {
-    	Button start = (Button) findViewById(R.id.recipe_image);
-    	start.setOnClickListener(new ButtonListener(this, LandingFragment.class));
+    	Button start = (Button) findViewById(R.id.start);
+    	start.setOnClickListener(new ButtonListener(this, ExecuteRecipeScreen.class));
     	
     	Button ingredients = (Button) findViewById(R.id.ingredients);
     	ingredients.setOnClickListener(new ButtonListener(this, IngredientsFragment.class));
@@ -85,6 +91,9 @@ public class RecipeViewActivity extends FragmentActivity {
     	instructions.setOnClickListener(new ButtonListener(this, InstructionsFragment.class));
     }
     
+    /**
+     * @return Recipe this activity is for
+     */
     public Recipe getRecipe() {
     	return recipe;
     }
@@ -118,6 +127,7 @@ public class RecipeViewActivity extends FragmentActivity {
     		this.classFrag = classFrag;
     	}
     	
+		/** @inheritDoc */
 		public void onClick(View v) {
 			
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -129,6 +139,7 @@ public class RecipeViewActivity extends FragmentActivity {
 			
 			// Checks if the instruction button was clicked, if so start voice recognition
 			// Otherwise, stop voice recognition because user left instructions fragment
+			Log.i("MYNOTE", "frag " + fragment.getView());
 			if(v.getId() == R.id.instructions) {
 				vr.start();
 			} else {
