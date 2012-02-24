@@ -63,7 +63,7 @@ public class TextToSpeecher implements OnInitListener {
 			
 			if (listItem.length() > 2){
 				// Remove first part of string with the step number.
-				// Comment out if you want it to read the step number, or if we change format
+				// Comment out if you want it to read the step number.
 				listItem = listItem.substring(2);
 				
 				this.speak(listItem);

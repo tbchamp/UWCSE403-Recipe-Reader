@@ -151,7 +151,7 @@ public class RecipeViewActivity extends FragmentActivity {
 			if(v.getId() == R.id.start) {
 				vr.start();
 				tts.setInstructionsList(recipe.getDirections().getDirectionList());
-				tts.speakInstruction(0); // reads first step
+				tts.speakInstruction(0);
 			} else {
 				vr.stop();
 			}
