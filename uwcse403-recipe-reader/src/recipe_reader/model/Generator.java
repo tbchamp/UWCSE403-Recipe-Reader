@@ -64,9 +64,9 @@ public class Generator {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				r.setPrep(json_data.getInt("r.prep_time"));
-				r.setCook(json_data.getInt("r.cook_time"));
-				r.setYield(json_data.getInt("r.yield"));
+				r.setPrep(json_data.getString("r.prep_time"));
+				r.setCook(json_data.getString("r.cook_time"));
+				r.setYield(json_data.getString("r.yield"));
 				r.setCalories(json_data.getInt("r.calories"));
 				r.setFat(json_data.getInt("r.fat"));
 				r.setCholesterol(json_data.getInt("r.cholesterol"));
@@ -113,10 +113,8 @@ public class Generator {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				String type = json_data.getString("type");
-				double amount = json_data.getDouble("amount");
-				String unit = json_data.getString("unit");
-				ing.add(new Ingredient(type, amount, unit));
+				String text = json_data.getString("text");
+				ing.add(new Ingredient(text));
 			}
 		} catch (JSONException e){
 			System.out.println("12json nosj");

@@ -17,6 +17,9 @@ $safe_preptime = mysql_real_escape_string($unsafe_preptime);
 $unsafe_cooktime =  $_REQUEST['cooktime'];
 $safe_cooktime = mysql_real_escape_string($unsafe_cooktime);
 
+$unsafe_readytime =  $_REQUEST['readytime'];
+$safe_readytime = mysql_real_escape_string($unsafe_readytime);
+
 $unsafe_yield =  $_REQUEST['yield'];
 $safe_yield = mysql_real_escape_string($unsafe_yield);
 
@@ -35,10 +38,13 @@ $safe_meal = mysql_real_escape_string($unsafe_meal);
 $unsafe_category =  $_REQUEST['category'];
 $safe_category = mysql_real_escape_string($unsafe_category);
 
-$result = mysql_query("insert into recipe(name, rating, description, prep_time, cook_time, yield, calories, fat, colesterol)
-							values ('" . $safe_name . "', " . $safe_rating . ", '" . $safe_description . "', " .
-							$safe_preptime . ", " . $safe_cooktime . ", " . $safe_yield . ", " . $safe_calories . ", "
-							 . $safe_fat . ", " . $safe_cholesterol . ")");
+$unsafe_img_loc =  $_REQUEST['img_loc'];
+$safe_img_loc = mysql_real_escape_string($unsafe_img_loc);
+
+$result = mysql_query("insert into recipe(name, rating, description, prep_time, cook_time, ready_time, yield, calories, fat, colesterol, img_loc)
+							values ('" . $safe_name . "', " . $safe_rating . ", '" . $safe_description . "', '" .
+							$safe_preptime . "', '" . $safe_cooktime . "', '" . $safe_readytime . "', '" . $safe_yield . "', " . $safe_calories . ", "
+							 . $safe_fat . ", " . $safe_cholesterol . ", '" . $safe_img_loc . "')");
 if (!$result) {
 	print("Recipe Create Failed!");
 } else {

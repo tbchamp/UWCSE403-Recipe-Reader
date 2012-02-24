@@ -8,17 +8,11 @@ $unsafe_id =  $_REQUEST['recipe_id'];
 $safe_id = mysql_real_escape_string($unsafe_id);
 
 if (strcmp($type, 'ingredient') == 0){
-	$unsafe_itype =  $_REQUEST['itype'];
-	$safe_itype = mysql_real_escape_string($unsafe_itype);
+	$unsafe_text =  $_REQUEST['text'];
+	$safe_text = mysql_real_escape_string($unsafe_text);
 
-	$unsafe_amount =  $_REQUEST['amount'];
-	$safe_amount = mysql_real_escape_string($unsafe_amount);
-
-	$unsafe_unit =  $_REQUEST['unit'];
-	$safe_unit = mysql_real_escape_string($unsafe_unit);
-	$q = mysql_query("insert into ingredients(recipe_id, type, amount, unit)
-			values(" . $safe_id . ", '" . $safe_itype . "', " . $safe_amount
-				. ", '" . $safe_unit  . "')");
+	$q = mysql_query("insert into ingredients(recipe_id, text)
+			values(" . $safe_id . ", '" . $safe_text . "')");
 	if (!$q) {
 		print("Add Ingredient Failed");
 	} else {
