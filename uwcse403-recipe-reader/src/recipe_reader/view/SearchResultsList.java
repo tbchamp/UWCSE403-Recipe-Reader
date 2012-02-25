@@ -38,6 +38,9 @@ public class SearchResultsList extends ListFragment {
 			User user = ((RecipeReaderActivity) this.getActivity()).getSettings().getUser();
 			recipeList = 
 				Searcher.getRecipeOverviewsByKeywords(searchKeywords, user);
+			if (recipeList == null) {
+				recipeList = new ArrayList<RecipeOverview>();
+			}
 		} catch (Exception e) {
 			Log.i("MYNOTE", "error: " + e);
 		}
