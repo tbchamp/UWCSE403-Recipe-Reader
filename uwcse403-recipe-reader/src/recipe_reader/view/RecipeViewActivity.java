@@ -6,23 +6,14 @@
 
 package recipe_reader.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 
-import recipe_reader.model.Category;
-import recipe_reader.model.Directions;
+
 import recipe_reader.model.Generator;
-import recipe_reader.model.Ingredient;
 import recipe_reader.model.Recipe;
-import recipe_reader.model.RecipeOverview;
-import recipe_reader.model.Searcher;
 import recipe_reader.model.Settings;
-import recipe_reader.model.User;
 import recipe_reader.sound.VoiceRecognition;
 import recipe_reader.sound.TextToSpeecher;
 import recipe_reader.sound.VoiceRecognition.Command;
@@ -30,8 +21,6 @@ import recipe_reader.sound.VoiceRecognition.Command;
 import uwcse403.recipe_reader.R;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBar;
@@ -65,7 +54,6 @@ public class RecipeViewActivity extends FragmentActivity {
         setContentView(R.layout.viewer);
         ActionBar bar = getSupportActionBar();
         Bundle extras = getIntent().getExtras();
-        String recipeName = extras.getString("recipeName");
         int id = extras.getInt("recipeID");
         
         settings = new Settings();
@@ -77,25 +65,18 @@ public class RecipeViewActivity extends FragmentActivity {
 		}
 		
         // field initialization
-        RecipeOverview ro = null;
-        try {
-			ro = Searcher.getOverviewFromId(id, settings.getUser());
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+        		
         Generator g = new Generator();
         
 		try {
-			recipe = g.getRecipe(ro);
+			recipe = g.getRecipe(id, settings.getUser());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}
 		
 		//THIS IS HERE FOR TESTING PURPOSES BECAUSE THE RECIPE LOADING IS NOT WORKING
 		//if (recipe == null) {
-			List<String> dirLst = new ArrayList<String>();
+			/*List<String> dirLst = new ArrayList<String>();
 			dirLst.add("Step one");
 			dirLst.add("Step two");
 			dirLst.add("Step three");
@@ -108,7 +89,7 @@ public class RecipeViewActivity extends FragmentActivity {
 			ing.add(new Ingredient("chicken", 2, "pounds"));
 			
 			recipe.setDirections(dir);
-			recipe.setIngredients(ing);
+			recipe.setIngredients(ing);*/
 			
 		//}
 		
