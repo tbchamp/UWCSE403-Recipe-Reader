@@ -105,7 +105,7 @@ public class RecipeViewActivity extends FragmentActivity {
 			Directions dir = new Directions(dirLst);
 			
 			List<Ingredient> ing = new ArrayList<Ingredient>();
-			ing.add(new Ingredient("chicken", 2, "pounds"));
+			ing.add(new Ingredient("2 pounds of chicken"));
 			
 			recipe.setDirections(dir);
 			recipe.setIngredients(ing);

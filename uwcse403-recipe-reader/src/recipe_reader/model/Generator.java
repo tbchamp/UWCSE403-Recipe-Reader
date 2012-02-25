@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,12 +33,12 @@ public class Generator {
 
 	 */
 	
-	public Recipe getRecipe(int id, User searcher) throws Exception {
+	public static Recipe getRecipe(int id, User searcher) throws Exception {
 		RecipeOverview temp = Searcher.getOverviewFromId(id, searcher);
 		return getRecipe(temp);
 	}
 	
-	public Recipe getRecipe(RecipeOverview overview) throws Exception {
+	public static Recipe getRecipe(RecipeOverview overview) throws Exception {
 		String result = "";
 		int id = overview.getId();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -71,18 +69,18 @@ public class Generator {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				r.setPrep(json_data.getString("r.prep_time"));
-				r.setCook(json_data.getString("r.cook_time"));
-				r.setYield(json_data.getString("r.yield"));
-				r.setReadytime(json_data.getString(r.getReadytime()));
-				r.setCalories(json_data.getInt("r.calories"));
-				r.setFat(json_data.getInt("r.fat"));
-				r.setCholesterol(json_data.getInt("r.cholesterol"));
-				r.setMeal(json_data.getString("m.name"));
-				r.setImgLoc(json_data.getString("r.img_loc"));
+				r.setPrep(json_data.getString("prep_time"));
+				r.setCook(json_data.getString("cook_time"));
+				r.setYield(json_data.getString("yield"));
+				r.setReadytime(json_data.getString("ready_time"));
+				r.setCalories(json_data.getInt("calories"));
+				r.setFat(json_data.getInt("fat"));
+				r.setCholesterol(json_data.getInt("colesterol"));
+				r.setMeal(json_data.getString("name"));
+				r.setImgLoc(json_data.getString("img_loc"));
 			}
 		} catch (JSONException e){
-			System.out.println("11json nosj");
+			System.out.println("11json nosj" + e.getMessage());
 		}
 		r.setIngredients(getIngredients(id));
 		r.setDirections(getDirections(id));
@@ -92,7 +90,7 @@ public class Generator {
 	}
 	
 	
-	private List<Ingredient> getIngredients(int id) throws Exception {
+	private static List<Ingredient> getIngredients(int id) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","ingredients"));
@@ -122,18 +120,16 @@ public class Generator {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				String type = json_data.getString("type");
-				double amount = json_data.getDouble("amount");
-				String unit = json_data.getString("unit");
-				ing.add(new Ingredient(type, amount, unit));
+				String text = json_data.getString("text");
+				ing.add(new Ingredient(text));
 			}
 		} catch (JSONException e){
-			System.out.println("12json nosj");
+			System.out.println("12json nosj" + e.getMessage());
 		}
 		return ing;
 	}
 	
-	private Directions getDirections(int id) throws Exception {
+	private static Directions getDirections(int id) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","directions"));
@@ -158,7 +154,6 @@ public class Generator {
 		if (result.equals("get directions failed\n")){
 			return null;
 		}
-
 		List<String> d = new ArrayList<String>();
 		try{
 			JSONArray jArray = new JSONArray(result);
@@ -167,12 +162,12 @@ public class Generator {
 				d.add(json_data.getString("text"));
 			}
 		} catch (JSONException e){
-			System.out.println("13json nosj");
+			System.out.println("13json nosj" + e.getMessage());
 		}
 		return new Directions(d);
 	}
 	
-	private List<String> getKeywords(int id) throws Exception {
+	private static List<String> getKeywords(int id) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","keywords"));
@@ -197,7 +192,6 @@ public class Generator {
 		if (result.equals("get keywords failed\n")){
 			return null;
 		}
-
 		List<String> k = new ArrayList<String>();
 		try{
 			JSONArray jArray = new JSONArray(result);
@@ -206,12 +200,12 @@ public class Generator {
 				k.add(json_data.getString("phrase"));
 			}
 		} catch (JSONException e){
-			System.out.println("14json nosj");
+			System.out.println("14json nosj" + e.getMessage());
 		}
 		return k;
 	}
 	
-	private List<String> getNotes(int id) throws Exception {
+	private static List<String> getNotes(int id) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","notes"));
@@ -236,7 +230,6 @@ public class Generator {
 		if (result.equals("get notes failed\n")){
 			return null;
 		}
-
 		List<String> n = new ArrayList<String>();
 		try{
 			JSONArray jArray = new JSONArray(result);
@@ -245,7 +238,7 @@ public class Generator {
 				n.add(json_data.getString("text"));
 			}
 		} catch (JSONException e){
-			System.out.println("15json nosj");
+			System.out.println("15json nosj" + e.getMessage());
 		}
 		return n;
 	}

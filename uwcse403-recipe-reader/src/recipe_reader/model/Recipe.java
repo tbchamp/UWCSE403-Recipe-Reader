@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -220,9 +219,7 @@ public class Recipe {
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("recipe_id", "" + recipeId));
 			nameValuePairs.add(new BasicNameValuePair("type", "ingredient"));
-			nameValuePairs.add(new BasicNameValuePair("amount", Double.toString(i.getAmount())));
-			nameValuePairs.add(new BasicNameValuePair("itype", i.getType()));
-			nameValuePairs.add(new BasicNameValuePair("unit", i.getUnit()));
+			nameValuePairs.add(new BasicNameValuePair("text", i.getText()));
 			//http post
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/addtorecipe.php");

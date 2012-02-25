@@ -4,12 +4,11 @@ mysql_select_db("zaphans_recipe_reader");
 
 $type =  $_REQUEST['type'];
 
-$unsafe_recipeid = $_REQUEST['recipeid']
+$unsafe_recipeid = $_REQUEST['recipeid'];
 $safe_recipeid = mysql_real_escape_string($unsafe_recipeid);
-
 if (strcmp($type, 'getMain') == 0){
 	$q=mysql_query("select r.prep_time, r.cook_time, r.yield,
-		r.calories, r.fat, r.cholesterol, m.name, r.ready_time, r.img_loc from recipe r, meal m
+		r.calories, r.fat, r.colesterol, m.name, r.ready_time, r.img_loc from recipe r, meals m
 		where r.id = " . $safe_recipeid . " and m.id = r.meal_id");
 	if (!$q){
 		print("get main recipe failed");
@@ -24,7 +23,9 @@ if (strcmp($type, 'getMain') == 0){
 	if (!$q){
 		print("get ingredients failed");
 	} else {
-
+		while($e=mysql_fetch_assoc($q))
+					        $output[]=$e;
+		print(json_encode($output));
 	}
 
 } elseif (strcmp($type, 'directions') == 0){
