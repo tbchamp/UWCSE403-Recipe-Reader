@@ -22,6 +22,5 @@ public class InstructionsFragment extends ListFragment {
         Directions d = ((RecipeViewActivity) this.getActivity()).getRecipe().getDirections();
         setListAdapter(new ArrayAdapter<String>(this.getActivity().getApplicationContext(),
                 R.layout.instruction_item, d.getDirectionList()));
-
     }
 }

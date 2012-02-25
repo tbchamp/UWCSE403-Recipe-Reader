@@ -196,7 +196,6 @@ public class VoiceRecognition extends Observable {
 	  *  Start a new cycle of noise monitoring
 	  */
 	 public void start() {
-		 //speakButton.setText("Listening");
 		 Sensor.start();
 		 Handler.postDelayed(PollTask, POLL_INTERVAL);
 	 }
@@ -205,9 +204,9 @@ public class VoiceRecognition extends Observable {
 	  * Stop the current cycle of noise monitoring
 	  */
 	 public void stop() {
-		 //speakButton.setText("Not Listening");
-		 Handler.removeCallbacks(PollTask);
 		 Sensor.stop();
+		 Handler.removeCallbacks(PollTask);
+		
 	 }
 	 
 	 /**

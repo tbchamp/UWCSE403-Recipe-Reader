@@ -6,12 +6,13 @@
 
 package recipe_reader.view;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import recipe_reader.model.Category;
+import recipe_reader.model.Directions;
 import recipe_reader.model.Generator;
 import recipe_reader.model.Recipe;
 import recipe_reader.model.RecipeOverview;
@@ -31,15 +32,13 @@ import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 
 public class RecipeViewActivity extends FragmentActivity {
 
-	private static Recipe recipe;
+	private Recipe recipe;
 	
 	private VoiceRecognition vr;
 	
@@ -49,6 +48,7 @@ public class RecipeViewActivity extends FragmentActivity {
 	// initialized to 0 and updated by vr as the user talks to the app
 	// Note: List of instructions is zero-based array
 	private int currentStep;
+	private int lastStep;
 	
     /** @inheritDoc */
     @Override
@@ -72,15 +72,35 @@ public class RecipeViewActivity extends FragmentActivity {
             ro = new RecipeOverview("Chicken Curry", new Category(6, "Entree"), true, "It's curry", id);
         }
         Generator g = new Generator();
+        
 		try {
 			recipe = g.getRecipe(ro);
 		} catch (Exception e) {
-			recipe = new Recipe("failed");
+			// TODO Auto-generated catch block
 		}
+		
+		//THIS IS HERE FOR TESTING PURPOSES BECAUSE THE RECIPE LOADING IS NOT WORKING
+		//if (recipe == null) {
+			List<String> dirLst = new ArrayList<String>();
+			dirLst.add("Step one");
+			dirLst.add("Step two");
+			dirLst.add("Step three");
+			dirLst.add("Step four");
+			dirLst.add("Step five");
+			
+			Directions dir = new Directions(dirLst);
+			
+			recipe = new Recipe("Test");
+			recipe.setDirections(dir);
+			recipe.setOverview(ro);
+		//}
+		
 		bar.setTitle(recipe.getName());
         vr = new VoiceRecognition(this);
         tts = new TextToSpeecher(this);
         currentStep = 0;
+        
+        lastStep = recipe.getDirections().getNumSteps() - 1;
 
         // attach a new observer to the VoiceRecognition object
         VoiceRecObserver obs = new VoiceRecObserver(this);
@@ -118,15 +138,24 @@ public class RecipeViewActivity extends FragmentActivity {
      * @author aosobov
      * @param c The Command that the VoiceRecognition object got from the user
      */
-    private void updateStep(Command c) {
+    public void updateStep(Command c) {
     	if (c == Command.NEXT) {
-    		currentStep++;
+    		if(currentStep < lastStep) {
+    			currentStep++;
+    			tts.speakInstruction(currentStep);
+    		} else {
+    			tts.speak("There are no more steps in this recipe");
+    		}
     	} else if (c == Command.PREVIOUS) {
     		if (currentStep > 0) {
     			currentStep--;
+    			tts.speakInstruction(currentStep);
+    		} else {
+    			tts.speak("This is the first step in this recipe");
     		}
     	} else if (c == Command.REPEAT) {
     		// repeat
+    		tts.speakInstruction(currentStep);
     	} else {
     		// unknown command so do nothing
     	}
@@ -150,7 +179,6 @@ public class RecipeViewActivity extends FragmentActivity {
 				fragment = Fragment.instantiate(activity, classFrag.getName());
 			}
 			ft.replace(R.id.frag, fragment);
-			
 			ft.commit();
 			
 			// Checks if the instruction button was clicked. If so, start voice recognition
@@ -164,7 +192,6 @@ public class RecipeViewActivity extends FragmentActivity {
 			} else {
 				vr.stop();
 			}
-			
 		}	
     }
 	
@@ -187,6 +214,8 @@ public class RecipeViewActivity extends FragmentActivity {
     		// Update app status based on result
     		updateStep(result);
     		
+    		/*
+    		 * DEBUGGING ALERT. WILL BE REMOVED FOR FINAL RELEASE
     		AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     		builder.setMessage("Command recieved: " + result + " Current step: " + currentStep)
     		       .setCancelable(false)
@@ -197,6 +226,7 @@ public class RecipeViewActivity extends FragmentActivity {
     		       });
     		AlertDialog alert = builder.create();
     		alert.show();
+    		*/
     	}
     }
     

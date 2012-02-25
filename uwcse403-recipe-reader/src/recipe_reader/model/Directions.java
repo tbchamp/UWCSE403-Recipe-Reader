@@ -36,4 +36,8 @@ public class Directions {
 	public List<String> getDirectionList(){
 		return directions;
 	}
+	
+	public int getNumSteps() {
+		return directions.size();
+	}
 }
