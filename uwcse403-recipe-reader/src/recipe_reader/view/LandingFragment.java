@@ -5,6 +5,7 @@
  */
 package recipe_reader.view;
 
+import recipe_reader.model.Recipe;
 import uwcse403.recipe_reader.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,7 +23,9 @@ public class LandingFragment extends Fragment {
 		View v = inflater.inflate(R.layout.landing, container, false);
 		TextView tv = (TextView) v.findViewById(R.id.recipe_title);
 		//String test = savedInstanceState.getString("name");
-		String test = "The Hamburger";
+		RecipeViewActivity rva = (RecipeViewActivity) this.getActivity();
+        Recipe r = rva.getRecipe();
+		String test = r.getName();
 		tv.setText(test);
 		return v;
     }

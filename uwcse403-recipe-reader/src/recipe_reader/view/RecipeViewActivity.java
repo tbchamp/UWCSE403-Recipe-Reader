@@ -7,16 +7,22 @@
 package recipe_reader.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import recipe_reader.model.Category;
 import recipe_reader.model.Directions;
 import recipe_reader.model.Generator;
+import recipe_reader.model.Ingredient;
 import recipe_reader.model.Recipe;
 import recipe_reader.model.RecipeOverview;
 import recipe_reader.model.Searcher;
+import recipe_reader.model.Settings;
+import recipe_reader.model.User;
 import recipe_reader.sound.VoiceRecognition;
 import recipe_reader.sound.TextToSpeecher;
 import recipe_reader.sound.VoiceRecognition.Command;
@@ -40,6 +46,8 @@ public class RecipeViewActivity extends FragmentActivity {
 
 	private Recipe recipe;
 	
+	private Settings settings;
+	
 	private VoiceRecognition vr;
 	
 	private TextToSpeecher tts;
@@ -60,17 +68,23 @@ public class RecipeViewActivity extends FragmentActivity {
         String recipeName = extras.getString("recipeName");
         int id = extras.getInt("recipeID");
         
+        settings = new Settings();
+        try {
+			settings.signIn("Jeremy Lin", "Linsanity");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
         // field initialization
         RecipeOverview ro = null;
         try {
-			ro = Searcher.getOverviewFromId(id, null);
+			ro = Searcher.getOverviewFromId(id, settings.getUser());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-        if (ro == null) {
-            ro = new RecipeOverview("Chicken Curry", new Category(6, "Entree"), true, "It's curry", id);
-        }
+		
         Generator g = new Generator();
         
 		try {
@@ -90,9 +104,12 @@ public class RecipeViewActivity extends FragmentActivity {
 			
 			Directions dir = new Directions(dirLst);
 			
-			recipe = new Recipe("Test");
+			List<Ingredient> ing = new ArrayList<Ingredient>();
+			ing.add(new Ingredient("chicken", 2, "pounds"));
+			
 			recipe.setDirections(dir);
-			recipe.setOverview(ro);
+			recipe.setIngredients(ing);
+			
 		//}
 		
 		bar.setTitle(recipe.getName());

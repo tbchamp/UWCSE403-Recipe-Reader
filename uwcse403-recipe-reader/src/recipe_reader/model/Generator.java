@@ -92,7 +92,7 @@ public class Generator {
 	}
 	
 	
-	private Set<Ingredient> getIngredients(int id) throws Exception {
+	private List<Ingredient> getIngredients(int id) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","ingredients"));
@@ -117,7 +117,7 @@ public class Generator {
 		if (result.equals("get ingredients failed\n")){
 			return null;
 		}
-		Set<Ingredient> ing = new HashSet<Ingredient>();
+		List<Ingredient> ing = new ArrayList<Ingredient>();
 		try{
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {

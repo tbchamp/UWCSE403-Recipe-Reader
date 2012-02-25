@@ -27,7 +27,7 @@ public class Recipe {
 	private String prep;
 	private String cook;
 	private String yield;
-	private Set<Ingredient> ingredients;
+	private List<Ingredient> ingredients;
 	private Directions directions;
 	private List<String> notes;
 	private List<String> keywords;
@@ -47,7 +47,7 @@ public class Recipe {
 		// Stub added so stuff would compile
 	}
 	
-	public Recipe(String name, String prep, String cook, String yield, Set<Ingredient> ingredients,
+	public Recipe(String name, String prep, String cook, String yield, List<Ingredient> ingredients,
 			Directions directions, List<String> notes, List<String> keywords, int calories, 
 			int fat, int cholesterol, Category category, boolean isFavoriteOfUser, 
 			String description, String meal, String readytime, String imgLoc) {
@@ -103,11 +103,11 @@ public class Recipe {
 		this.yield = yield;
 	}
 
-	public Set<Ingredient> getIngredients() {
+	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(Set<Ingredient> ingredients) {
+	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 

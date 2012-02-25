@@ -6,6 +6,8 @@
 package recipe_reader.view;
 
 import java.util.ArrayList;
+
+import recipe_reader.model.Ingredient;
 import recipe_reader.model.Recipe;
 import uwcse403.recipe_reader.R;
 import android.os.Bundle;
@@ -19,7 +21,7 @@ public class IngredientsFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         RecipeViewActivity rva = (RecipeViewActivity) this.getActivity();
         Recipe r = rva.getRecipe();
-        ArrayList<String> ingredients = new ArrayList<String>(r.getNotes());
+        ArrayList<Ingredient> ingredients = (ArrayList<Ingredient>) r.getIngredients();
         setListAdapter(new IngredientListAdapter(this.getActivity().getApplicationContext(),
                 R.layout.ingredient_item, ingredients));
     }

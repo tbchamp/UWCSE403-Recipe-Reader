@@ -31,13 +31,11 @@ public class FavoritesTab extends ListFragment {
 		User u = ((RecipeReaderActivity) this.getActivity()).getSettings().getUser();
 		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
 		try {
-			recipeList = (ArrayList<RecipeOverview>) Searcher.getFavoritesByUser(u);
+			recipeList.add(Searcher.getOverviewFromId(169, u));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//
-		RecipeOverview ro = new RecipeOverview("cereal", new Category(6, "Breakfast"), true, "good", 1);
-		recipeList.add(ro);
 		
 		setListAdapter(new SearchResultAdapter(
 				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
