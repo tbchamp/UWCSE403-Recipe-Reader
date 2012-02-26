@@ -5,13 +5,14 @@
 
 package recipe_reader.view;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import recipe_reader.model.Ingredient;
-import recipe_reader.model.Recipe;
+
 import uwcse403.recipe_reader.R;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.widget.ArrayAdapter;
 
 public class IngredientsFragment extends ListFragment {
 	
@@ -19,10 +20,9 @@ public class IngredientsFragment extends ListFragment {
 	/** @inheritDoc */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RecipeViewActivity rva = (RecipeViewActivity) this.getActivity();
-        Recipe r = rva.getRecipe();
-        ArrayList<Ingredient> ingredients = (ArrayList<Ingredient>) r.getIngredients();
-        setListAdapter(new IngredientListAdapter(this.getActivity().getApplicationContext(),
+        
+        List<String> ingredients = ((RecipeViewActivity) this.getActivity()).getRecipe().getIngredients();
+        setListAdapter(new ArrayAdapter<String>(this.getActivity().getApplicationContext(),
                 R.layout.ingredient_item, ingredients));
     }
 }

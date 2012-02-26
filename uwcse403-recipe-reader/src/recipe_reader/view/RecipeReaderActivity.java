@@ -12,7 +12,6 @@ import java.util.Set;
 
 import recipe_reader.model.Category;
 import recipe_reader.model.Directions;
-import recipe_reader.model.Ingredient;
 import recipe_reader.model.Recipe;
 import recipe_reader.model.Settings;
 import uwcse403.recipe_reader.R;

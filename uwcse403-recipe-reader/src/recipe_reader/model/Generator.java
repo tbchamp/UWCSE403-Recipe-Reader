@@ -90,7 +90,7 @@ public class Generator {
 	}
 	
 	
-	private static List<Ingredient> getIngredients(int id) throws Exception {
+	private static List<String> getIngredients(int id) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","ingredients"));
@@ -115,13 +115,13 @@ public class Generator {
 		if (result.equals("get ingredients failed\n")){
 			return null;
 		}
-		List<Ingredient> ing = new ArrayList<Ingredient>();
+		List<String> ing = new ArrayList<String>();
 		try{
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
 				String text = json_data.getString("text");
-				ing.add(new Ingredient(text));
+				ing.add(text);
 			}
 		} catch (JSONException e){
 			System.out.println("12json nosj" + e.getMessage());

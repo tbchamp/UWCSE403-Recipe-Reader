@@ -26,7 +26,7 @@ public class Recipe {
 	private String prep;
 	private String cook;
 	private String yield;
-	private List<Ingredient> ingredients;
+	private List<String> ingredients;
 	private Directions directions;
 	private List<String> notes;
 	private List<String> keywords;
@@ -46,7 +46,7 @@ public class Recipe {
 		// Stub added so stuff would compile
 	}
 	
-	public Recipe(String name, String prep, String cook, String yield, List<Ingredient> ingredients,
+	public Recipe(String name, String prep, String cook, String yield, List<String> ingredients,
 			Directions directions, List<String> notes, List<String> keywords, int calories, 
 			int fat, int cholesterol, Category category, boolean isFavoriteOfUser, 
 			String description, String meal, String readytime, String imgLoc) {
@@ -102,11 +102,11 @@ public class Recipe {
 		this.yield = yield;
 	}
 
-	public List<Ingredient> getIngredients() {
+	public List<String> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(List<Ingredient> ingredients) {
+	public void setIngredients(List<String> ingredients) {
 		this.ingredients = ingredients;
 	}
 
@@ -214,12 +214,12 @@ public class Recipe {
 
 
 	private boolean addIngredientsToDB(int recipeId) throws Exception {
-		for (Ingredient i : ingredients) {
+		for (String i : ingredients) {
 			String result = "";
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("recipe_id", "" + recipeId));
 			nameValuePairs.add(new BasicNameValuePair("type", "ingredient"));
-			nameValuePairs.add(new BasicNameValuePair("text", i.getText()));
+			nameValuePairs.add(new BasicNameValuePair("text", i));
 			//http post
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/addtorecipe.php");

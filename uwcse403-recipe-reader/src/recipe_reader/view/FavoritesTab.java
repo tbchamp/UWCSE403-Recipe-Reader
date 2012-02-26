@@ -29,9 +29,12 @@ public class FavoritesTab extends ListFragment {
 		
 		// Temporary hard-coded data: to be replaced by List of RecipeOverviews from Searcher.java(?) 
 		User u = ((RecipeReaderActivity) this.getActivity()).getSettings().getUser();
-		ArrayList<RecipeOverview> recipeList = new ArrayList<RecipeOverview>();
+		ArrayList<RecipeOverview> recipeList = null;
 		try {
-			recipeList.add(Searcher.getOverviewFromId(169, u));
+			recipeList = (ArrayList<RecipeOverview>) Searcher.getFavoritesByUser(u);
+			if (recipeList == null) {
+				recipeList = new ArrayList<RecipeOverview>();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
