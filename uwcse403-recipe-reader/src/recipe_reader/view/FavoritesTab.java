@@ -32,8 +32,8 @@ public class FavoritesTab extends ListFragment {
 		ArrayList<RecipeOverview> recipeList = null;
 		try {
 			recipeList = (ArrayList<RecipeOverview>) Searcher.getFavoritesByUser(u);
-			if (recipeList == null) {
-				recipeList = new ArrayList<RecipeOverview>();
+			if (recipeList.isEmpty()) {
+				recipeList.add(Searcher.getOverviewFromId(195, u));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
