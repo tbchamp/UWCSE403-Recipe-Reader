@@ -233,6 +233,8 @@ public class Searcher {
 				RecipeOverview temp = getOverviewFromId(json_data.getInt("recipe_id"), u);
 				if (temp == null){
 					return null;
+				} else {
+					list.add(temp);
 				}
 			}
 		} catch (JSONException e){

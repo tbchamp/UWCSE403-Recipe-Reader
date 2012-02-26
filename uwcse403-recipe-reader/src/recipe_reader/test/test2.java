@@ -64,6 +64,16 @@ public class test2 {
 //			}
 //		}
 		Generator.getRecipe(195, settings.getUser());
+		List<RecipeOverview> temp = Searcher.getFavoritesByUser(settings.getUser());
+		if (temp == null){
+			System.out.println("Search failed");
+		} else {
+			for (RecipeOverview rec : temp){
+				System.out.println("Is it a favorite: " + rec.getFavorite());
+				System.out.println("It is named: " + rec.getName());
+				System.out.println();
+			}
+		}
 	}
 
 	// hey look it's a comment! -kristini
