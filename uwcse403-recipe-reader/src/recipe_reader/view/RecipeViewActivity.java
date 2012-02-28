@@ -10,6 +10,7 @@ package recipe_reader.view;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.michaelnovakjr.numberpicker.NumberPickerDialog;
 
 import recipe_reader.model.Generator;
 import recipe_reader.model.Recipe;
@@ -27,9 +28,13 @@ import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
 
 public class RecipeViewActivity extends FragmentActivity {
 
@@ -73,25 +78,6 @@ public class RecipeViewActivity extends FragmentActivity {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}
-		
-		//THIS IS HERE FOR TESTING PURPOSES BECAUSE THE RECIPE LOADING IS NOT WORKING
-		//if (recipe == null) {
-			/*List<String> dirLst = new ArrayList<String>();
-			dirLst.add("Step one");
-			dirLst.add("Step two");
-			dirLst.add("Step three");
-			dirLst.add("Step four");
-			dirLst.add("Step five");
-			
-			Directions dir = new Directions(dirLst);
-			
-			List<Ingredient> ing = new ArrayList<Ingredient>();
-			ing.add(new Ingredient("2 pounds of chicken"));
-			
-			recipe.setDirections(dir);
-			recipe.setIngredients(ing);*/
-			
-		//}
 		
 		bar.setTitle(recipe.getName());
         vr = new VoiceRecognition(this);
@@ -184,9 +170,9 @@ public class RecipeViewActivity extends FragmentActivity {
 			//
 			// Also, store instance of InstructionsFragment. For use in reading TextToSpeech stuff.
 			if(v.getId() == R.id.start) {
-				vr.start();
 				tts.setInstructionsList(recipe.getDirections().getDirectionList());
 				tts.speakInstruction(0);
+				vr.start();
 			} else {
 				vr.stop();
 			}
@@ -236,5 +222,41 @@ public class RecipeViewActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	vr.onActivityResult(requestCode, resultCode, data);
     }
-
+    
+    /**
+     * @author aosobov
+     * Inflates the options menu when it is first opened
+     */
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu, menu);
+	    return true;
+	}
+    
+    /**
+     * @author aosobov
+     * Called when an item is selected from the options menu
+     * @param item the menu item selected
+     */
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.id.sensitivity) {
+			// display the number picker
+			NumberPickerDialog dialog = new NumberPickerDialog(this, 4, vr.getSensitivity());
+			dialog.setTitle("Select sensitivity threshold");
+			dialog.setOnNumberSetListener(new SensitivityUpdater());
+			dialog.show();
+		}
+	    return true;
+	}
+	
+	/**
+	 * @author aosobov
+	 * Custom handler for a new number selection in the NumberPickerDialog
+	 */
+	private class SensitivityUpdater implements NumberPickerDialog.OnNumberSetListener {
+		public void onNumberSet(int selectedNumber) {
+			vr.setSensitivity(selectedNumber);
+		}
+	}
+	
 }

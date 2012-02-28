@@ -25,14 +25,6 @@
    			android:clickable="true"
    			android:layout_weight="5"></Button>
    		<Button 
-   			android:id="@+id/thresholdButton"
-   			android:text="@+string/Threshold"
-   			android:layout_height="fill_parent"  
-   			android:layout_width="0px" 
-   			android:layout_weight="7"
-   			android:layout_gravity="center"
-   			android:clickable="true"></Button>
-   		<Button 
    			android:id="@+id/step_forward"
    			android:text="@+string/Step_Forward"
    			android:layout_height="fill_parent"  
