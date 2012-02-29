@@ -5,14 +5,6 @@
 package recipe_reader.view;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import recipe_reader.model.Category;
-import recipe_reader.model.Directions;
-import recipe_reader.model.Recipe;
 import recipe_reader.model.Settings;
 import uwcse403.recipe_reader.R;
 
@@ -21,9 +13,12 @@ import android.support.v4.app.ActionBar.Tab;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
 import android.view.MenuInflater;
 import android.os.Bundle;
 
@@ -61,6 +56,27 @@ public class RecipeReaderActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.menu_rr, menu);
+	    return true;
+	}
+	
+    /**
+     * @author aosobov
+     * Called when an item is selected from the options menu
+     * @param item the menu item selected
+     */
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.id.help) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage("Help is coming")
+    		       .setCancelable(false)
+    		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		        	   dialog.cancel();
+    		           }
+    		       });
+    		AlertDialog alert = builder.create();
+    		alert.show();
+		}
 	    return true;
 	}
     
