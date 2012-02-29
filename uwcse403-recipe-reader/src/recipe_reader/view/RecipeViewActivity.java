@@ -23,6 +23,7 @@ import uwcse403.recipe_reader.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 
 
 public class RecipeViewActivity extends FragmentActivity {
@@ -45,6 +47,8 @@ public class RecipeViewActivity extends FragmentActivity {
 	private VoiceRecognition vr;
 	
 	private TextToSpeecher tts;
+	
+	private ListView instructListView;
 	
 	// the recipe step that were currently on (is highlighted)
 	// initialized to 0 and updated by vr as the user talks to the app
@@ -126,16 +130,18 @@ public class RecipeViewActivity extends FragmentActivity {
     	if (c == Command.NEXT) {
     		if(currentStep < lastStep) {
     			currentStep++;
+    			highlightStep(currentStep, currentStep - 1);
     			tts.speakInstruction(currentStep);
     		} else {
-    			tts.speak("There are no more steps in this recipe");
+    			tts.speak("There are no more steps in this recipe.");
     		}
     	} else if (c == Command.PREVIOUS) {
     		if (currentStep > 0) {
     			currentStep--;
+    			highlightStep(currentStep, currentStep + 1);
     			tts.speakInstruction(currentStep);
     		} else {
-    			tts.speak("This is the first step in this recipe");
+    			tts.speak("This is the first step in this recipe.");
     		}
     	} else if (c == Command.REPEAT) {
     		// repeat
@@ -167,8 +173,6 @@ public class RecipeViewActivity extends FragmentActivity {
 			
 			// Checks if the instruction button was clicked. If so, start voice recognition
 			// Otherwise, stop voice recognition because user left instructions fragment
-			//
-			// Also, store instance of InstructionsFragment. For use in reading TextToSpeech stuff.
 			if(v.getId() == R.id.start) {
 				tts.setInstructionsList(recipe.getDirections().getDirectionList());
 				tts.speakInstruction(0);
@@ -258,5 +262,33 @@ public class RecipeViewActivity extends FragmentActivity {
 			vr.setSensitivity(selectedNumber);
 		}
 	}
+	
+	
+	/**
+	 * @author yamana
+	 * 
+	 * Gives the activity access to the ListView of the Instructions fragment so highlighting can occur
+	 * 
+	 * @param v - This is the ListView of the InstructionsFragment
+	 */
+	public void setInstructionsListView(ListView v){
+		instructListView = v;
+	}
+	
+	
+	/**
+	 * @author yamana
+	 * 
+	 * Highlights the next step in the recipe and un-highlights the previously
+	 * 	highlighted step
+	 * 
+	 * @param nextStep - The step that is being switched to
+	 * @param previousStep - The last highlighted step
+	 */
+	private void highlightStep(int nextStep, int previousStep){
+		instructListView.getChildAt(previousStep).setBackgroundColor(Color.BLACK);
+		instructListView.getChildAt(nextStep).setBackgroundColor(Color.rgb(87, 174, 74));
+	}
+	
 	
 }
