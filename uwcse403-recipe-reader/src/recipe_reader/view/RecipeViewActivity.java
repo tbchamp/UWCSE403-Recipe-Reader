@@ -34,6 +34,7 @@ import android.support.v4.view.MenuItem;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -89,6 +90,10 @@ public class RecipeViewActivity extends FragmentActivity {
         currentStep = 0;
         
         lastStep = recipe.getDirections().getNumSteps() - 1;
+        
+        // make sure the screen will not turn off while this activity is running
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | 
+        		WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // attach a new observer to the VoiceRecognition object
         VoiceRecObserver obs = new VoiceRecObserver(this);
