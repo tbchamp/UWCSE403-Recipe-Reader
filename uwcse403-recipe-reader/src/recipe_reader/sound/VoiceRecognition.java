@@ -38,7 +38,7 @@ public class VoiceRecognition extends Observable {
 	 // how often the SoundMeter object should check to see if a loud noise was made  
      private static final int POLL_INTERVAL = 300;
      // the threshold used to determine how loud a noise needs to be to trigger voice recognition
-	 private int THRESHOLD = 5;
+	 private int THRESHOLD = 8;
 	 private int THRESHOLD_MIN = 1;
 	 private int THRESHOLD_MAX = 10;
 	 

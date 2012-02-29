@@ -85,7 +85,7 @@ public class RecipeViewActivity extends FragmentActivity {
         tts = new TextToSpeecher(this);
         currentStep = 0;
         
-        lastStep = recipe.getDirections().getNumSteps() - 1;
+        lastStep = recipe.getDirections().getNumSteps();
         
         // make sure the screen will not turn off while this activity is running
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | 
@@ -178,8 +178,10 @@ public class RecipeViewActivity extends FragmentActivity {
 				tts.setInstructionsList(recipe.getDirections().getDirectionList());
 				tts.speakInstruction(0);
 				vr.start();
+				v.setEnabled(false);
 			} else {
 				vr.stop();
+				findViewById(R.id.start).setEnabled(true);
 			}
 		}	
     }
