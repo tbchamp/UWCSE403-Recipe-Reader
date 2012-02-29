@@ -55,7 +55,7 @@ public class RecipeViewActivity extends FragmentActivity {
 	// initialized to 0 and updated by vr as the user talks to the app
 	// Note: List of instructions is zero-based array
 	private int currentStep;
-	private int lastStep;
+	private int numSteps;
 	
     /** @inheritDoc */
     @Override
@@ -89,7 +89,7 @@ public class RecipeViewActivity extends FragmentActivity {
         tts = new TextToSpeecher(this);
         currentStep = 0;
         
-        lastStep = recipe.getDirections().getNumSteps();
+        numSteps = recipe.getDirections().getNumSteps();
         
         // make sure the screen will not turn off while this activity is running
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | 
@@ -133,7 +133,7 @@ public class RecipeViewActivity extends FragmentActivity {
      */
     public void updateStep(Command c) {
     	if (c == Command.NEXT) {
-    		if(currentStep < lastStep) {
+    		if(currentStep < numSteps - 1) {
     			currentStep++;
     			highlightStep(currentStep, currentStep - 1);
     			tts.speakInstruction(currentStep);
@@ -296,6 +296,5 @@ public class RecipeViewActivity extends FragmentActivity {
 		instructListView.getChildAt(previousStep).setBackgroundColor(Color.BLACK);
 		instructListView.getChildAt(nextStep).setBackgroundColor(Color.rgb(87, 174, 74));
 	}
-	
-	
+		
 }

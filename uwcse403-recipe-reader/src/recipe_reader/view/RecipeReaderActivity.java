@@ -23,6 +23,8 @@ import android.support.v4.app.FragmentManager;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.Menu;
+import android.view.MenuInflater;
 import android.os.Bundle;
 
 
@@ -51,6 +53,16 @@ public class RecipeReaderActivity extends FragmentActivity {
     public Settings getSettings() {
     	return settings;
     }
+    
+    /**
+     * @author aosobov
+     * Inflates the options menu when it is first opened
+     */
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu_rr, menu);
+	    return true;
+	}
     
     /**
      * Add tabs to action bar, add listeners for each tab, and show bar.

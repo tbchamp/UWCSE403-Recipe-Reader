@@ -58,7 +58,7 @@ public class TextToSpeecher implements OnInitListener {
 	 * @param instr - the numbered instruction to read
 	 */
 	public void speakInstruction(int instr){
-		if(instructList != null && instr >= 0 && instr < instructCount - 1){
+		if(instructList != null && instr >= 0 && instr < instructCount){
 			this.speak((String) instructList.get(instr));
 		}
 	}
