@@ -38,6 +38,16 @@ if (strcmp($type, 'add') == 0){
 	        $output[]=$e;
 		print(json_encode($output));
 	}
+} elseif (strcmp($type, 'remove') == 0){
+	$unsafe_recipeid = $_REQUEST['recipeid'];
+	$safe_recipeid = mysql_real_escape_string($unsafe_recipeid);
+	$q = mysql_query("delete from favorites where user_id = " . $safe_userid .
+				" and recipe_id = " . $safe_recipeid);
+	if (!$q){
+		print("remove favorite failed");
+	} else {
+		print("remove favorite successful");
+	}
 }
 mysql_close();
 ?>

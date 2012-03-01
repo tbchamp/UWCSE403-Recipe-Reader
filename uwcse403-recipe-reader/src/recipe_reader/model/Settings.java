@@ -19,10 +19,18 @@ import org.json.JSONObject;
 
 public class Settings {
 	private User user;
-	
+
 	public Settings(){	
+		try {
+			if (!signIn("guest", "guestPwd")){
+				user = null;
+			}
+		} catch (Exception e) {
+			user = null;
+			e.printStackTrace();
+		}
 	}
-	
+
 	public boolean createUser(String username, String password) throws Exception{
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -46,7 +54,7 @@ public class Settings {
 		}
 		is.close();
 		result=sb.toString();
-		
+
 		if (result.equals("Create User Failed!\n")){
 			return false;
 		}
@@ -68,7 +76,7 @@ public class Settings {
 		this.user = new User(username, id, UniqueId);
 		return true;
 	}
-	
+
 	public boolean signIn(String username, String password) throws Exception{
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -93,7 +101,7 @@ public class Settings {
 		}
 		is.close();
 		result=sb.toString();
-		
+
 		if (result.equals("Sign in failed\n")){
 			return false;
 		}
@@ -115,7 +123,7 @@ public class Settings {
 		this.user = new User(username, id, UniqueId);
 		return true;
 	}
-	
+
 	public boolean signIn(String UniqueId) throws Exception{
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -139,7 +147,7 @@ public class Settings {
 		}
 		is.close();
 		result=sb.toString();
-		
+
 		if (result.equals("Sign in failed\n")){
 			return false;
 		}
@@ -161,19 +169,34 @@ public class Settings {
 		this.user = new User(username, id, UniqueId);
 		return true;
 	}
-	
+
 	public int getUserId() {
-		return user.getId();
+		if (user != null) {
+			return user.getId();
+		} else {
+			return -1;
+		}
 	}
-	
+
 	public String getUserUniqueId() {
-		return user.getUniqueId();
+		if (user != null) {
+			return user.getUniqueId();
+		} else {
+			return null;
+		}
 	}
-	
+
 	public void signOut() {
-		this.user = null;
+		try {
+			if (!signIn("guest", "guestPwd")){
+				user = null;
+			}
+		} catch (Exception e) {
+			user = null;
+			e.printStackTrace();
+		}
 	}
-	
+
 	public User getUser(){
 		return user;
 	}
