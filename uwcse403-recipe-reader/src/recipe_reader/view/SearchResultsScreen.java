@@ -6,14 +6,21 @@ package recipe_reader.view;
 
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+
+import recipe_reader.model.RecipeOverview;
 import uwcse403.recipe_reader.R;
+import uwcse403.recipe_reader.RecipeCategoryComparator;
+import uwcse403.recipe_reader.RecipeRatingComparator;
+import uwcse403.recipe_reader.RecipeTitleComparator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 public class SearchResultsScreen extends Fragment {
@@ -24,16 +31,26 @@ public class SearchResultsScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.results_screen, container, false);
+		attachButtonListeners(v);
 		FragmentTransaction ft = 
 			((FragmentActivity) getActivity()).getSupportFragmentManager().beginTransaction();
-		Fragment resultsFragment = Fragment.instantiate(getActivity(), 
+		SearchResultsList resultsFragment = (SearchResultsList) Fragment.instantiate(getActivity(), 
 				SearchResultsList.class.getName());
-		((SearchResultsList) resultsFragment).setSearchPhrase(searchKeywords);
+		resultsFragment.setSearchPhrase(searchKeywords);
+		resultsFragment.setComparator(new RecipeTitleComparator());
 		ft.replace(R.id.list_frag, resultsFragment, "Search Results");
 		ft.commit();
+		v.findViewById(R.id.sort_title).setEnabled(false);
 		return v;
-		
-		
+	}
+	
+	private void attachButtonListeners(View v) {
+		v.findViewById(R.id.sort_category)
+			.setOnClickListener(new ClickListener(new RecipeCategoryComparator()));
+		v.findViewById(R.id.sort_title)
+			.setOnClickListener(new ClickListener(new RecipeTitleComparator()));
+		v.findViewById(R.id.sort_rating)
+			.setOnClickListener(new ClickListener(new RecipeRatingComparator()));
 	}
 	
 	/**
@@ -42,6 +59,34 @@ public class SearchResultsScreen extends Fragment {
 	 */
 	public void setSearchPhrase(String phrase) {
 		searchKeywords = Arrays.asList(phrase.split(" "));
+	}
+	
+	private class ClickListener implements View.OnClickListener {
+		private SearchResultsList frag;
+		private Comparator<RecipeOverview> comp;
+		private ClickListener(Comparator<RecipeOverview> comp) {
+			this.comp = comp;
+		}
+		public void onClick(View v) {
+			FragmentTransaction ft = 
+				((FragmentActivity) getActivity())
+				.getSupportFragmentManager().beginTransaction();
+			if (frag == null) {
+				frag = (SearchResultsList) Fragment.instantiate(getActivity(), 
+						SearchResultsList.class.getName());
+				frag.setSearchPhrase(searchKeywords);
+				frag.setComparator(comp);
+			}
+			ft.replace(R.id.list_frag, frag, "Search Results");
+			ft.commit();
+			((View)v.getParent()).findViewById(R.id.sort_category)
+				.setEnabled(true);
+			((View)v.getParent()).findViewById(R.id.sort_title)
+				.setEnabled(true);
+			((View)v.getParent()).findViewById(R.id.sort_rating)
+				.setEnabled(true);
+			v.setEnabled(false);
+		}
 	}
 
 }

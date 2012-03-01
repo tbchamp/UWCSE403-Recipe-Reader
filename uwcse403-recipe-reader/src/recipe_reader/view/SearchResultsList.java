@@ -7,12 +7,15 @@
 package recipe_reader.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import recipe_reader.model.RecipeOverview;
 import recipe_reader.model.Searcher;
 import recipe_reader.model.User;
 import uwcse403.recipe_reader.R;
+import uwcse403.recipe_reader.RecipeTitleComparator;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +28,7 @@ import android.widget.ListView;
 
 public class SearchResultsList extends ListFragment {
 	private List<String> searchKeywords;
+	private Comparator<RecipeOverview> comparator;
 
 	@Override
 	/** @inheritDoc */
@@ -44,9 +48,17 @@ public class SearchResultsList extends ListFragment {
 		} catch (Exception e) {
 			Log.i("MYNOTE", "error: " + e);
 		}
+		if (this.comparator == null) {
+			this.comparator = new RecipeTitleComparator(); // Default to alphabetical order
+		}
+		Collections.sort(recipeList, this.comparator);
 		setListAdapter(new SearchResultAdapter(
 				this.getActivity(), R.layout.list_item, recipeList));
 		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	
+	public void setComparator(Comparator<RecipeOverview> comp) {
+		this.comparator = comp;
 	}
 	
 	@Override
