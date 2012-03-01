@@ -41,7 +41,7 @@ public class FavoritesTab extends ListFragment {
 		//
 		
 		setListAdapter(new SearchResultAdapter(
-				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
+				this.getActivity(), R.layout.list_item, recipeList));
 		
 		return super.onCreateView(inflater, container, savedInstanceState);
     }

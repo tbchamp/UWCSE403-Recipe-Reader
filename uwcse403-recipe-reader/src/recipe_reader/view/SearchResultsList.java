@@ -45,7 +45,7 @@ public class SearchResultsList extends ListFragment {
 			Log.i("MYNOTE", "error: " + e);
 		}
 		setListAdapter(new SearchResultAdapter(
-				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
+				this.getActivity(), R.layout.list_item, recipeList));
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	

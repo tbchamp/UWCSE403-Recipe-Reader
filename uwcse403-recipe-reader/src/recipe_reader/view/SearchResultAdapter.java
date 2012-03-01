@@ -8,28 +8,34 @@ package recipe_reader.view;
 import java.util.List;
 
 import recipe_reader.model.RecipeOverview;
+import recipe_reader.model.Searcher;
+import recipe_reader.model.User;
 import uwcse403.recipe_reader.R;
 import uwcse403.recipe_reader.R.drawable;
 import uwcse403.recipe_reader.R.id;
 import uwcse403.recipe_reader.R.layout;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
 	private List<RecipeOverview> recipes;
+	private User user;
 	private Context context;
 	
 	/** @inheritDoc
 	 *  Create adapter with context and recipe data. */
-	public SearchResultAdapter(Context context, int textViewResourceId,
+	public SearchResultAdapter(Activity activity, int textViewResourceId,
 				List<RecipeOverview> recipes) {
-		super(context, textViewResourceId, recipes);	
-		this.context = context;
+		super(activity.getApplicationContext(), textViewResourceId, recipes);	
+		this.user = ((RecipeReaderActivity) activity).getSettings().getUser();
+		this.context = activity.getApplicationContext();
 		this.recipes = recipes;
 	}
 	
@@ -45,7 +51,7 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
             RecipeOverview recipe = recipes.get(position);
             if (recipe != null) {
             		ImageView image = (ImageView) v.findViewById(R.id.categoryIcon);
-            		ImageView favoriteStar = (ImageView) v.findViewById(R.id.favoriteStar);
+            		ImageButton favoriteStar = (ImageButton) v.findViewById(R.id.favoriteStar);
                     TextView title = (TextView) v.findViewById(R.id.name);
                     TextView rating = (TextView) v.findViewById(R.id.rating);
                     if (title != null) {
@@ -54,8 +60,14 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
                     if (image != null) {
                         image.setImageResource(recipe.getCategory().getIcon());    
                     }
-                    if (favoriteStar != null && recipe.getFavorite()) {
-                        favoriteStar.setImageResource(R.drawable.star);    
+                    if (favoriteStar != null) {
+                    	if (recipe.getFavorite()) {
+                    		favoriteStar.setImageResource(R.drawable.star);  
+                    	} else {
+                    		favoriteStar.setImageResource(R.drawable.star_outline);
+                    	}
+                    	favoriteStar.setOnClickListener(
+                    			new FavoriteStarListener(user, recipe.getId()));
                     }
                     if (rating != null) {
                         rating.setText("" + recipe.getRating());    
@@ -63,4 +75,22 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
             }
             return v;
     }
+	
+	private class FavoriteStarListener implements View.OnClickListener {
+		private User user;
+		private int id; 
+		
+		private FavoriteStarListener(User user, int id) {
+			this.user = user;
+			this.id = id;
+		}
+		
+		public void onClick(View v) {
+			try {
+				Searcher.addRecipeToFavoriteById(user, id);
+			} catch (Exception e) {}
+			((ImageButton) v).setImageResource(R.drawable.star);
+		}
+		
+	}
 }
