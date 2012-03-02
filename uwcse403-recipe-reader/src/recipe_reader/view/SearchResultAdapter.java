@@ -16,6 +16,7 @@ import uwcse403.recipe_reader.R.id;
 import uwcse403.recipe_reader.R.layout;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
                     		favoriteStar.setImageResource(R.drawable.star_outline);
                     	}
                     	favoriteStar.setOnClickListener(
-                    			new FavoriteStarListener(user, recipe.getId()));
+                    			new FavoriteStarListener(user, recipe));
                     }
                     if (rating != null) {
                         rating.setText("" + recipe.getRating());    
@@ -78,18 +79,26 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
 	
 	private class FavoriteStarListener implements View.OnClickListener {
 		private User user;
-		private int id; 
+		private RecipeOverview recipe; 
 		
-		private FavoriteStarListener(User user, int id) {
+		private FavoriteStarListener(User user, RecipeOverview recipe) {
 			this.user = user;
-			this.id = id;
+			this.recipe = recipe;
 		}
 		
 		public void onClick(View v) {
-			try {
-				Searcher.addRecipeToFavoriteById(user, id);
-			} catch (Exception e) {}
-			((ImageButton) v).setImageResource(R.drawable.star);
+			ImageButton b = ((ImageButton) v);
+			if (recipe.getFavorite()) {
+				try {
+					Searcher.removeRecipeFromFavoriteById(user, recipe.getId());
+				} catch (Exception e) {}
+				b.setImageResource(R.drawable.star_outline);
+			} else {
+				try {
+					Searcher.addRecipeToFavoriteById(user, recipe.getId());
+				} catch (Exception e) {}
+				b.setImageResource(R.drawable.star);
+			}
 		}
 		
 	}
