@@ -4,19 +4,118 @@
     android:gravity="center_horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <ImageView
+        android:id="@+id/recipe_image"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:padding="10dp"/>
 	<TextView
         android:id="@+id/recipe_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
         android:gravity="center_horizontal"
-        android:text="Hamburgers"
         android:paddingBottom="10dp"
-        android:textSize="24dp"/>
-    <ImageView
-        android:id="@+id/recipe_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:src="@drawable/hamburger" />
+        android:paddingTop="10dp"
+        android:textSize="24dp"
+        android:layout_weight="1"/>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1">
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:orientation="horizontal"
+		    android:gravity="center_horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingTop="5dp">
+			<TextView
+			    android:text="@string/Yield"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:paddingLeft="10dp"
+		        android:layout_weight="1"
+		        android:textSize="16dp"/>
+			<TextView
+		        android:id="@+id/yield"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:layout_weight="1"
+		        android:paddingLeft="10dp"
+		        android:textSize="16dp"/>
+		</LinearLayout>
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:orientation="horizontal"
+		    android:gravity="center_horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingTop="5dp">
+			<TextView
+			    android:text="@string/Cook_Time"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:paddingLeft="10dp"
+		        android:layout_weight="1"
+		        android:textSize="16dp"/>
+			<TextView
+		        android:id="@+id/cook_time"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:layout_weight="1"
+		        android:paddingLeft="10dp"
+		        android:textSize="16dp"/>
+		</LinearLayout>
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:orientation="horizontal"
+		    android:gravity="center_horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingTop="5dp">
+			<TextView
+			    android:text="@string/Total_Time"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:paddingLeft="10dp"
+		        android:layout_weight="1"
+		        android:textSize="16dp"/>
+			<TextView
+		        android:id="@+id/total_time"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:layout_weight="1"
+		        android:paddingLeft="10dp"
+		        android:textSize="16dp"/>
+		</LinearLayout>
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:orientation="horizontal"
+		    android:gravity="center_horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingTop="5dp">
+			<TextView
+			    android:text="@string/Calories"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:paddingLeft="10dp"
+		        android:layout_weight="1"
+		        android:textSize="16dp"/>
+			<TextView
+		        android:id="@+id/calories"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="left"
+		        android:layout_weight="1"
+		        android:paddingLeft="10dp"
+		        android:textSize="16dp"/>
+		</LinearLayout>
+</LinearLayout>
 </LinearLayout>
