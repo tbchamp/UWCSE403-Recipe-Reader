@@ -36,8 +36,7 @@ public class LandingFragment extends Fragment {
 			ImageView iv = ((ImageView) v.findViewById(R.id.recipe_image));
 			InputStream is = (InputStream) new URL(r.getImgLoc()).getContent();
 			Drawable d = Drawable.createFromStream(is, "src");
-			iv.setImageDrawable(d);
-			
+			iv.setBackgroundDrawable(d);
 		} catch (IOException e) {}
 		((TextView) v.findViewById(R.id.yield)).setText(r.getYield());
 		((TextView) v.findViewById(R.id.cook_time)).setText(r.getCook());

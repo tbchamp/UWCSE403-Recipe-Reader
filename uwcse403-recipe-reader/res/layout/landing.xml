@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:padding="10dp">
     <ImageView
+        android:contentDescription="Recipe image"
         android:id="@+id/recipe_image"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:padding="10dp"/>
+        android:padding="5dp"/>
+    <TextView 
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:text=" "/>
 	<TextView
         android:id="@+id/recipe_title"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:padding="5dp"
         android:textSize="24dp"
-        android:layout_weight="1"/>
+        android:background="@+drawable/text_background"/>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
-	    android:layout_height="0dp"
-	    android:layout_weight="1">
+	    android:layout_height="wrap_content"
+	    android:background="@+drawable/text_background"
+	    android:padding="5dp">
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:orientation="horizontal"
 		    android:gravity="center_horizontal"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:paddingTop="5dp">
+		    android:padding="2dp">
 			<TextView
 			    android:text="@string/Yield"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:gravity="left"
-		        android:paddingLeft="10dp"
+		        android:paddingLeft="5dp"
 		        android:layout_weight="1"
 		        android:textSize="16dp"/>
 			<TextView
@@ -53,13 +57,13 @@
 		    android:gravity="center_horizontal"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:paddingTop="5dp">
+		    android:paddingTop="2dp">
 			<TextView
 			    android:text="@string/Cook_Time"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:gravity="left"
-		        android:paddingLeft="10dp"
+		        android:paddingLeft="5dp"
 		        android:layout_weight="1"
 		        android:textSize="16dp"/>
 			<TextView
@@ -76,13 +80,13 @@
 		    android:gravity="center_horizontal"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:paddingTop="5dp">
+		    android:paddingTop="2dp">
 			<TextView
 			    android:text="@string/Total_Time"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:gravity="left"
-		        android:paddingLeft="10dp"
+		        android:paddingLeft="5dp"
 		        android:layout_weight="1"
 		        android:textSize="16dp"/>
 			<TextView
@@ -99,13 +103,13 @@
 		    android:gravity="center_horizontal"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:paddingTop="5dp">
+		    android:paddingTop="2dp">
 			<TextView
 			    android:text="@string/Calories"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:gravity="left"
-		        android:paddingLeft="10dp"
+		        android:paddingLeft="5dp"
 		        android:layout_weight="1"
 		        android:textSize="16dp"/>
 			<TextView

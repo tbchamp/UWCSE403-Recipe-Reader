@@ -1,0 +1,8 @@
+<resources>
+
+<style name="CustomTheme" parent="Theme.Sherlock">
+    <item name="android:typeface">sans</item>
+    <item name="abBackground">#000000</item>
+</style>
+
+</resources>
