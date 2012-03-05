@@ -377,6 +377,15 @@ public class Searcher {
 		return categories;
 	}
 	
+	public static List<String> getCategoryStrings() throws Exception {
+		List<Category> categories = getCategories();
+		List<String> catStrings = new ArrayList<String>();
+		for (Category c: categories) {
+			catStrings.add(c.getName());
+		}
+		return catStrings;
+	}
+	
 	public static List<RecipeOverview> getOverviewByMealCategory(int mealId, int categoryId, User searcher) throws Exception{
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();

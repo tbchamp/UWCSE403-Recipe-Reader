@@ -26,6 +26,7 @@ public class Category {
             put("Gluten Free", R.drawable.gluten_free);
             put("Vegan", R.drawable.vegan);
             put("Beverage", R.drawable.beverage);
+            put("Other", R.drawable.other);
         }
     };
 	

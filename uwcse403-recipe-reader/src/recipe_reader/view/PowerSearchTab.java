@@ -23,8 +23,8 @@ public class PowerSearchTab extends ListFragment{
                              Bundle savedInstanceState) {
 		
 		try {
-			setListAdapter(new ArrayAdapter<Category>(this.getActivity().getApplicationContext(),
-			        R.layout.power_search_item, Searcher.getCategories()));
+			setListAdapter(new ArrayAdapter<String>(this.getActivity().getApplicationContext(),
+			        R.layout.power_search_item, Searcher.getCategoryStrings()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
