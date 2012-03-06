@@ -1,4 +1,4 @@
-package uwcse403.recipe_reader;
+package recipe_reader.comparator;
 
 import java.util.Comparator;
 

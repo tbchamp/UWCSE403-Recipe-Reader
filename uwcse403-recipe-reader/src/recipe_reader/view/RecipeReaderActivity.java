@@ -5,14 +5,6 @@
 package recipe_reader.view;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import recipe_reader.model.Category;
-import recipe_reader.model.Directions;
-import recipe_reader.model.Recipe;
 import recipe_reader.model.Settings;
 import uwcse403.recipe_reader.R;
 
@@ -37,7 +29,7 @@ public class RecipeReaderActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         settings = new Settings();
         try {
-			settings.signIn("Jeremy Lin", "Linsanity");
+			settings.signIn("guest", "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

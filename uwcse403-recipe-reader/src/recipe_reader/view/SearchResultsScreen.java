@@ -9,11 +9,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import recipe_reader.comparator.RecipeCategoryComparator;
+import recipe_reader.comparator.RecipeRatingComparator;
+import recipe_reader.comparator.RecipeTitleComparator;
 import recipe_reader.model.RecipeOverview;
 import uwcse403.recipe_reader.R;
-import uwcse403.recipe_reader.RecipeCategoryComparator;
-import uwcse403.recipe_reader.RecipeRatingComparator;
-import uwcse403.recipe_reader.RecipeTitleComparator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 
 public class SearchResultsScreen extends Fragment {
 	private List<String> searchKeywords;
+	private int catNumber;
 	
 	@Override
 	/** @inheritDoc */
@@ -36,7 +37,11 @@ public class SearchResultsScreen extends Fragment {
 			((FragmentActivity) getActivity()).getSupportFragmentManager().beginTransaction();
 		SearchResultsList resultsFragment = (SearchResultsList) Fragment.instantiate(getActivity(), 
 				SearchResultsList.class.getName());
-		resultsFragment.setSearchPhrase(searchKeywords);
+		if(searchKeywords != null) {
+			resultsFragment.setSearchPhrase(searchKeywords);
+		} else {
+			resultsFragment.setCatNumber(catNumber);
+		}
 		resultsFragment.setComparator(new RecipeTitleComparator());
 		ft.replace(R.id.list_frag, resultsFragment, "Search Results");
 		ft.commit();
@@ -59,6 +64,10 @@ public class SearchResultsScreen extends Fragment {
 	 */
 	public void setSearchPhrase(String phrase) {
 		searchKeywords = Arrays.asList(phrase.split(" "));
+	}
+	
+	public void setCatNumber(int c) {
+		catNumber = c;
 	}
 	
 	private class ClickListener implements View.OnClickListener {

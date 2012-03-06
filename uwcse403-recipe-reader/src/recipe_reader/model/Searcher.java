@@ -121,7 +121,7 @@ public class Searcher {
 				name =  json_data.getString("name");
 				description =  json_data.getString("description");
 				rating = json_data.getInt("rating");
-				category = new Category(json_data.getInt("id"), json_data.getString("cat"));
+				category = new Category(json_data.getString("cat"));
 			}
 		} catch (JSONException e){
 			System.out.println("1json nosj");
@@ -329,7 +329,7 @@ public class Searcher {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				Meal m = new Meal(json_data.getInt("id"), json_data.getString("name"));
+				Meal m = new Meal(json_data.getString("name"));
 				meals.add(m);
 			}
 		} catch (JSONException e){
@@ -368,7 +368,7 @@ public class Searcher {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				Category m = new Category(json_data.getInt("id"), json_data.getString("cat"));
+				Category m = new Category(json_data.getString("cat"));
 				categories.add(m);
 			}
 		} catch (JSONException e){
