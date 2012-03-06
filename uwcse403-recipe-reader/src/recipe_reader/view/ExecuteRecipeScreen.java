@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class ExecuteRecipeScreen extends Fragment {
 	
@@ -49,13 +50,13 @@ public class ExecuteRecipeScreen extends Fragment {
 	 */
 	public void attachNavButtonListeners(View v) {
 
-    	Button stepBack = (Button) v.findViewById(R.id.step_back);
+		ImageButton stepBack = (ImageButton) v.findViewById(R.id.step_back);
     	stepBack.setOnClickListener(new NavButtonListener());
     	
-    	Button repeatStep = (Button) v.findViewById(R.id.repeat_step);
+    	ImageButton repeatStep = (ImageButton) v.findViewById(R.id.repeat_step);
     	repeatStep.setOnClickListener(new NavButtonListener());
     	
-    	Button stepForward = (Button)  v.findViewById(R.id.step_forward);
+    	ImageButton stepForward = (ImageButton)  v.findViewById(R.id.step_forward);
     	stepForward.setOnClickListener(new NavButtonListener());
 	}
 
