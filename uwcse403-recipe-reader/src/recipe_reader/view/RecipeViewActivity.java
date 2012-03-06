@@ -293,8 +293,8 @@ public class RecipeViewActivity extends FragmentActivity {
 	 * @param previousStep - The last highlighted step
 	 */
 	private void highlightStep(int nextStep, int previousStep){
-		//instructListView.getChildAt(previousStep).setBackgroundColor(Color.BLACK);
-		//instructListView.getChildAt(nextStep).setBackgroundColor(Color.rgb(87, 174, 74));
+		instructListView.getChildAt(previousStep).setBackgroundColor(Color.BLACK);
+		instructListView.getChildAt(nextStep).setBackgroundColor(Color.rgb(87, 174, 74));
 	}
 		
 }

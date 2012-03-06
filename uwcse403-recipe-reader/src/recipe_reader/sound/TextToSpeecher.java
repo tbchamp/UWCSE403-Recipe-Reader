@@ -1,6 +1,6 @@
 /**
  * @author Alisa Yamanaka
- * @version February 23, 2012 - 22:26
+ * @version March 6, 2012 - 11:19
  * 
  * This class uses the TextToSpeech class provided by android to convert text
  * 	to speech. Implements the OnInitListener so other classes do not have to.
@@ -47,7 +47,7 @@ public class TextToSpeecher implements OnInitListener {
 	 */
 	public void speak(String text){
 		if(text != null && text.length() > 0) {
-			tts.speak(text, TextToSpeech.QUEUE_ADD, null);
+			tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 		}
 	}
 	
@@ -59,15 +59,7 @@ public class TextToSpeecher implements OnInitListener {
 	 */
 	public void speakInstruction(int instr){
 		if(instructList != null && instr >= 0 && instr < instructCount){
-			String listItem = (String) instructList.get(instr);
-			
-			if (listItem.length() > 2){
-				// Remove first part of string with the step number.
-				// Comment out if you want it to read the step number.
-				listItem = listItem.substring(2);
-				
-				this.speak(listItem);
-			}
+			this.speak((String) instructList.get(instr));
 		}
 	}
 	
