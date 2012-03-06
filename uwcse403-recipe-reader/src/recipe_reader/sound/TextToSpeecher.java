@@ -13,6 +13,7 @@ import java.util.List;
 import android.app.Activity;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import android.util.Log;
 import android.widget.Toast;
 
 public class TextToSpeecher implements OnInitListener {
@@ -75,6 +76,18 @@ public class TextToSpeecher implements OnInitListener {
 			instructList = il;
 			instructCount = il.size();
 		}
+	}
+	
+	
+	/**
+	 * Shuts down the TextToSpeech engine to avoid leakage error
+	 */
+	public void shutDown(){
+	    if(tts != null) {
+	        tts.stop();
+	        tts.shutdown();
+	        Log.d("ActivityTTS", "TTS Destroyed");
+	    }
 	}
 	
 

@@ -296,5 +296,19 @@ public class RecipeViewActivity extends FragmentActivity {
 		instructListView.getChildAt(previousStep).setBackgroundColor(Color.BLACK);
 		instructListView.getChildAt(nextStep).setBackgroundColor(Color.rgb(87, 174, 74));
 	}
+	
+	
+	/**
+	 * @author yamana
+	 * 
+	 * Overrides onDestroy() method so that the TextToSpeech stuff can be shutdown
+	 *  and avoids leakage issue.
+	 */
+	@Override
+	protected void onDestroy() {
+		tts.shutDown();
+	    super.onDestroy();
+	}
+
 		
 }
