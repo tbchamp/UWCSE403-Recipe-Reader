@@ -55,9 +55,6 @@ public class ExecuteRecipeScreen extends Fragment {
     	Button repeatStep = (Button) v.findViewById(R.id.repeat_step);
     	repeatStep.setOnClickListener(new NavButtonListener());
     	
-    	Button setThreshold = (Button)  v.findViewById(R.id.thresholdButton);
-    	setThreshold.setOnClickListener(new NavButtonListener());
-    	
     	Button stepForward = (Button)  v.findViewById(R.id.step_forward);
     	stepForward.setOnClickListener(new NavButtonListener());
 	}
@@ -76,8 +73,6 @@ public class ExecuteRecipeScreen extends Fragment {
 				parent.updateStep(Command.PREVIOUS);
 			} else if(v.getId() == R.id.repeat_step) {
 				parent.updateStep(Command.REPEAT);
-			} else if(v.getId() == R.id.thresholdButton) {
-				
 			} else if(v.getId() == R.id.step_forward) {
 				parent.updateStep(Command.NEXT);
 			}

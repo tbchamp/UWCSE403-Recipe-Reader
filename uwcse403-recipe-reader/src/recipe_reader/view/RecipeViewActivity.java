@@ -10,6 +10,7 @@ package recipe_reader.view;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.michaelnovakjr.numberpicker.NumberPickerDialog;
 
 import recipe_reader.model.Generator;
 import recipe_reader.model.Recipe;
@@ -22,14 +23,21 @@ import uwcse403.recipe_reader.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ListView;
+
 
 public class RecipeViewActivity extends FragmentActivity {
 
@@ -41,11 +49,13 @@ public class RecipeViewActivity extends FragmentActivity {
 	
 	private TextToSpeecher tts;
 	
+	private ListView instructListView;
+	
 	// the recipe step that were currently on (is highlighted)
 	// initialized to 0 and updated by vr as the user talks to the app
 	// Note: List of instructions is zero-based array
 	private int currentStep;
-	private int lastStep;
+	private int numSteps;
 	
     /** @inheritDoc */
     @Override
@@ -74,31 +84,16 @@ public class RecipeViewActivity extends FragmentActivity {
 			// TODO Auto-generated catch block
 		}
 		
-		//THIS IS HERE FOR TESTING PURPOSES BECAUSE THE RECIPE LOADING IS NOT WORKING
-		//if (recipe == null) {
-			/*List<String> dirLst = new ArrayList<String>();
-			dirLst.add("Step one");
-			dirLst.add("Step two");
-			dirLst.add("Step three");
-			dirLst.add("Step four");
-			dirLst.add("Step five");
-			
-			Directions dir = new Directions(dirLst);
-			
-			List<Ingredient> ing = new ArrayList<Ingredient>();
-			ing.add(new Ingredient("2 pounds of chicken"));
-			
-			recipe.setDirections(dir);
-			recipe.setIngredients(ing);*/
-			
-		//}
-		
 		bar.setTitle(recipe.getName());
         vr = new VoiceRecognition(this);
         tts = new TextToSpeecher(this);
         currentStep = 0;
         
-        lastStep = recipe.getDirections().getNumSteps() - 1;
+        numSteps = recipe.getDirections().getNumSteps();
+        
+        // make sure the screen will not turn off while this activity is running
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | 
+        		WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // attach a new observer to the VoiceRecognition object
         VoiceRecObserver obs = new VoiceRecObserver(this);
@@ -138,18 +133,20 @@ public class RecipeViewActivity extends FragmentActivity {
      */
     public void updateStep(Command c) {
     	if (c == Command.NEXT) {
-    		if(currentStep < lastStep) {
+    		if(currentStep < numSteps - 1) {
     			currentStep++;
+    			highlightStep(currentStep, currentStep - 1);
     			tts.speakInstruction(currentStep);
     		} else {
-    			tts.speak("There are no more steps in this recipe");
+    			tts.speak("There are no more steps in this recipe.");
     		}
     	} else if (c == Command.PREVIOUS) {
     		if (currentStep > 0) {
     			currentStep--;
+    			highlightStep(currentStep, currentStep + 1);
     			tts.speakInstruction(currentStep);
     		} else {
-    			tts.speak("This is the first step in this recipe");
+    			tts.speak("This is the first step in this recipe.");
     		}
     	} else if (c == Command.REPEAT) {
     		// repeat
@@ -181,14 +178,14 @@ public class RecipeViewActivity extends FragmentActivity {
 			
 			// Checks if the instruction button was clicked. If so, start voice recognition
 			// Otherwise, stop voice recognition because user left instructions fragment
-			//
-			// Also, store instance of InstructionsFragment. For use in reading TextToSpeech stuff.
 			if(v.getId() == R.id.start) {
-				vr.start();
 				tts.setInstructionsList(recipe.getDirections().getDirectionList());
 				tts.speakInstruction(0);
+				vr.start();
+				v.setEnabled(false);
 			} else {
 				vr.stop();
+				findViewById(R.id.start).setEnabled(true);
 			}
 		}	
     }
@@ -236,5 +233,68 @@ public class RecipeViewActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	vr.onActivityResult(requestCode, resultCode, data);
     }
-
+    
+    /**
+     * @author aosobov
+     * Inflates the options menu when it is first opened
+     */
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu, menu);
+	    return true;
+	}
+    
+    /**
+     * @author aosobov
+     * Called when an item is selected from the options menu
+     * @param item the menu item selected
+     */
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.id.sensitivity) {
+			// display the number picker
+			NumberPickerDialog dialog = new NumberPickerDialog(this, 4, vr.getSensitivity());
+			dialog.setTitle("Select sensitivity threshold");
+			dialog.setOnNumberSetListener(new SensitivityUpdater());
+			dialog.show();
+		}
+	    return true;
+	}
+	
+	/**
+	 * @author aosobov
+	 * Custom handler for a new number selection in the NumberPickerDialog
+	 */
+	private class SensitivityUpdater implements NumberPickerDialog.OnNumberSetListener {
+		public void onNumberSet(int selectedNumber) {
+			vr.setSensitivity(selectedNumber);
+		}
+	}
+	
+	
+	/**
+	 * @author yamana
+	 * 
+	 * Gives the activity access to the ListView of the Instructions fragment so highlighting can occur
+	 * 
+	 * @param v - This is the ListView of the InstructionsFragment
+	 */
+	public void setInstructionsListView(ListView v){
+		instructListView = v;
+	}
+	
+	
+	/**
+	 * @author yamana
+	 * 
+	 * Highlights the next step in the recipe and un-highlights the previously
+	 * 	highlighted step
+	 * 
+	 * @param nextStep - The step that is being switched to
+	 * @param previousStep - The last highlighted step
+	 */
+	private void highlightStep(int nextStep, int previousStep){
+		instructListView.getChildAt(previousStep).setBackgroundColor(Color.BLACK);
+		instructListView.getChildAt(nextStep).setBackgroundColor(Color.rgb(87, 174, 74));
+	}
+		
 }

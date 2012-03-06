@@ -10,35 +10,27 @@
     	android:padding="4dp"
     	android:gravity="top"
     	android:baselineAligned="false">
-   		<Button 
+   		<ImageButton 
    			android:id="@+id/step_back"
-   			android:text="@+string/Step_Back"
+			android:src="@drawable/arrow_left"
    			android:layout_height="fill_parent" 
-   			android:layout_width="0px" 
+   			android:layout_width="fill_parent" 
    			android:clickable="true"
-   			android:layout_weight="5"></Button>
-   		<Button 
+   			android:layout_weight="1"></ImageButton>
+   		<ImageButton 
    			android:id="@+id/repeat_step"
-   			android:text="@+string/Repeat_Step"
+   			android:src="@drawable/step_repeat"
    			android:layout_height="fill_parent"  
-   			android:layout_width="0px" 
+   			android:layout_width="fill_parent" 
    			android:clickable="true"
-   			android:layout_weight="5"></Button>
-   		<Button 
-   			android:id="@+id/thresholdButton"
-   			android:text="@+string/Threshold"
-   			android:layout_height="fill_parent"  
-   			android:layout_width="0px" 
-   			android:layout_weight="7"
-   			android:layout_gravity="center"
-   			android:clickable="true"></Button>
-   		<Button 
+   			android:layout_weight="1"></ImageButton>
+   		<ImageButton 
    			android:id="@+id/step_forward"
-   			android:text="@+string/Step_Forward"
+			android:src="@drawable/arrow_right"
    			android:layout_height="fill_parent"  
-   			android:layout_width="0px"
+   			android:layout_width="fill_parent"
    			android:clickable="true"
-   			android:layout_weight="6"></Button>
+   			android:layout_weight="1"></ImageButton>
 	    </LinearLayout>
 	<FrameLayout
             android:id="@+id/instruction_list_frag"

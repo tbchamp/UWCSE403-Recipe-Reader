@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 
-/**
+/** 
  * Sample code that invokes the speech recognition intent API.
  */
 public class VoiceRecognition extends Observable {
@@ -38,7 +38,9 @@ public class VoiceRecognition extends Observable {
 	 // how often the SoundMeter object should check to see if a loud noise was made  
      private static final int POLL_INTERVAL = 300;
      // the threshold used to determine how loud a noise needs to be to trigger voice recognition
-	 private int THRESHOLD = 5;
+	 private int THRESHOLD = 6;
+	 private int THRESHOLD_MIN = 1;
+	 private int THRESHOLD_MAX = 10;
 	 
 	 // Possible words the user may say to mean one of the Commands
 	 private String[] next_arr = {"next", "text", "nice", "post", "max", "thanks", "maxed", "next stop", "next up", "next feb", "forward", "foreign"};
@@ -216,9 +218,17 @@ public class VoiceRecognition extends Observable {
 	  * @throws IllegalArgumentException if level is not within the expected range
 	  */
 	 public void setSensitivity(int level) {
-		 if (level < 1 || level > 10) {
-			 throw new IllegalArgumentException("Level must be between 1 and 10");
+		 if (level < THRESHOLD_MIN || level > THRESHOLD_MAX) {
+			 throw new IllegalArgumentException("Level must be between " + THRESHOLD_MIN + " and " + THRESHOLD_MAX);
 		 }
 		 THRESHOLD = level;
+	 }
+	 
+	 /**
+	  * Get the sensitivity that the loud noise detector is currently set to.
+	  * @return current threshold that the loud noise detector is set to
+	  */
+	 public int getSensitivity() {
+		 return THRESHOLD;
 	 }
 }
