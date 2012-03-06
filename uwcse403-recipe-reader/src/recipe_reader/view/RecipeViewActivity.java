@@ -37,6 +37,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class RecipeViewActivity extends FragmentActivity {
@@ -56,6 +57,8 @@ public class RecipeViewActivity extends FragmentActivity {
 	// Note: List of instructions is zero-based array
 	private int currentStep;
 	private int numSteps;
+	
+	private final int HIGHLIGHTING_COLOR = Color.rgb(87, 174, 74);
 	
     /** @inheritDoc */
     @Override
@@ -293,8 +296,14 @@ public class RecipeViewActivity extends FragmentActivity {
 	 * @param previousStep - The last highlighted step
 	 */
 	private void highlightStep(int nextStep, int previousStep){
-		instructListView.getChildAt(previousStep).setBackgroundColor(Color.BLACK);
-		instructListView.getChildAt(nextStep).setBackgroundColor(Color.rgb(87, 174, 74));
+		View previous = instructListView.getChildAt(previousStep);
+		View next = instructListView.getChildAt(nextStep);
+		
+		previous.setBackgroundColor(Color.BLACK);
+		((TextView) previous).setTextColor(Color.LTGRAY);
+		
+		next.setBackgroundColor(HIGHLIGHTING_COLOR);
+		((TextView) next).setTextColor(Color.BLACK);
 	}
 	
 	
