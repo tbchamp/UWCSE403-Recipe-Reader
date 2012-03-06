@@ -121,7 +121,7 @@ public class Searcher {
 				name =  json_data.getString("name");
 				description =  json_data.getString("description");
 				rating = json_data.getInt("rating");
-				category = new Category(json_data.getInt("id"), json_data.getString("cat"));
+				category = new Category(json_data.getString("cat"));
 			}
 		} catch (JSONException e){
 			System.out.println("1json nosj");
@@ -224,6 +224,8 @@ public class Searcher {
 		result=sb.toString();
 		if (result.equals("get all favorites failed\n")){
 			return null;
+		} else if (result.equals("null\n")){
+			return new ArrayList<RecipeOverview>();
 		}
 		List<RecipeOverview> list = new ArrayList<RecipeOverview>();
 		try{
@@ -238,10 +240,36 @@ public class Searcher {
 				}
 			}
 		} catch (JSONException e){
-			System.out.println("4json nosj");
+			System.out.println("4json nosj" + e.getMessage());
 		}
 		
 		return list;
+	}
+	
+	public static boolean removeRecipeFromFavoriteById(User u, int id) throws Exception{
+		String result = "";
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("type","remove"));
+		nameValuePairs.add(new BasicNameValuePair("userid",""+u.getId()));
+		nameValuePairs.add(new BasicNameValuePair("recipeid",""+id));
+		//http post
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/favorite.php");
+		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		HttpResponse response = httpclient.execute(httppost);
+		HttpEntity entity = response.getEntity();
+		InputStream is = entity.getContent();
+
+		//convert response to string
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			sb.append(line + "\n");
+		}
+		is.close();
+		result=sb.toString();
+		return (result.equals("remove favorite successful\n"));
 	}
 	
 	public static boolean addNoteForUserById(User u, int id, String note) throws Exception{
@@ -301,7 +329,7 @@ public class Searcher {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				Meal m = new Meal(json_data.getInt("id"), json_data.getString("name"));
+				Meal m = new Meal(json_data.getString("name"));
 				meals.add(m);
 			}
 		} catch (JSONException e){
@@ -340,13 +368,22 @@ public class Searcher {
 			JSONArray jArray = new JSONArray(result);
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject json_data = jArray.getJSONObject(i);
-				Category m = new Category(json_data.getInt("id"), json_data.getString("cat"));
+				Category m = new Category(json_data.getString("cat"));
 				categories.add(m);
 			}
 		} catch (JSONException e){
 			System.out.println("6json nosj" + e.getMessage());
 		}
 		return categories;
+	}
+	
+	public static List<String> getCategoryStrings() throws Exception {
+		List<Category> categories = getCategories();
+		List<String> catStrings = new ArrayList<String>();
+		for (Category c: categories) {
+			catStrings.add(c.getName());
+		}
+		return catStrings;
 	}
 	
 	public static List<RecipeOverview> getOverviewByMealCategory(int mealId, int categoryId, User searcher) throws Exception{

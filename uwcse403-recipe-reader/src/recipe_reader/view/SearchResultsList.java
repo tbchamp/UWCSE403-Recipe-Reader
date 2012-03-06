@@ -7,8 +7,11 @@
 package recipe_reader.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import recipe_reader.comparator.RecipeTitleComparator;
 import recipe_reader.model.RecipeOverview;
 import recipe_reader.model.Searcher;
 import recipe_reader.model.User;
@@ -25,6 +28,8 @@ import android.widget.ListView;
 
 public class SearchResultsList extends ListFragment {
 	private List<String> searchKeywords;
+	private Comparator<RecipeOverview> comparator;
+	private int catNumber;
 
 	@Override
 	/** @inheritDoc */
@@ -40,13 +45,26 @@ public class SearchResultsList extends ListFragment {
 				Searcher.getRecipeOverviewsByKeywords(searchKeywords, user);
 			if (recipeList == null) {
 				recipeList = new ArrayList<RecipeOverview>();
+				if (catNumber > 0 && catNumber < 9) {
+					for(int i = 1; i < 8; i++) {
+						recipeList.addAll(Searcher.getOverviewByMealCategory(i, catNumber, user));	
+					}
+				}
 			}
 		} catch (Exception e) {
 			Log.i("MYNOTE", "error: " + e);
 		}
+		if (this.comparator == null) {
+			this.comparator = new RecipeTitleComparator(); // Default to alphabetical order
+		}
+		Collections.sort(recipeList, this.comparator);
 		setListAdapter(new SearchResultAdapter(
-				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
+				this.getActivity(), R.layout.list_item, recipeList));
 		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	
+	public void setComparator(Comparator<RecipeOverview> comp) {
+		this.comparator = comp;
 	}
 	
 	@Override
@@ -67,6 +85,10 @@ public class SearchResultsList extends ListFragment {
 	 */
 	public void setSearchPhrase(List<String> phrase) {
 		searchKeywords = phrase;
+	}
+	
+	public void setCatNumber(int c) {
+		catNumber = c;
 	}
 
 }

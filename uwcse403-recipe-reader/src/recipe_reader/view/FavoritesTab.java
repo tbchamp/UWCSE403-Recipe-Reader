@@ -33,7 +33,7 @@ public class FavoritesTab extends ListFragment {
 		try {
 			recipeList = (ArrayList<RecipeOverview>) Searcher.getFavoritesByUser(u);
 			if (recipeList.isEmpty()) {
-				recipeList.add(Searcher.getOverviewFromId(195, u));
+				recipeList = new ArrayList<RecipeOverview>();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class FavoritesTab extends ListFragment {
 		//
 		
 		setListAdapter(new SearchResultAdapter(
-				this.getActivity().getApplicationContext(), R.layout.list_item, recipeList));
+				this.getActivity(), R.layout.list_item, recipeList));
 		
 		return super.onCreateView(inflater, container, savedInstanceState);
     }

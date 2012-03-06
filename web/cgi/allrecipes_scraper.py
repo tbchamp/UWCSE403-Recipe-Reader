@@ -165,8 +165,8 @@ print "</p>"
 
 print "<h1> Upload to DataBase Results: </h1>"
 
-db_url1 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/add_recipe.php'
-db_url2 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/addtorecipe.php'
+db_url1 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php-test/add_recipe.php'
+db_url2 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php-test/addtorecipe.php'
 
 # 1. add overview info
 
@@ -214,6 +214,7 @@ for ingredient in ingredients:
 		if the_page != "Ingredient Inserted":
 			print the_page
 			#sys.exit()
+		print "added 1 ingredient"
 
 # 3. add directions
 count = 0
@@ -266,66 +267,31 @@ print "<h1> Scraped Data: </h1>"
 
 print "<p> </p>"
 
-print "<p> title: "
-if title:
-	print unescape(title) 
-else:
-	print "<NONE>"
-print " </p>"
+print "<p> title: " + unescape(title) + " </p>"
 
 print "<p> </p>"
 
-print "<p> picture: "
-if picture:
-	print unescape(picture)
-else:
-	print "<NONE>"
-print " </p>"
+print "<p> picture: " + unescape(picture) + " </p>"
 
 print "<p> </p>"
 
-print "<p> description: "
-if description:
-	print unescape(description)
-else:
-	print "<NONE>"
-print " </p>"
+print "<p> description: " + unescape(description) + " </p>"
 
 print "<p> </p>"
 
-print "<p> prep_time: "
-if prep_time:
-	print unescape(prep_time)
-else:
-	print "<NONE>"
-print " </p>"
+print "<p> prep_time: " + unescape(prep_time) + " </p>"
 
 print "<p> </p>"
 
-print "<p> cook_time: "
-if cook_time:
-	print unescape(cook_time)
-else:
-	print "<NONE>"
-print " </p>"
+print "<p> cook_time: " + unescape(cook_time) + " </p>"
 
 print "<p> </p>"
 
-print "<p> ready_time: "
-if ready_time:
-	print unescape(ready_time)
-else:
-	print "<NONE>"
-print " </p>"
+print "<p> ready_time: " + unescape(ready_time) + " </p>"
 
 print "<p> </p>"
 
-print "<p> yield_info: "
-if yield_info:
-	print unescape(yield_info)
-else:
-	print "<NONE>"
-print " </p>"
+print "<p> yield_info: " + unescape(yield_info) + " </p>"
 
 print "<p> </p>"
 

@@ -32,4 +32,8 @@
     <string name="Repeat_Step">Repeat step</string>
     <string name="Step_Forward">Forward</string>
     <string name="Threshold">Set threshold</string>
+    <string name="Yield">Yield:</string>
+    <string name="Cook_Time">Cooking time:</string>
+    <string name="Total_Time">Total time:</string>
+    <string name="Calories">Calories per serving:</string>
 </resources>

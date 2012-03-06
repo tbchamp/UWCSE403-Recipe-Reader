@@ -47,7 +47,7 @@ public class TextToSpeecher implements OnInitListener {
 	 */
 	public void speak(String text){
 		if(text != null && text.length() > 0) {
-			tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+			tts.speak(text, TextToSpeech.QUEUE_ADD, null);
 		}
 	}
 	
@@ -59,7 +59,15 @@ public class TextToSpeecher implements OnInitListener {
 	 */
 	public void speakInstruction(int instr){
 		if(instructList != null && instr >= 0 && instr < instructCount){
-			this.speak((String) instructList.get(instr));
+			String listItem = (String) instructList.get(instr);
+			
+			if (listItem.length() > 2){
+				// Remove first part of string with the step number.
+				// Comment out if you want it to read the step number.
+				listItem = listItem.substring(2);
+				
+				this.speak(listItem);
+			}
 		}
 	}
 	

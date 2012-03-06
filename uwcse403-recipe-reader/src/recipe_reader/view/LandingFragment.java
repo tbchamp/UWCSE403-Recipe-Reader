@@ -5,13 +5,18 @@
  */
 package recipe_reader.view;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import recipe_reader.model.Recipe;
 import uwcse403.recipe_reader.R;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LandingFragment extends Fragment {
@@ -27,6 +32,16 @@ public class LandingFragment extends Fragment {
         Recipe r = rva.getRecipe();
 		String test = r.getName();
 		tv.setText(test);
+		try {
+			ImageView iv = ((ImageView) v.findViewById(R.id.recipe_image));
+			InputStream is = (InputStream) new URL(r.getImgLoc()).getContent();
+			Drawable d = Drawable.createFromStream(is, "src");
+			iv.setBackgroundDrawable(d);
+		} catch (IOException e) {}
+		((TextView) v.findViewById(R.id.yield)).setText(r.getYield());
+		((TextView) v.findViewById(R.id.cook_time)).setText(r.getCook());
+		((TextView) v.findViewById(R.id.total_time)).setText(r.getReadytime());
+		((TextView) v.findViewById(R.id.calories)).setText(""+r.getCalories());
 		return v;
     }
 }

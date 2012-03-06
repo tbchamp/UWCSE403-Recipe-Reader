@@ -14,12 +14,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
 import android.view.MenuInflater;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 
@@ -32,21 +35,20 @@ public class RecipeReaderActivity extends FragmentActivity {
     /** @inheritDoc */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // exit if there is no internet connection
+        if(!isNetworkAvailable()) {
+        	noNetwork(this);
+        }
+        
         settings = new Settings();
         try {
-			settings.signIn("Jeremy Lin", "Linsanity");
+			settings.signIn("guest", "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         setUpTabs();
-    }
-    
-    /**
-     * @return Settings object associated with this app.
-     */
-    public Settings getSettings() {
-    	return settings;
     }
     
     /**
@@ -79,6 +81,43 @@ public class RecipeReaderActivity extends FragmentActivity {
 		}
 	    return true;
 	}
+	
+	/**
+	 * @author aosobov
+	 * @return true if a network connection is available, false otherwise
+	 */
+	private boolean isNetworkAvailable() {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null;
+	}
+	
+	/**
+	 * @author aosobov
+	 * Pop up a dialog informing the user that this app cannot run without a network connection
+	 * and force the user to close the app
+	 * @param cur the parent activity
+	 */
+	private void noNetwork(final Activity cur) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Sorry, you must have a network connection to use Recipe Reader")
+		       .setCancelable(false)
+		       .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   cur.finish();
+		           }
+		       });
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+    
+    /**
+     * @return Settings object associated with this app.
+     */
+    public Settings getSettings() {
+    	return settings;
+    }
     
     /**
      * Add tabs to action bar, add listeners for each tab, and show bar.

@@ -9,6 +9,7 @@
     	android:targetSdkVersion="15" />
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -16,14 +17,16 @@
         android:theme="@style/Theme.Sherlock" >
         <activity
             android:name="recipe_reader.view.RecipeReaderActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="recipe_reader.view.RecipeViewActivity"></activity>
+        <activity android:name="recipe_reader.view.RecipeViewActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 	
 </manifest>

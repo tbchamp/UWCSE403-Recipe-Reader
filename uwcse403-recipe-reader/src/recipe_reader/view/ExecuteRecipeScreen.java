@@ -8,14 +8,17 @@ package recipe_reader.view;
 
 import recipe_reader.sound.VoiceRecognition.Command;
 import uwcse403.recipe_reader.R;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class ExecuteRecipeScreen extends Fragment {
@@ -37,9 +40,9 @@ public class ExecuteRecipeScreen extends Fragment {
 		parent = (RecipeViewActivity) getActivity();
 		attachNavButtonListeners(v);
 		
+		
 		return v;
 	}
-
 	
 	/**
 	 * @author aosobov
@@ -71,8 +74,6 @@ public class ExecuteRecipeScreen extends Fragment {
 				parent.updateStep(Command.PREVIOUS);
 			} else if(v.getId() == R.id.repeat_step) {
 				parent.updateStep(Command.REPEAT);
-			//} else if(v.getId() == R.id.thresholdButton) {
-				
 			} else if(v.getId() == R.id.step_forward) {
 				parent.updateStep(Command.NEXT);
 			}
