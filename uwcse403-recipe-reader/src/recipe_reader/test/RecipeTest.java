@@ -22,7 +22,7 @@ public class RecipeTest extends AndroidTestCase {
 	User user;
 	
 	@Override
-	public void setUp(){
+	public void setUp() throws Exception{
 		directions = new ArrayList<String>();
 		directions.add("1. Preheat oven to 1 billion degree.");
 		directions.add("2. Roll around on ground.");
@@ -51,7 +51,12 @@ public class RecipeTest extends AndroidTestCase {
 				testDirections, notes, keywords, 5240, 5000, 240, testCategory, true, "Delete this recipe if it makes it to the database at some point.",
 				"Lunch", "Never", "http://i.imgur.com/dUWmF.jpg");
 		
-		user = new User("TestUser", 777777, "TestUserID");
+		try{
+			user = new User("TestUser", 777777, "TestUserID");
+		} catch (IllegalArgumentException unexpected){
+			fail("Setup was not performed successfully.");
+		}
+
 	}
 	
 

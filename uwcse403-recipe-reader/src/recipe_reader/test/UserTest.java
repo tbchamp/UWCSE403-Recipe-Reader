@@ -8,8 +8,12 @@ public class UserTest extends AndroidTestCase {
 	User testUser;
 	
 	@Override
-	public void setUp() {
-		testUser = new User("TestUser", 777777, "TestUserId");
+	public void setUp() throws Exception{
+		try {
+			testUser = new User("TestUser", 777777, "TestUserId");
+		} catch (IllegalArgumentException expected){
+			fail("Setup was not performed successfully.");
+		}
 	}
 	
 	
@@ -30,7 +34,7 @@ public class UserTest extends AndroidTestCase {
 		} catch (IllegalArgumentException expected){
 		}
 	}
-	
+
 	
 	
 	/***************************************************	getter METHOD TESTS	***************************************************/
