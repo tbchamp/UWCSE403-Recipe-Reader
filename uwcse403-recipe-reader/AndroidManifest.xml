@@ -27,6 +27,13 @@
         </activity>
         <activity android:name="recipe_reader.view.RecipeViewActivity"
             android:screenOrientation="portrait"></activity>
+        <uses-library android:name="android.test.runner" />
+        
     </application>
+    
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="uwcse403.recipe_reader" />
+
 	
 </manifest>
