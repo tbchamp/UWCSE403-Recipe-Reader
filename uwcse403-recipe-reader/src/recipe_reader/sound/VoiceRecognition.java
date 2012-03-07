@@ -42,6 +42,9 @@ public class VoiceRecognition extends Observable {
 	 private int THRESHOLD_MIN = 1;
 	 private int THRESHOLD_MAX = 10;
 	 
+	 // status variable that is set to false when the text to speech is speaking
+	 private boolean doneSpeaking;
+	 
 	 // Possible words the user may say to mean one of the Commands
 	 private String[] next_arr = {"next", "text", "nice", "post", "max", "thanks", "maxed", "next stop", "next up", "next feb", "forward", "foreign"};
 	 private String[] prev_arr = {"previous", "prius", "please", "previous stop", "previous top", "back", "go back", "goback", "go bak"};
@@ -78,6 +81,8 @@ public class VoiceRecognition extends Observable {
 		 }
 		 
 		 rReference = current;
+		 
+		 doneSpeaking = true;
 
 		// initialize the SoundMeter
         Sensor = new SoundMeter();
@@ -184,7 +189,7 @@ public class VoiceRecognition extends Observable {
 		 public void run() {
 			 double amp = Sensor.getAmplitude();
 			 //speakButton.setText("Amplitude is " + amp + ", h: " + HitCount);
-			 if (amp > THRESHOLD) {
+			 if (amp > THRESHOLD && doneSpeaking) {
 					 stop();
 					 startVoiceRecognitionActivity();
 					 return;
@@ -230,5 +235,19 @@ public class VoiceRecognition extends Observable {
 	  */
 	 public int getSensitivity() {
 		 return THRESHOLD;
+	 }
+	 
+	 /**
+	  * mute the VoiceRecognition so that it is not triggered by any sound
+	  */
+	 public void mute() {
+		 doneSpeaking = false;
+	 }
+	 
+	 /**
+	  * allow VoiceRecognition to be triggered by sound above the set sensitivity
+	  */
+	 public void unMute() {
+		 doneSpeaking = true;;
 	 }
 }

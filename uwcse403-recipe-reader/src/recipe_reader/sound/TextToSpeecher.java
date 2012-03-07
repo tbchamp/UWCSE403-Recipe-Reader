@@ -8,7 +8,10 @@
 
 package recipe_reader.sound;
 
+import java.util.HashMap;
 import java.util.List;
+
+import recipe_reader.view.RecipeViewActivity;
 
 import android.app.Activity;
 import android.speech.tts.TextToSpeech;
@@ -22,6 +25,7 @@ public class TextToSpeecher implements OnInitListener {
 	private TextToSpeech tts;
 	private List<String> instructList;
 	private int instructCount;
+	private HashMap<String, String> params;
 	
 	/**
 	 * Creates a new TextToSpeecher object
@@ -35,6 +39,9 @@ public class TextToSpeecher implements OnInitListener {
 			tts = new TextToSpeech(act, this);
 			instructList = null;
 			instructCount = 0;
+			
+			params = new HashMap<String, String>();
+			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "complete");
 		} else {
 			throw new NullPointerException();
 		}
@@ -48,7 +55,7 @@ public class TextToSpeecher implements OnInitListener {
 	 */
 	public void speak(String text){
 		if(text != null && text.length() > 0) {
-			tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+			tts.speak(text, TextToSpeech.QUEUE_FLUSH, params);
 		}
 	}
 	
@@ -108,6 +115,18 @@ public class TextToSpeecher implements OnInitListener {
 		else if (status == TextToSpeech.ERROR) {
 			Toast.makeText(act, "Error occurred while initializing Text-To-Speech engine", Toast.LENGTH_LONG).show();
 		}*/
+		
+		// called when this object is done reading a string
+		// turns the voice recognition back on
+	    tts.setOnUtteranceCompletedListener(new TextToSpeech.OnUtteranceCompletedListener() {
+
+	        public void onUtteranceCompleted(String utteranceId) {
+	        	if(utteranceId.equalsIgnoreCase("complete")) {
+	        		RecipeViewActivity r =  (RecipeViewActivity) act;
+	        		r.startVoiceRec();
+	        	}
+	        }
+	    });
 	}
 
 }
