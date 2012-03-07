@@ -101,6 +101,7 @@ public class RecipeViewActivity extends FragmentActivity {
         // attach a new observer to the VoiceRecognition object
         VoiceRecObserver obs = new VoiceRecObserver(this);
         vr.addObserver(obs);
+        vr.mute();
         
         attachButtonListeners();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -119,6 +120,15 @@ public class RecipeViewActivity extends FragmentActivity {
     public void onStop() {
     	super.onStop();
     	vr.stop();
+    }
+    
+    
+    /**
+     * @author aosobov
+     * called to restart voice recognition after it has been stopped by a call to updateStep
+     */
+    public void startVoiceRec() {
+    	vr.unMute();
     }
     
     //Attach listeners to buttons for displaying 3 screens.
@@ -146,6 +156,7 @@ public class RecipeViewActivity extends FragmentActivity {
      * @param c The Command that the VoiceRecognition object got from the user
      */
     public void updateStep(Command c) {
+    	vr.mute();
     	if (c == Command.NEXT) {
     		if(currentStep < numSteps - 1) {
     			currentStep++;
@@ -167,6 +178,7 @@ public class RecipeViewActivity extends FragmentActivity {
     		tts.speakInstruction(currentStep);
     	} else {
     		// unknown command so do nothing
+    		vr.unMute();
     	}
     }
     
@@ -222,20 +234,7 @@ public class RecipeViewActivity extends FragmentActivity {
     		
     		// Update app status based on result
     		updateStep(result);
-    		
-    		/*
-    		 * DEBUGGING ALERT. WILL BE REMOVED FOR FINAL RELEASE
-    		AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-    		builder.setMessage("Command recieved: " + result + " Current step: " + currentStep)
-    		       .setCancelable(false)
-    		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-    		           public void onClick(DialogInterface dialog, int id) {
-    		        	   dialog.cancel();
-    		           }
-    		       });
-    		AlertDialog alert = builder.create();
-    		alert.show();
-    		*/
+
     	}
     }
     
@@ -329,6 +328,4 @@ public class RecipeViewActivity extends FragmentActivity {
 		tts.shutDown();
 	    super.onDestroy();
 	}
-
-		
 }
