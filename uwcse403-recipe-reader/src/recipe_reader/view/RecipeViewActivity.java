@@ -110,6 +110,17 @@ public class RecipeViewActivity extends FragmentActivity {
 		ft.commit();
     }
     
+	/**
+	 * @author aosobov
+	 * 
+	 * Overrides onStop() method so that the SpeachToText enging can be shutdown
+	 * in order to avoid leaks and errors.
+	 */
+    public void onStop() {
+    	super.onStop();
+    	vr.stop();
+    }
+    
     //Attach listeners to buttons for displaying 3 screens.
     private void attachButtonListeners() {
     	Button start = (Button) findViewById(R.id.start);
