@@ -42,12 +42,6 @@ public class RecipeReaderActivity extends FragmentActivity {
         }
         
         settings = new Settings();
-        try {
-			settings.signIn("guest", "");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         setUpTabs();
     }
     
