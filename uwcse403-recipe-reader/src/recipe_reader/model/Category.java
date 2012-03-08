@@ -11,8 +11,11 @@ public class Category {
 	private String name;
 		
 	public Category(String name) {
-		this.setName(name);
-		this.setId(ids.get(name));
+		if(name == null || !ids.containsKey(name)) {
+			throw new IllegalArgumentException();
+		}
+		this.name = name;
+		this.id = ids.get(name);
 		this.icon = icons.get(name);
 	}
 	
@@ -45,6 +48,9 @@ public class Category {
     };
     
     public int getIdByName(String category) {
+    	if(category == null || !ids.containsKey(category)) {
+    		throw new IllegalArgumentException();
+    	}
     	return ids.get(category);
     }
 	
@@ -56,16 +62,8 @@ public class Category {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String toString() {
