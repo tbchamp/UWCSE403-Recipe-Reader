@@ -13,6 +13,7 @@ import uwcse403.recipe_reader.R;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +40,16 @@ public class LandingFragment extends Fragment {
 			iv.setBackgroundDrawable(d);
 		} catch (IOException e) {}
 		((TextView) v.findViewById(R.id.yield)).setText(r.getYield());
-		((TextView) v.findViewById(R.id.cook_time)).setText(r.getCook());
-		((TextView) v.findViewById(R.id.total_time)).setText(r.getReadytime());
+		if (r.getCook().equals("[]")) {
+			((TextView) v.findViewById(R.id.cook_time)).setText("N/A");
+		} else {
+			((TextView) v.findViewById(R.id.cook_time)).setText(r.getCook());
+		}
+		if (r.getReadytime().equals("[]")) {
+			((TextView) v.findViewById(R.id.total_time)).setText("N/A");
+		} else {
+			((TextView) v.findViewById(R.id.total_time)).setText(r.getReadytime());
+		}
 		((TextView) v.findViewById(R.id.calories)).setText(""+r.getCalories());
 		return v;
     }
