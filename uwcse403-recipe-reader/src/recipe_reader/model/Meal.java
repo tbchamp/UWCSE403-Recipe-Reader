@@ -8,8 +8,11 @@ public class Meal {
 	private String name;
 	
 	public Meal(String name){
-		this.setName(name);
-		this.setId(ids.get(name));
+		if(name == null || !ids.containsKey(name)) {
+			throw new IllegalArgumentException();
+		}
+		this.name = name;
+		this.id = ids.get(name);
 	}
 	
 	private static final Map<String, Integer> ids =
@@ -26,6 +29,9 @@ public class Meal {
     };
     
     public int getIdByName(String meal) {
+    	if(meal == null || !ids.containsKey(meal)) {
+    		throw new IllegalArgumentException();
+    	}
     	return ids.get(meal);
     }
 
@@ -33,15 +39,8 @@ public class Meal {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 }
