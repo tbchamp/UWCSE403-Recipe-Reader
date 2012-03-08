@@ -408,7 +408,7 @@ public class Searcher {
 		}
 		is.close();
 		result=sb.toString();
-		if (result.equals("get overviews by category and meal failed\n")){
+		if (result.equals("get overviews by category and meal failed\n") || result.equals("null\n")){
 			return null;
 		}
 		List<Integer> ids = new ArrayList<Integer>();
