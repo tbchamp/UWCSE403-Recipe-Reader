@@ -41,14 +41,11 @@ public class SearchResultsList extends ListFragment {
 		
 		try {
 			User user = ((RecipeReaderActivity) this.getActivity()).getSettings().getUser();
-			recipeList = 
-				Searcher.getRecipeOverviewsByKeywords(searchKeywords, user);
-			if (recipeList == null) {
-				recipeList = new ArrayList<RecipeOverview>();
-				if (catNumber > 0 && catNumber < 9) {
-					for(int i = 1; i < 8; i++) {
-						recipeList.addAll(Searcher.getOverviewByMealCategory(i, catNumber, user));	
-					}
+			if (searchKeywords != null) {
+				recipeList = Searcher.getRecipeOverviewsByKeywords(searchKeywords, user);
+			} else {
+				for (int i = 1; i <= 7; i++) {
+					recipeList.addAll(Searcher.getOverviewByMealCategory(i, catNumber, user));
 				}
 			}
 		} catch (Exception e) {

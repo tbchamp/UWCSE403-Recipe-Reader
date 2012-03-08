@@ -84,6 +84,7 @@ public class SearchResultsScreen extends Fragment {
 				frag = (SearchResultsList) Fragment.instantiate(getActivity(), 
 						SearchResultsList.class.getName());
 				frag.setSearchPhrase(searchKeywords);
+				frag.setCatNumber(catNumber);
 				frag.setComparator(comp);
 			}
 			ft.replace(R.id.list_frag, frag, "Search Results");
