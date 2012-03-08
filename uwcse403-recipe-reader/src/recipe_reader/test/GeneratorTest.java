@@ -1,5 +1,7 @@
 package recipe_reader.test;
 
+// White box test TO DA MAX
+
 import android.test.AndroidTestCase;
 import recipe_reader.model.Generator;
 

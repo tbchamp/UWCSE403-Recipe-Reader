@@ -1,5 +1,7 @@
 package recipe_reader.test;
 
+// Ideally, black box test, but Directions.java needs documentation
+
 import android.test.AndroidTestCase;
 import recipe_reader.model.Directions;
 

@@ -1,5 +1,7 @@
 package recipe_reader.test;
 
+// White box test
+
 import android.test.ActivityInstrumentationTestCase2;
 import recipe_reader.view.RecipeReaderActivity;
 
