@@ -1,5 +1,7 @@
 package recipe_reader.test;
 
+// Black box test
+
 import android.test.AndroidTestCase;
 import recipe_reader.model.RecipeOverview;
 

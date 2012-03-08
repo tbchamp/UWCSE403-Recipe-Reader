@@ -1,5 +1,9 @@
 package recipe_reader.test;
 
+/*
+ * Black Box Test
+ */
+
 import android.test.AndroidTestCase;
 import recipe_reader.model.User;
 
@@ -37,7 +41,7 @@ public class UserTest extends AndroidTestCase {
 
 	
 	
-	/***************************************************	getter METHOD TESTS	***************************************************/
+	/***************************************************	getter METHOD TESTS		***************************************************/
 	
 	// Tests that getUsername returns the correct username
 	public void testsTheGetUsernameMethod(){

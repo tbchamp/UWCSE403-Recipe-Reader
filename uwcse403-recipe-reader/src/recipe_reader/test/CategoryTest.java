@@ -72,7 +72,7 @@ public class CategoryTest extends AndroidTestCase {
 	
 	
 	
-	/***************************************************	getId TESTS	***************************************************/
+	/***************************************************	getId TESTS		***************************************************/
 	
 	// Tests that the correct ID is returned for Dairy Category
 	public void testsThatTheCorrectIdIsReturnedWhenGetIdMethodIsCalledOnDairyCategory() {
@@ -215,7 +215,7 @@ public class CategoryTest extends AndroidTestCase {
 	
 	
 	
-	/***************************************************	setId TESTS	***************************************************/
+	/***************************************************	setId TESTS		***************************************************/
 	
 	// Tests that passing setId zero throws an exception.
 	public void testsThatPassingSetIdMethodZeroThrowsAnException() throws Exception {
