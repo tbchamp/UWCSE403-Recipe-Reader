@@ -20,6 +20,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -62,14 +63,16 @@ public class RecipeReaderActivity extends FragmentActivity {
      */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == R.id.help) {
+			// inflate the help dialog from xml and display it
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("Help is coming")
+    		builder.setTitle("Help and Instructions")
     		       .setCancelable(false)
     		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
     		        	   dialog.cancel();
     		           }
     		       });
+    		builder.setView(LayoutInflater.from(this).inflate(R.menu.help_dialog, null));
     		AlertDialog alert = builder.create();
     		alert.show();
 		}
