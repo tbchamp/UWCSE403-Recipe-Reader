@@ -25,12 +25,12 @@ import org.json.JSONObject;
 
 public class Searcher {
 
-	public Searcher() {
-	}
-
-	/* Connections to mysql */
-
-
+	/**
+	 * method gets creates a list of recipe overviews based on a keyword search
+	 * @param keywords - what is being searched for
+	 * @param searcher - who is doing the searching
+	 * @return a list of RecipeOverview objects corresponding to the search keyterms, null on failure
+	 */
 	public static List<RecipeOverview> getRecipeOverviewsByKeywords(List<String> keywords, User searcher) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -88,6 +88,12 @@ public class Searcher {
 		return ovs;
 	}
 
+	/**
+	 * gets a recipeOverview from a recipe id
+	 * @param id - id of the recipe
+	 * @param searcher - who is getting the overview
+	 * @return recipeOverview corresponding to the id, null on failure
+	 */
 	public static RecipeOverview getOverviewFromId(int id, User searcher) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -140,6 +146,12 @@ public class Searcher {
 		return ov;
 	}	
 
+	/**
+	 * tells if a recipe is a favorite of a user
+	 * @param u - user to check
+	 * @param recipeId - id of the recipe to check
+	 * @return true of a favorite, false otherwise or on failure
+	 */
 	public static boolean isFavorite(User u, int recipeId) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -187,6 +199,12 @@ public class Searcher {
 		return (useri == u.getId() && recipei == recipeId);
 	}
 
+	/**
+	 * adds a recipe to a users favorites
+	 * @param u - user to add recipe to favorites
+	 * @param id - recipe id to add
+	 * @return true on success, false on failure
+	 */
 	public static boolean addRecipeToFavoriteById(User u, int id) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -217,6 +235,11 @@ public class Searcher {
 		}
 	}
 
+	/**
+	 * get all favorites of a user
+	 * @param u - user to get favorites for
+	 * @return list of RecipeOverviews corresponding to user's favorites, null on failure
+	 */
 	public static List<RecipeOverview> getFavoritesByUser(User u) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -267,6 +290,12 @@ public class Searcher {
 		return list;
 	}
 
+	/**
+	 * remove a recipe from a users favorites
+	 * @param u - user to remove from
+	 * @param id - recipe id to be removed
+	 * @return true on success, false on failure
+	 */
 	public static boolean removeRecipeFromFavoriteById(User u, int id) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -297,6 +326,13 @@ public class Searcher {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 * @param u
+	 * @param id
+	 * @param note
+	 * @return
+	 */
 	public static boolean addNoteForUserById(User u, int id, String note) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -328,6 +364,10 @@ public class Searcher {
 		}
 	}
 
+	/**
+	 * get all meals in the database
+	 * @return list of meals, null on failure
+	 */
 	public static List<Meal> getMeals() {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -371,6 +411,10 @@ public class Searcher {
 		return meals;
 	}
 
+	/**
+	 * get all categories in the database
+	 * @return list of categories, null on failure
+	 */
 	public static List<Category> getCategories() {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -414,15 +458,29 @@ public class Searcher {
 		return categories;
 	}
 
+	/**
+	 * get the names of all categories
+	 * @return list of strings, null on failure
+	 */
 	public static List<String> getCategoryStrings() {
 		List<Category> categories = getCategories();
 		List<String> catStrings = new ArrayList<String>();
+		if (categories == null){
+			return null;
+		}
 		for (Category c: categories) {
 			catStrings.add(c.getName());
 		}
 		return catStrings;
 	}
 
+	/**
+	 * get recipe overviews by meal and category
+	 * @param mealId
+	 * @param categoryId
+	 * @param searcher
+	 * @return list of overviews, null on failure
+	 */
 	public static List<RecipeOverview> getOverviewByMealCategory(int mealId, int categoryId, User searcher) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -447,6 +505,62 @@ public class Searcher {
 			is.close();
 			result=sb.toString();
 			if (result.equals("get overviews by category and meal failed\n") || result.equals("null\n")){
+				return null;
+			}
+		} catch (IOException e) {
+			return null;
+		}
+		List<Integer> ids = new ArrayList<Integer>();
+		//parse json data
+		try{
+			JSONArray jArray = new JSONArray(result);
+			for (int i = 0; i < jArray.length(); i++) {
+				JSONObject json_data = jArray.getJSONObject(i);
+				ids.add(json_data.getInt("id"));
+			}
+		} catch (JSONException e){
+			return null;
+		}
+		List<RecipeOverview> ovs = new ArrayList<RecipeOverview>();
+		for (int i = 0; i < ids.size() && i < 20; i++){
+			RecipeOverview temp = getOverviewFromId(ids.get(i), searcher);
+			if (temp == null){
+				return null;
+			}
+			ovs.add(temp);
+		}
+		return ovs;
+	}
+	
+	/**
+	 * get recipe overviews by category
+	 * @param categoryId
+	 * @param searcher
+	 * @return list of overviews, null on failure
+	 */
+	public static List<RecipeOverview> getOverviewByCategory(int categoryId, User searcher) {
+		String result = "";
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("type","getIdsByCat"));
+		nameValuePairs.add(new BasicNameValuePair("categoryid",""+categoryId));
+		//http post
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/search.php");
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
+			if (result.equals("get overviews by category failed\n") || result.equals("null\n")){
 				return null;
 			}
 		} catch (IOException e) {

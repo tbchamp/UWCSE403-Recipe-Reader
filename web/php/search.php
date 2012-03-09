@@ -75,6 +75,18 @@ if (strcmp($type, 'standard') == 0){
 						$output[]=$e;
 		print(json_encode($output));
 	}
+} else if (strcmp($type, 'getIdsByCat') == 0){
+	$categoryid = $_REQUEST['categoryid'];
+	$safe_categoryid = mysql_real_escape_string($categoryid);
+	$q = mysql_query("select id, rating from recipe where meal_id = "
+		. $safe_mealid . " order by rating desc");
+	if (!$q) {
+		print("get overviews by category failed");
+	} else {
+		while($e=mysql_fetch_assoc($q))
+						$output[]=$e;
+		print(json_encode($output));
+	}
 }
 
 mysql_close();
