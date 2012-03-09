@@ -10,6 +10,12 @@ import java.util.List;
 import android.test.AndroidTestCase;
 import recipe_reader.model.*;
 
+/**
+ * RecipeTest tests the recipe class
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class RecipeTest extends AndroidTestCase {
 	
 	List<String> directions;

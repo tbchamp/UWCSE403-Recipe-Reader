@@ -4,6 +4,12 @@ import java.util.Comparator;
 
 import recipe_reader.model.RecipeOverview;
 
+/**
+ * RecipeRatingComparator allows a list of recipes to be sorted by rating
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class RecipeRatingComparator implements Comparator<RecipeOverview> {
 
 	public int compare(RecipeOverview o1, RecipeOverview o2) {

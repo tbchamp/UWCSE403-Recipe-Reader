@@ -1,9 +1,3 @@
-/**
- * Fragment for displaying list of recipes with 
- * information like name, rating, and whether it
- * is one of the user's favorites.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
 
 import java.util.ArrayList;
@@ -26,6 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+/**
+ * SearchResultsList is the List Fragment for displaying a list of recipes
+ * with some relavant information
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class SearchResultsList extends ListFragment {
 	private List<String> searchKeywords;
 	private Comparator<RecipeOverview> comparator;

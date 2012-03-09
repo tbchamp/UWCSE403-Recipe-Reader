@@ -1,11 +1,4 @@
-/**
- * Activity for viewing a single recipe, and for executing
- * the recipe via voice commands.
- * @author Kristin Ivarson
- */
-
 package recipe_reader.view;
-
 
 import java.util.Observable;
 import java.util.Observer;
@@ -39,7 +32,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
+/**
+ * RecipeViewActivity is the activity for viewing a single recipe
+ * and executing that recipe through voice or touch commands
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class RecipeViewActivity extends FragmentActivity {
 
 	private Recipe recipe;

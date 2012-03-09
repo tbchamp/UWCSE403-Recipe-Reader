@@ -1,9 +1,3 @@
-/**
- * Fragment for displaying instructions and buttons
- * to navigate instructions while a recipe is being made.
- * @author Kristin Ivarson
- */
-
 package recipe_reader.view;
 
 import recipe_reader.sound.VoiceRecognition.Command;
@@ -18,6 +12,13 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 
+/**
+ * ExecuteRecipeScreen is a fragment for displaying instructions and buttons
+ * to navigate instructions while a recipe is being made.
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class ExecuteRecipeScreen extends Fragment {
 	
 	private RecipeViewActivity parent;

@@ -5,6 +5,12 @@ package recipe_reader.test;
 import android.test.ActivityInstrumentationTestCase2;
 import recipe_reader.view.RecipeReaderActivity;
 
+/**
+ * RecipeReaderActivityTest tests the RecipeReaderActivity class
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class RecipeReaderActivityTest extends ActivityInstrumentationTestCase2<RecipeReaderActivity> {
 	
 	private RecipeReaderActivity rra;

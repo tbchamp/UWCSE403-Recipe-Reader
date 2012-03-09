@@ -3,6 +3,12 @@ package recipe_reader.test;
 import android.test.AndroidTestCase;
 import recipe_reader.model.Category;
 
+/**
+ * CategoryTest tests the Category class
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class CategoryTest extends AndroidTestCase {
 	
 	Category dairyCategory;

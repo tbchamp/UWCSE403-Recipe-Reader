@@ -1,9 +1,4 @@
-/**
- * Fragment for settings/preferences tab.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
-
 
 import recipe_reader.model.Settings;
 import uwcse403.recipe_reader.R;
@@ -17,7 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-
+/**
+ * SettingsTab is the fragment showing the user log in information
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class SettingsTab extends Fragment {
 	
 	private Settings settings;

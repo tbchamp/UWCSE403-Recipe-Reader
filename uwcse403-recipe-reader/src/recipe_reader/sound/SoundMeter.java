@@ -29,6 +29,13 @@ import java.io.IOException;
 
 import android.media.MediaRecorder;
 
+/**
+ * SoundMeter measures noise levels through the devices microphone.
+ * It should only be used by the VoiceRecognition object
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class SoundMeter {
 	// Exponential Moving Average Filter
 	static final private double EMA_FILTER = 0.6;

@@ -7,6 +7,12 @@ package recipe_reader.test;
 import android.test.AndroidTestCase;
 import recipe_reader.model.User;
 
+/**
+ * UserTest tests the User class
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class UserTest extends AndroidTestCase {
 	
 	User testUser;

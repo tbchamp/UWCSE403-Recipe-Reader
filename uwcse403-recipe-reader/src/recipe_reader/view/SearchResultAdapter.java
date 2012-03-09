@@ -1,8 +1,3 @@
-/**
- * Adapter for populating a list of recipes with images and names
- * into the XML.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
 
 import java.util.List;
@@ -21,6 +16,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * SearchResultAdapater adapts recipe information into a list of recipes
+ * for the search results screen
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
 	private List<RecipeOverview> recipes;
 	private User user;

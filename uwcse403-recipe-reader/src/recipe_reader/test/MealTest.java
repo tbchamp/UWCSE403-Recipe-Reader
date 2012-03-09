@@ -5,6 +5,12 @@ package recipe_reader.test;
 import android.test.AndroidTestCase;
 import recipe_reader.model.Meal;
 
+/**
+ * MealTest tests the Meal Class
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class MealTest extends AndroidTestCase {
 	
 	@Override

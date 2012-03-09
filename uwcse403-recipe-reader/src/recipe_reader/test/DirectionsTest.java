@@ -5,6 +5,12 @@ package recipe_reader.test;
 import android.test.AndroidTestCase;
 import recipe_reader.model.Directions;
 
+/**
+ * DirectionsTest tests the Directions class
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class DirectionsTest extends AndroidTestCase {
 	
 	@Override
