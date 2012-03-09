@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/prefsLayout"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 	    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,4 +28,12 @@
 	   			android:layout_gravity="center"
 	   			android:clickable="true"></Button>
 	    </LinearLayout>
+	    <TextView
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp"
+	    android:textSize="16dp"
+	    android:textColor="#663399"
+	    android:drawableLeft="@drawable/huskysoft" 
+	    />	
     </LinearLayout>

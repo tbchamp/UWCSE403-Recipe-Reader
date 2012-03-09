@@ -33,7 +33,7 @@ public class SettingsTab extends Fragment {
 			Button logInButton = (Button) v.findViewById(R.id.logInButton);
 			logInButton.setOnClickListener(new ClickListener());
 		} else {
-			v = inflater.inflate(R.layout.preferences, container, false);
+			v = inflater.inflate(R.layout.logged_in, container, false);
 			TextView tv = (TextView) v.findViewById(R.id.userName);
 			if (tv != null) {
 				tv.setText("Logged in as:\n\t" + settings.getUser().getUsername());

@@ -22,6 +22,7 @@
     <EditText
         android:id="@+id/passwordEntry"
         android:inputType="text"
+        android:password="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/password"/>
@@ -38,7 +39,7 @@
 	    android:textSize="16dp"
 	    android:textColor="#663399"
 	    android:drawableLeft="@drawable/huskysoft" 
-	    android:layout_alignParentBottom="true"
+	    android:layout_below="@id/logInButton"
 	    android:layout_centerHorizontal="true"
-	    android:text=" " />
+	    />
 </RelativeLayout>
