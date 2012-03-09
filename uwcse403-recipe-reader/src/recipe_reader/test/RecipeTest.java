@@ -173,7 +173,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setOverview method
 	public void testsTheSetOverviewMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		bareRecipe.setOverview(testRecipeOverview);
 		assertEquals("Calling setOverview on a new bare Recipe should set the Recipe to the RecipeOverview passed.",
 				testRecipeOverview, bareRecipe.getOverview());
@@ -181,7 +181,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setPrep method
 	public void testsTheSetPrepMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		String inital = bareRecipe.getPrep();
 		bareRecipe.setPrep("15 minutes");
 		assertTrue("The bare Recipe's prep time should initially be null, and changed after calling the setPrep method.",
@@ -190,7 +190,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setCook method
 	public void testsTheSetCookMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		String inital = bareRecipe.getCook();
 		bareRecipe.setPrep("200 minutes");
 		assertTrue("The bare Recipe's cook time should initially be null, and changed after calling the setCook method.",
@@ -199,7 +199,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setYield method
 	public void testsTheSetYieldMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		String inital = bareRecipe.getYield();
 		bareRecipe.setYield("52 servings");
 		assertTrue("The bare Recipe's yield amount should initially be null, and changed after calling the setYield method.",
@@ -208,7 +208,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setIngredients method
 	public void testsTheSetIngredientsMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		List<String> inital = bareRecipe.getIngredients();
 		bareRecipe.setIngredients(ingredients);
 		assertTrue("The bare Recipe's ingredients should initially be null, and changed after calling the setIngredients method.",
@@ -217,7 +217,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setDirection method
 	public void testsTheSetDirectionsMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		Directions inital = bareRecipe.getDirections();
 		bareRecipe.setDirections(testDirections);
 		assertTrue("The bare Recipe's directions should initially be null, and changed after calling the setDirections method.",
@@ -226,7 +226,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setNotes method
 	public void testsTheSetNotesMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		List<String> inital = bareRecipe.getNotes();
 		bareRecipe.setNotes(notes);
 		assertTrue("The bare Recipe's notes should initially be null, and changed after calling the setNotes method.",
@@ -235,28 +235,28 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setFat method
 	public void testsTheSetFatMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		bareRecipe.setFat(300);
 		assertEquals("The bare Recipe's fat amount should be set after calling the setFat method.", 300, bareRecipe.getFat());
 	}
 	
 	// Tests the setCalories method
 	public void testsTheSetCaloriesMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		bareRecipe.setCalories(64453);
 		assertEquals("The bare Recipe's calorie amount should be set after calling the setCalories method.", 64453, bareRecipe.getCalories());
 	}
 	
 	// Tests the setCholesterol method
 	public void testsTheSetCholesterolMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		bareRecipe.setCholesterol(300);
 		assertEquals("The bare Recipe's cholesterol amount should be set after calling the setCholesterol method.", 300, bareRecipe.getCholesterol());
 	}
 	
 	// Tests the setKeywords method
 	public void testsTheSetKeywordsMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		List<String> inital = bareRecipe.getKeywords();
 		bareRecipe.setKeywords(keywords);
 		assertTrue("The bare Recipe's list of keywords should initially be null, and changed after calling the setKeywords method.",
@@ -265,7 +265,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setMeal method
 	public void testsTheSetMealMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		String inital = bareRecipe.getMeal();
 		bareRecipe.setMeal("Supper");
 		assertTrue("The bare Recipe's meal type should initially be null, and changed after calling the setMeal method.",
@@ -274,7 +274,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setReadytime method
 	public void testsTheSetReadytimeMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		String inital = bareRecipe.getReadytime();
 		bareRecipe.setReadytime("80 minutes");
 		assertTrue("The bare Recipe's ready time should initially be null, and changed after calling the setReadytime method.",
@@ -283,7 +283,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the setImgLoc method
 	public void testsTheSetImgLocMethodOnANewEmptyRecipe() {
-		Recipe bareRecipe = new Recipe("Bare Recipe");
+		Recipe bareRecipe = new Recipe();
 		String inital = bareRecipe.getImgLoc();
 		bareRecipe.setImgLoc("http://i.imgur.com/5KiBc.jpg");
 		assertTrue("The bare Recipe's image location should initially be null, and changed after calling the setImgLoc method.",
@@ -320,7 +320,7 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests that a completely empty Recipe can't be added to the database.
 	public void testsThatAnEmptyRecipeCannotBeAddedToTheDatabase() {
-		Recipe testRecipe = new Recipe("Fried Twinkies");
+		Recipe testRecipe = new Recipe();
 		
 		try{
 			assertFalse(testRecipe.addToDatabase(user));

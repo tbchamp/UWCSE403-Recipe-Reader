@@ -37,15 +37,39 @@ public class Recipe {
 	private String readytime;
 	private String imgLoc;
 
+	/**
+	 * class constructor using overview
+	 * @param overview
+	 */
 	public Recipe(RecipeOverview overview) {
 		this.setOverview(overview);
 	}
-	
-	public Recipe(String name) {
-		//TODO: write this
-		// Stub added so stuff would compile
-	}
-	
+
+	/**
+	 * empty class constructor for testing
+	 */
+	public Recipe(){}
+
+	/**
+	 * class constructor to init all fields
+	 * @param name
+	 * @param prep
+	 * @param cook
+	 * @param yield
+	 * @param ingredients
+	 * @param directions
+	 * @param notes
+	 * @param keywords
+	 * @param calories
+	 * @param fat
+	 * @param cholesterol
+	 * @param category
+	 * @param isFavoriteOfUser
+	 * @param description
+	 * @param meal
+	 * @param readytime
+	 * @param imgLoc
+	 */
 	public Recipe(String name, String prep, String cook, String yield, List<String> ingredients,
 			Directions directions, List<String> notes, List<String> keywords, int calories, 
 			int fat, int cholesterol, Category category, boolean isFavoriteOfUser, 
@@ -66,98 +90,300 @@ public class Recipe {
 		this.setImgLoc(imgLoc);
 	}
 
+	/**
+	 * fetcher for overview
+	 * @return overview for this recipe
+	 */
 	public RecipeOverview getOverview() {
 		return overview;
 	}
-	
+
+	/**
+	 * fetcher for name
+	 * @return name for this recipe
+	 */
 	public String getName() {
 		return overview.getName();
 	}
 
-	public void setOverview(RecipeOverview overview) {
-		this.overview = overview;
-	}
-
+	/**
+	 * fetcher for prep
+	 * @return prep for this recipe
+	 */
 	public String getPrep() {
 		return prep;
 	}
 
-	public void setPrep(String prep) {
-		this.prep = prep;
-	}
-
+	/**
+	 * fetcher for cook
+	 * @return cook for this recipe
+	 */
 	public String getCook() {
 		return cook;
 	}
 
-	public void setCook(String cook) {
-		this.cook = cook;
-	}
-
+	/**
+	 * fetcher for yield
+	 * @return yield for this recipe
+	 */
 	public String getYield() {
 		return yield;
 	}
 
-	public void setYield(String yield) {
-		this.yield = yield;
-	}
-
+	/**
+	 * fetcher for ingredients
+	 * @return ingredients for this recipe
+	 */
 	public List<String> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(List<String> ingredients) {
-		this.ingredients = ingredients;
-	}
-
+	/**
+	 * fetcher for directions
+	 * @return directions for this recipe
+	 */
 	public Directions getDirections() {
 		return directions;
 	}
 
-	public void setDirections(Directions directions) {
-		this.directions = directions;
-	}
-
+	/**
+	 * fetcher for notes
+	 * @return notes for this recipe
+	 */
 	public List<String> getNotes() {
 		return notes;
 	}
 
-	public void setNotes(List<String> notes) {
-		this.notes = notes;
-	}
-
+	/**
+	 * fetcher for calories
+	 * @return calories for this recipe
+	 */
 	public int getCalories() {
 		return calories;
 	}
 
-	public void setCalories(int calories) {
-		this.calories = calories;
-	}
-
+	/**
+	 * fetcher for fat
+	 * @return fat for this recipe
+	 */
 	public int getFat() {
 		return fat;
 	}
 
-	public void setFat(int fat) {
-		this.fat = fat;
-	}
-
+	/**
+	 * fetcher for cholesterol
+	 * @return cholesterol for this recipe
+	 */
 	public int getCholesterol() {
 		return cholesterol;
 	}
 
-	public void setCholesterol(int cholesterol) {
-		this.cholesterol = cholesterol;
-	}
-
+	/**
+	 * fetcher for keywords
+	 * @return keywords for this recipe
+	 */
 	public List<String> getKeywords() {
 		return keywords;
 	}
 
+	/**
+	 * fetcher for meal
+	 * @return meal for this recipe
+	 */
+	public String getMeal() {
+		return meal;
+	}
+
+	/**
+	 * fetcher for readytime
+	 * @return readytime for this recipe
+	 */
+	public String getReadytime() {
+		return readytime;
+	}
+
+	/**
+	 * fetcher for imgLoc
+	 * @return imgLoc for this recipe
+	 */
+	public String getImgLoc() {
+		return imgLoc;
+	}
+
+	/**
+	 * set overview for this recipe
+	 * @param overview
+	 * @throws IllegalStateException if overview already set
+	 */
+	public void setOverview(RecipeOverview overview) {
+		if (this.overview != null){
+			throw new IllegalStateException();
+		}
+		this.overview = overview;
+	}
+
+	/**
+	 * set prep for this recipe
+	 * @param prep
+	 * @throws IllegalStateException if prep already set
+	 */
+	public void setPrep(String prep) {
+		if (this.prep != null){
+			throw new IllegalStateException();
+		}
+		this.prep = prep;
+	}
+
+	/**
+	 * set cook for this recipe
+	 * @param cook
+	 * @throws IllegalStateException if cook already set
+	 */
+	public void setCook(String cook) {
+		if (this.cook != null){
+			throw new IllegalStateException();
+		}
+		this.cook = cook;
+	}
+
+	/**
+	 * set yield for this recipe
+	 * @param yield
+	 * @throws IllegalStateException if yield already set
+	 */
+	public void setYield(String yield) {
+		if (this.yield != null){
+			throw new IllegalStateException();
+		}
+		this.yield = yield;
+	}
+
+	/**
+	 * set ingredients for this recipe
+	 * @param ingredients
+	 * @throws IllegalStateException if ingredients already set
+	 */
+	public void setIngredients(List<String> ingredients) {
+		if (this.ingredients != null){
+			throw new IllegalStateException();
+		}
+		this.ingredients = ingredients;
+	}
+
+	/**
+	 * set directions for this recipe
+	 * @param directions
+	 * @throws IllegalStateException if directions already set
+	 */
+	public void setDirections(Directions directions) {
+		if (this.directions != null){
+			throw new IllegalStateException();
+		}
+		this.directions = directions;
+	}
+
+	/**
+	 * set notes for this recipe
+	 * @param notes
+	 * @throws IllegalStateException if notes already set
+	 */
+	public void setNotes(List<String> notes) {
+		if (this.notes != null){
+			throw new IllegalStateException();
+		}
+		this.notes = notes;
+	}
+
+	/**
+	 * set calories for this recipe
+	 * @param calories
+	 * @throws IllegalStateException if calories already set
+	 */
+	public void setCalories(int calories) {
+		if (this.calories != 0){
+			throw new IllegalStateException();
+		}
+		this.calories = calories;
+	}
+
+	/**
+	 * set fat for this recipe
+	 * @param fat
+	 * @throws IllegalStateException if fat already set
+	 */
+	public void setFat(int fat) {
+		if (this.fat != 0){
+			throw new IllegalStateException();
+		}
+		this.fat = fat;
+	}
+
+	/**
+	 * set cholesterol for this recipe
+	 * @param cholesterol
+	 * @throws IllegalStateException if cholesterol already set
+	 */
+	public void setCholesterol(int cholesterol) {
+		if (this.cholesterol != 0){
+			throw new IllegalStateException();
+		}
+		this.cholesterol = cholesterol;
+	}
+
+	/**
+	 * set keywords for this recipe
+	 * @param keywords
+	 * @throws IllegalStateException if keywords already set
+	 */
 	public void setKeywords(List<String> keywords) {
+		if (this.keywords != null){
+			throw new IllegalStateException();
+		}
 		this.keywords = keywords;
 	}
-	
+
+	/**
+	 * set meal for this recipe
+	 * @param meal
+	 * @throws IllegalStateException if meal already set
+	 */
+	public void setMeal(String meal) {
+		if (this.meal != null){
+			throw new IllegalStateException();
+		}
+		this.meal = meal;
+	}
+
+	/**
+	 * set readytime for this recipe
+	 * @param readytime
+	 * @throws IllegalStateException if readytime already set
+	 */
+	public void setReadytime(String readytime) {
+		if (this.readytime != null){
+			throw new IllegalStateException();
+		}
+		this.readytime = readytime;
+	}
+
+	/**
+	 * set imgLoc for this recipe
+	 * @param imgLoc
+	 * @throws IllegalStateException if imgLoc already set
+	 */
+	public void setImgLoc(String imgLoc) {
+		if (this.imgLoc != null){
+			throw new IllegalStateException();
+		}
+		this.imgLoc = imgLoc;
+	}
+
+	/**
+	 * @deprecated
+	 * @param adder
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean addToDatabase(User adder) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -199,7 +425,7 @@ public class Recipe {
 			return false;
 		}
 		int id = Integer.parseInt(result);
-		overview.setId(id);
+		//overview.setId(id);
 		if (!addIngredientsToDB(id) || !addKeywordsToDB(id) || !addDirectionsToDB(id)
 				|| !addNotesToDB(id, adder)){
 			return false;
@@ -213,6 +439,12 @@ public class Recipe {
 	}
 
 
+	/**
+	 * @deprecated
+	 * @param recipeId
+	 * @return
+	 * @throws Exception
+	 */
 	private boolean addIngredientsToDB(int recipeId) throws Exception {
 		for (String i : ingredients) {
 			String result = "";
@@ -227,9 +459,9 @@ public class Recipe {
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
 			InputStream is = entity.getContent();
-	
+
 			//convert response to string
-	
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
@@ -244,6 +476,13 @@ public class Recipe {
 		}
 		return true;		
 	}
+
+	/**
+	 * @deprecated
+	 * @param recipeId
+	 * @return
+	 * @throws Exception
+	 */
 	private boolean addKeywordsToDB(int recipeId) throws Exception{
 		for (String k : keywords) {
 			String result = "";
@@ -258,9 +497,9 @@ public class Recipe {
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
 			InputStream is = entity.getContent();
-	
+
 			//convert response to string
-	
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
@@ -275,6 +514,13 @@ public class Recipe {
 		}
 		return true;			
 	}
+
+	/**
+	 * @deprecated
+	 * @param recipeId
+	 * @return
+	 * @throws Exception
+	 */
 	private boolean addDirectionsToDB(int recipeId) throws Exception{
 		List<String> list = directions.getDirectionList();
 		for (int i = 0; i < list.size(); i++) {
@@ -291,9 +537,9 @@ public class Recipe {
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
 			InputStream is = entity.getContent();
-	
+
 			//convert response to string
-	
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
@@ -308,7 +554,14 @@ public class Recipe {
 		}
 		return true;		
 	}
-	
+
+	/**
+	 * @deprecated
+	 * @param recipeId
+	 * @param adder
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean addNotesToDB(int recipeId, User adder) throws Exception {
 		for (String n : notes) {
 			String result = "";
@@ -324,9 +577,9 @@ public class Recipe {
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
 			InputStream is = entity.getContent();
-	
+
 			//convert response to string
-	
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
@@ -340,30 +593,6 @@ public class Recipe {
 			}
 		}
 		return true;	
-	}
-
-	public String getMeal() {
-		return meal;
-	}
-
-	public void setMeal(String meal) {
-		this.meal = meal;
-	}
-
-	public String getReadytime() {
-		return readytime;
-	}
-
-	public void setReadytime(String readytime) {
-		this.readytime = readytime;
-	}
-
-	public String getImgLoc() {
-		return imgLoc;
-	}
-
-	public void setImgLoc(String imgLoc) {
-		this.imgLoc = imgLoc;
 	}
 
 }

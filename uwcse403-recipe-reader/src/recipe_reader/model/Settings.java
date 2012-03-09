@@ -1,6 +1,7 @@
 package recipe_reader.model;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -20,18 +21,23 @@ import org.json.JSONObject;
 public class Settings {
 	private User user;
 
+	/**
+	 * class constructor
+	 * attempts to log user into guest account, on failure sets user to null
+	 */
 	public Settings(){	
-		try {
-			if (!signIn("guest", "guestPwd")){
-				user = null;
-			}
-		} catch (Exception e) {
+		if (!signIn("guest", "guestPwd")){
 			user = null;
-			e.printStackTrace();
 		}
 	}
 
-	public boolean createUser(String username, String password) throws Exception{
+	/**
+	 * creates a new user and sets field to new user
+	 * @param username
+	 * @param password
+	 * @return true on success, false on error
+	 */
+	public boolean createUser(String username, String password) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("username",username));
@@ -39,23 +45,25 @@ public class Settings {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/createuser.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
 
-		//convert response to string
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
-
-		if (result.equals("Create User Failed!\n")){
+			if (result.equals("Create User Failed!\n")){
+				return false;
+			}
+		} catch (IOException e){
 			return false;
 		}
 
@@ -70,14 +78,19 @@ public class Settings {
 				UniqueId = json_data.getString("unique_id");
 			}
 		} catch (JSONException e){
-			System.out.println("8json nosj");
 			return false;
 		}
 		this.user = new User(username, id, UniqueId);
 		return true;
 	}
 
-	public boolean signIn(String username, String password) throws Exception{
+	/**
+	 * attempts to sign a user in 
+	 * @param username
+	 * @param password
+	 * @return true on success, false on error
+	 */
+	public boolean signIn(String username, String password) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","byUserPass"));
@@ -86,23 +99,27 @@ public class Settings {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/signin.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
 
-		//convert response to string
+			//convert response to string
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
 
-		if (result.equals("Sign in failed\n")){
+			if (result.equals("Sign in failed\n")){
+				return false;
+			}
+		} catch (IOException e){
 			return false;
 		}
 
@@ -117,14 +134,18 @@ public class Settings {
 				UniqueId = json_data.getString("unique_id");
 			}
 		} catch (JSONException e){
-			System.out.println("9json nosj" + e.getMessage());
 			return false;
 		}
 		this.user = new User(username, id, UniqueId);
 		return true;
 	}
 
-	public boolean signIn(String UniqueId) throws Exception{
+	/**
+	 * attempts to sign a user in using users UniqueId
+	 * @param UniqueId
+	 * @return true on success, false on error
+	 */
+	public boolean signIn(String UniqueId) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","byUniqueId"));
@@ -132,23 +153,25 @@ public class Settings {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/signin.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
 
-		//convert response to string
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
-
-		if (result.equals("Sign in failed\n")){
+			if (result.equals("Sign in failed\n")){
+				return false;
+			}
+		} catch (IOException e){
 			return false;
 		}
 
@@ -163,13 +186,16 @@ public class Settings {
 				username = json_data.getString("username");
 			}
 		} catch (JSONException e){
-			System.out.println("10json nosj");
 			return false;
 		}
 		this.user = new User(username, id, UniqueId);
 		return true;
 	}
 
+	/**
+	 * fetcher for userId
+	 * @return id of current user, -1 if user is null
+	 */
 	public int getUserId() {
 		if (user != null) {
 			return user.getId();
@@ -178,6 +204,10 @@ public class Settings {
 		}
 	}
 
+	/**
+	 * fetcher for UniqueId
+	 * @return uniqueId of current user, null if user is null
+	 */
 	public String getUserUniqueId() {
 		if (user != null) {
 			return user.getUniqueId();
@@ -186,17 +216,20 @@ public class Settings {
 		}
 	}
 
+	/**
+	 * signs out current user by signing into guest account
+	 * sets user to null on failure
+	 */
 	public void signOut() {
-		try {
-			if (!signIn("guest", "guestPwd")){
-				user = null;
-			}
-		} catch (Exception e) {
+		if (!signIn("guest", "guestPwd")){
 			user = null;
-			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * 
+	 * @return user object for this settings
+	 */
 	public User getUser(){
 		return user;
 	}

@@ -1,6 +1,7 @@
 package recipe_reader.model;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -22,23 +23,38 @@ public class Generator {
 
 	public Generator() {
 	}
-	
+
 	/**
-
-	private Set<Ingredient> ingredients;
-	private Directions directions;
-	private List<String> notes;
-	private List<String> keywords;
-	 * @throws Exception 
-
+	 * static method generates a recipe based off of id and who is user who is generating
+	 * uses user information to determine if recipe is a favorite or not
+	 * 
+	 * @param id recipe_id of the recipe 
+	 * @param searcher user who generated the call
+	 * @return populated recipe object, null on failure
+	 * @throws IllegalArgumentException if id negative or 0 or searcher is null
 	 */
-	
-	public static Recipe getRecipe(int id, User searcher) throws Exception {
+	public static Recipe getRecipe(int id, User searcher) {
+		if (id <= 0 || searcher == null){
+			throw new IllegalArgumentException();
+		}
 		RecipeOverview temp = Searcher.getOverviewFromId(id, searcher);
+		if (temp == null){
+			return null;
+		}
 		return getRecipe(temp);
 	}
-	
-	public static Recipe getRecipe(RecipeOverview overview) throws Exception {
+
+	/**
+	 * Uses a recipeOverview to generate full recipe
+	 * 
+	 * @param overview, for the recipe to generate
+	 * @return populated recipe object, null on failure
+	 * @throws IllegalArgumentException if overview is null or has negative id
+	 */
+	public static Recipe getRecipe(RecipeOverview overview) {
+		if (overview == null || overview.getId() <= 0){
+			throw new IllegalArgumentException();
+		}
 		String result = "";
 		int id = overview.getId();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -47,21 +63,25 @@ public class Generator {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/fetcher.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
 
-		//convert response to string
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
-		if (result.equals("get main recipe failed\n")){
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
+			if (result.equals("get main recipe failed\n")){
+				return null;
+			}
+		} catch (IOException e) {
 			return null;
 		}
 		Recipe r = new Recipe(overview);
@@ -80,7 +100,7 @@ public class Generator {
 				r.setImgLoc(json_data.getString("img_loc"));
 			}
 		} catch (JSONException e){
-			System.out.println("11json nosj" + e.getMessage());
+			return null;
 		}
 		r.setIngredients(getIngredients(id));
 		r.setDirections(getDirections(id));
@@ -88,9 +108,18 @@ public class Generator {
 		r.setNotes(getNotes(id));
 		return r;
 	}
-	
-	
-	private static List<String> getIngredients(int id) throws Exception {
+
+	/**
+	 * get ingredients from recipe id
+	 * 
+	 * @param id of the desired recipe
+	 * @return list of ingredient strings, null on failure
+	 * @throws IllegalArgumentException if negative id
+	 */
+	private static List<String> getIngredients(int id) {
+		if (id <= 0){
+			throw new IllegalArgumentException();
+		}
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","ingredients"));
@@ -98,21 +127,25 @@ public class Generator {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/fetcher.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
 
-		//convert response to string
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
-		if (result.equals("get ingredients failed\n")){
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
+			if (result.equals("get ingredients failed\n")){
+				return null;
+			}
+		} catch (IOException e) {
 			return null;
 		}
 		List<String> ing = new ArrayList<String>();
@@ -124,12 +157,22 @@ public class Generator {
 				ing.add(text);
 			}
 		} catch (JSONException e){
-			System.out.println("12json nosj" + e.getMessage());
+			return null;
 		}
 		return ing;
 	}
-	
-	private static Directions getDirections(int id) throws Exception {
+
+	/**
+	 * get directions from recipe id
+	 * 
+	 * @param id of the desired recipe
+	 * @return directions object for recipe, null on failure
+	 * @throws IllegalArgumentException if negative id
+	 */
+	private static Directions getDirections(int id) {
+		if (id <= 0){
+			throw new IllegalArgumentException();
+		}
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","directions"));
@@ -137,21 +180,25 @@ public class Generator {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/fetcher.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
 
-		//convert response to string
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
-		if (result.equals("get directions failed\n")){
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
+			if (result.equals("get directions failed\n")){
+				return null;
+			}
+		} catch (IOException e) {
 			return null;
 		}
 		List<String> d = new ArrayList<String>();
@@ -162,12 +209,22 @@ public class Generator {
 				d.add(json_data.getString("text"));
 			}
 		} catch (JSONException e){
-			System.out.println("13json nosj" + e.getMessage());
+			return null;
 		}
 		return new Directions(d);
 	}
-	
-	private static List<String> getKeywords(int id) throws Exception {
+
+	/**
+	 * get keywords from recipe id
+	 * 
+	 * @param id of the desired recipe
+	 * @return list of keyword strings, null on failure
+	 * @throws IllegalArgumentException if negative id
+	 */
+	private static List<String> getKeywords(int id) {
+		if (id <= 0) {
+			throw new IllegalArgumentException();
+		}
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","keywords"));
@@ -175,21 +232,25 @@ public class Generator {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/fetcher.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
 
-		//convert response to string
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
-		if (result.equals("get keywords failed\n")){
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
+			if (result.equals("get keywords failed\n")){
+				return null;
+			}
+		} catch (IOException e) {
 			return null;
 		}
 		List<String> k = new ArrayList<String>();
@@ -200,12 +261,15 @@ public class Generator {
 				k.add(json_data.getString("phrase"));
 			}
 		} catch (JSONException e){
-			System.out.println("14json nosj" + e.getMessage());
+			return null;
 		}
 		return k;
 	}
-	
-	private static List<String> getNotes(int id) throws Exception {
+
+	/**
+	 * @deprecated
+	 */
+	private static List<String> getNotes(int id) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","notes"));
@@ -213,21 +277,25 @@ public class Generator {
 		//http post
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/fetcher.php");
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		HttpResponse response = httpclient.execute(httppost);
-		HttpEntity entity = response.getEntity();
-		InputStream is = entity.getContent();
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
 
-		//convert response to string
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		is.close();
-		result=sb.toString();
-		if (result.equals("get notes failed\n")){
+			//convert response to string
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
+			if (result.equals("get notes failed\n")){
+				return null;
+			}
+		} catch (IOException e) {
 			return null;
 		}
 		List<String> n = new ArrayList<String>();
@@ -238,7 +306,7 @@ public class Generator {
 				n.add(json_data.getString("text"));
 			}
 		} catch (JSONException e){
-			System.out.println("15json nosj" + e.getMessage());
+			return null;
 		}
 		return n;
 	}

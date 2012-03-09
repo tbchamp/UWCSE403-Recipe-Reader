@@ -6,9 +6,9 @@ package recipe_reader.model;
  */
 
 public class User {
-	private String username;
-	private String UniqueId;
-	private int id;
+	private final String username;
+	private final String UniqueId;
+	private final int id;
 	
 	/**
 	 * Constructor for a User object
@@ -18,7 +18,7 @@ public class User {
 	 * @param UniqueId - a unique string id to identify the user by
 	 * @throws IllegalArgumentException if any inputs are null or empty or negative (bad)
 	 */
-	public User(String username, int id, String UniqueId) throws Exception{
+	public User(String username, int id, String UniqueId) {
 		if(id < 0 || username == null || username.equals("") || UniqueId == null || UniqueId.equals("")){
 			throw new IllegalArgumentException();
 		}
