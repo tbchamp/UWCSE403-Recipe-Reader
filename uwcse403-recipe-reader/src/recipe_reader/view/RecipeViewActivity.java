@@ -202,16 +202,18 @@ public class RecipeViewActivity extends FragmentActivity {
 			ft.replace(R.id.frag, fragment);
 			ft.commit();
 			
+			findViewById(R.id.start).setEnabled(true);
+			findViewById(R.id.ingredients).setEnabled(true);
+			findViewById(R.id.instructions).setEnabled(true);
+			v.setEnabled(false);
 			// Checks if the instruction button was clicked. If so, start voice recognition
 			// Otherwise, stop voice recognition because user left instructions fragment
 			if(v.getId() == R.id.start) {
 				tts.setInstructionsList(recipe.getDirections().getDirectionList());
 				tts.speakInstruction(0);
 				vr.start();
-				v.setEnabled(false);
 			} else {
 				vr.stop();
-				findViewById(R.id.start).setEnabled(true);
 			}
 		}	
     }
