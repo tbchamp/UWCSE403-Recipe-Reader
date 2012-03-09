@@ -31,4 +31,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/passwordEntry"
         android:text="@string/log_in" />
+   	<TextView
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp"
+	    android:textSize="16dp"
+	    android:textColor="#663399"
+	    android:drawableLeft="@drawable/huskysoft" 
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:text=" " />
 </RelativeLayout>
