@@ -78,8 +78,8 @@ if (strcmp($type, 'standard') == 0){
 } else if (strcmp($type, 'getIdsByCat') == 0){
 	$categoryid = $_REQUEST['categoryid'];
 	$safe_categoryid = mysql_real_escape_string($categoryid);
-	$q = mysql_query("select id, rating from recipe where meal_id = "
-		. $safe_mealid . " order by rating desc");
+	$q = mysql_query("select id, rating from recipe where category_id = "
+		. $safe_categoryid . " order by rating desc");
 	if (!$q) {
 		print("get overviews by category failed");
 	} else {
