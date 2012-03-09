@@ -18,11 +18,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 /**
- * Runs queries against a back-end database
+ * Searcher runs queries against a back end database
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
  */
-
 public class Searcher {
 
 	/**

@@ -13,7 +13,6 @@ import uwcse403.recipe_reader.R;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ public class LandingFragment extends Fragment {
                              Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.landing, container, false);
 		TextView tv = (TextView) v.findViewById(R.id.recipe_title);
-		//String test = savedInstanceState.getString("name");
 		RecipeViewActivity rva = (RecipeViewActivity) this.getActivity();
         Recipe r = rva.getRecipe();
 		String test = r.getName();

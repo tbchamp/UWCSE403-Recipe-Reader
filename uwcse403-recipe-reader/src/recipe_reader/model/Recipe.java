@@ -1,9 +1,5 @@
 package recipe_reader.model;
 
-/**
- * Contains all the information about a specific recipe
- * Jonathan Ramaswamy
- */
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,7 +15,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-
+/**
+ * Recipe holds all the information for any given recipe
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class Recipe {
 
 	private RecipeOverview overview;

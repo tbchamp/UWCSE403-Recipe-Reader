@@ -1,10 +1,11 @@
-/**
- * Recipe Overview object contains data necessary to 
- * populate an item in a list of recipes.
- * Kristin Ivarson (kristini@cs)
- */
 package recipe_reader.model;
 
+/**
+ * RecipeOverview contains information about a recipe to be display in a list of other recipes
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class RecipeOverview {
 	private final int id;
 	private final String name;

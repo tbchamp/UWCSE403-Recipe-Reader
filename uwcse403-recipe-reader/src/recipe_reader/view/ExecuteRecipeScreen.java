@@ -8,17 +8,14 @@ package recipe_reader.view;
 
 import recipe_reader.sound.VoiceRecognition.Command;
 import uwcse403.recipe_reader.R;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 public class ExecuteRecipeScreen extends Fragment {

@@ -2,6 +2,12 @@ package recipe_reader.model;
 
 import java.util.List;
 
+/**
+ * Directions holds a list of directions and methods to get next, previous, and current directions
+ * @author $Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class Directions {
 	private int curr;
 	private final List<String> directions;

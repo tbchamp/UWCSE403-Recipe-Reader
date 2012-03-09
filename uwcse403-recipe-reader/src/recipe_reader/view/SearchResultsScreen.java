@@ -66,6 +66,10 @@ public class SearchResultsScreen extends Fragment {
 		searchKeywords = Arrays.asList(phrase.split(" "));
 	}
 	
+	/**
+	 * Sets the category number to display results from
+	 * @param c Category ID number
+	 */
 	public void setCatNumber(int c) {
 		catNumber = c;
 	}

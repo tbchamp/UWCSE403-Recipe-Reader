@@ -1,10 +1,11 @@
 package recipe_reader.model;
 
-/*
- * Represents a User of the RecipeReader application. A User is described by a username, a unique string ID,
- * 	and a unique integer ID through which to identify a User.
+/**
+ * User represents a single user of the application. Each user has a name, password, and unique ID
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
  */
-
 public class User {
 	private final String username;
 	private final String UniqueId;

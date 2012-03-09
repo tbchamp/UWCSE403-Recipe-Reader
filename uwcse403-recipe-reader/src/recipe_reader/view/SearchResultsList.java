@@ -85,6 +85,9 @@ public class SearchResultsList extends ListFragment {
 		searchKeywords = phrase;
 	}
 	
+	/**
+	 * @param c The category number to display recipes from
+	 */
 	public void setCatNumber(int c) {
 		catNumber = c;
 	}

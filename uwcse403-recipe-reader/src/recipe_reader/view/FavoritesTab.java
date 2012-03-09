@@ -6,7 +6,6 @@ package recipe_reader.view;
 
 import java.util.ArrayList;
 
-import recipe_reader.model.Category;
 import recipe_reader.model.RecipeOverview;
 import recipe_reader.model.Searcher;
 import recipe_reader.model.User;
@@ -27,7 +26,6 @@ public class FavoritesTab extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 		
-		// Temporary hard-coded data: to be replaced by List of RecipeOverviews from Searcher.java(?) 
 		User u = ((RecipeReaderActivity) this.getActivity()).getSettings().getUser();
 		ArrayList<RecipeOverview> recipeList = null;
 		try {
@@ -38,7 +36,6 @@ public class FavoritesTab extends ListFragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//
 		
 		setListAdapter(new SearchResultAdapter(
 				this.getActivity(), R.layout.list_item, recipeList));
@@ -54,7 +51,7 @@ public class FavoritesTab extends ListFragment {
 		RecipeOverview ro = (RecipeOverview) l.getItemAtPosition(position);
 		int idNum = ro.getId();
 		b.putInt("recipeID", idNum);
-		i.putExtras(b);
+		i.putExtras(b); //Sends the id number of the recipe clicked to the view activity
 		startActivity(i);
 	}
 

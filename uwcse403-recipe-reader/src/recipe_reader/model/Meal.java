@@ -3,6 +3,12 @@ package recipe_reader.model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Meal is the container class for a meal type from the database
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class Meal {
 	private final int id;
 	private final String name;

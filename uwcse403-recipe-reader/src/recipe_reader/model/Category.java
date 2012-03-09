@@ -5,6 +5,12 @@ import java.util.Map;
 
 import uwcse403.recipe_reader.R;
 
+/**
+ * Category is the container class for a recipe category
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class Category {
 	private final int icon;
 	private final int id;

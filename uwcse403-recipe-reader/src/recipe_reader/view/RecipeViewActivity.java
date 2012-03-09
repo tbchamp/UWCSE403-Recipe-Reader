@@ -68,21 +68,10 @@ public class RecipeViewActivity extends FragmentActivity {
         ActionBar bar = getSupportActionBar();
         Bundle extras = getIntent().getExtras();
         int id = extras.getInt("recipeID");
-        
         settings = new Settings();
-        try {
-			settings.signIn("Jeremy Lin", "Linsanity");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-        // field initialization
-        		
-        Generator g = new Generator();
-        
+		        		        
 		try {
-			recipe = g.getRecipe(id, settings.getUser());
+			recipe = Generator.getRecipe(id, settings.getUser());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}
