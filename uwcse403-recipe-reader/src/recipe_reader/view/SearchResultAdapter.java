@@ -87,17 +87,19 @@ public class SearchResultAdapter extends ArrayAdapter<RecipeOverview> {
 		}
 		
 		public void onClick(View v) {
-			ImageButton b = ((ImageButton) v);
-			if (recipe.getFavorite()) {
-				try {
-					Searcher.removeRecipeFromFavoriteById(user, recipe.getId());
-				} catch (Exception e) {}
-				b.setImageResource(R.drawable.star_outline);
-			} else {
-				try {
-					Searcher.addRecipeToFavoriteById(user, recipe.getId());
-				} catch (Exception e) {}
-				b.setImageResource(R.drawable.star);
+			if(!user.getUsername().equals("guest")) {
+				ImageButton b = ((ImageButton) v);
+				if (recipe.getFavorite()) {
+					try {
+						Searcher.removeRecipeFromFavoriteById(user, recipe.getId());
+					} catch (Exception e) {}
+					b.setImageResource(R.drawable.star_outline);
+				} else {
+					try {
+						Searcher.addRecipeToFavoriteById(user, recipe.getId());
+					} catch (Exception e) {}
+					b.setImageResource(R.drawable.star);
+				}
 			}
 		}
 		
