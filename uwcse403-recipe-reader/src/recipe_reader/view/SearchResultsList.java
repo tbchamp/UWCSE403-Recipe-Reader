@@ -44,12 +44,7 @@ public class SearchResultsList extends ListFragment {
 			if (searchKeywords != null) {
 				recipeList = Searcher.getRecipeOverviewsByKeywords(searchKeywords, user);
 			} else {
-				for (int i = 1; i <= 7; i++) {
-					List<RecipeOverview> catOverviews = Searcher.getOverviewByMealCategory(i, catNumber, user);
-					if (catOverviews != null) {
-						recipeList.addAll(catOverviews);
-					}
-				}
+				recipeList = Searcher.getOverviewByCategory(catNumber, user);
 			}
 			if (recipeList == null) {
 				recipeList = new ArrayList<RecipeOverview>();
