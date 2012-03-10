@@ -9,7 +9,7 @@ public class DirectionsTest extends AndroidTestCase {
 	
 	@Override
 	public void setUp() {
-
+		
 	}
 	
 }

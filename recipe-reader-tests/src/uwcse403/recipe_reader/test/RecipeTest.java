@@ -289,7 +289,167 @@ public class RecipeTest extends AndroidTestCase {
 		assertTrue("The bare Recipe's image location should initially be null, and changed after calling the setImgLoc method.",
 				inital == null && bareRecipe.getImgLoc().equals("http://i.imgur.com/5KiBc.jpg"));
 	}
+	
+	
+	
+	/***************************************************	NEGATIVE setter METHOD TESTS		***************************************************/
+	
+	
+	// Tests that the setOverview method throws an IllegalStateException if it has already been set.
+	public void testsThatSetOverviewMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setOverview(testRecipeOverview);
+			
+			fail("Calling the setOverview method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setPrep method throws an IllegalStateException if it has already been set.
+	public void testsThatSetPrepMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setPrep("100000 minutes");
+			
+			fail("Calling the setPrep method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setCook method throws an IllegalStateException if it has already been set.
+	public void testsThatCookPrepMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setCook("87654 hours");
+			
+			fail("Calling the setCook method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setYield method throws an IllegalStateException if it has already been set.
+	public void testsThatYieldPrepMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setYield("-2894 servings");
+			
+			fail("Calling the setYield method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setIngredients method throws an IllegalStateException if it has already been set.
+	public void testsThatIngredientsPrepMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setIngredients(ingredients);
+			
+			fail("Calling the setIngredients method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setDirections method throws an IllegalStateException if it has already been set.
+	public void testsThatSetDirectionsMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setDirections(testDirections);
+			
+			fail("Calling the setDirections method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setNotes method throws an IllegalStateException if it has already been set.
+	public void testsThatSetNotesMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setNotes(notes);
+			
+			fail("Calling the setNotes method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setCalories method throws an IllegalStateException if it has already been set.
+	public void testsThatSetCaloriesMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setCalories(45);
+			
+			fail("Calling the setCalories method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setFat method throws an IllegalStateException if it has already been set.
+	public void testsThatSetFatMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setFat(789);
+			
+			fail("Calling the setFat method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setCholesterol method throws an IllegalStateException if it has already been set.
+	public void testsThatSetCholesterolMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setCholesterol(257);
+			
+			fail("Calling the setCholesterol method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setKeywords method throws an IllegalStateException if it has already been set.
+	public void testsThatSetKeywordsMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setKeywords(keywords);
+			
+			fail("Calling the setKeywords method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setMeal method throws an IllegalStateException if it has already been set.
+	public void testsThatSetMealMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setMeal("Supper");
+			
+			fail("Calling the setMeal method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
 
+	// Tests that the setReadytime method throws an IllegalStateException if it has already been set.
+	public void testsThatSetReadytimeMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setReadytime("8235 minutes");
+			
+			fail("Calling the setReadytime method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	// Tests that the setImgLoc method throws an IllegalStateException if it has already been set.
+	public void testsThatSetImgLocMethodThrowsAnExceptionIfItHasAlreadyBeenSet() {
+		try{
+			testFullRecipe.setImgLoc("http://i.imgur.com/w8hge.jpg");
+			
+			fail("Calling the setImgLoc method on a Recipe that's already been set should " +
+					"result in an Exception.");
+		} catch (IllegalStateException expected){
+		}
+	}
+	
+	
 	
 	/* NOTICE:
 	 * 	All addDatabase type methods were created in the beginning of the Recipe
