@@ -59,7 +59,81 @@
     <h1>Upload Recipes:</h1>
     <section>
      <h2>Fill out the form below:</h2>
+     
+     <form action="http://cubist.cs.washington.edu/projects/12wi/cse403/r/cgi/upload.py" method="get" >
+        <p>
+          Title:
+          <input type="text" size="30" name="title" />
+          Image URL:
+          <input type="text" size="25" name="image_url" />
+        </p>
+        <p>
+          Description:
+          <input type="text" size="65" name="description" />
+        </p>
+        <p>
+          Meal:
+          <select name="meal">
+            <option value="Other">Other</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+            <option value="Supper">Supper</option>
+            <option value="Dessert">Dessert</option>
+          </select>
+          Category:
+          <select name="category">
+            <option value="Other">Other</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Gluten Free">Gluten Free</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Beverage">Beverage</option>
+            <option value="Entree">Entree</option>
+            <option value="Side Dish">Side Dish</option>
+          </select>
+          Keywords:
+          <input type="text" size="19" name="keyword" value="allrecipes"/>
+        </p>
+        <p>
+          Prep time:
+          <input type="text" size="10" name="prep_time" />
+          Cook time:
+          <input type="text" size="10" name="cook_time" />
+          Ready time:
+          <input type="text" size="10" name="ready_time" />
+        </p>
+        <p>
+          Yield:
+          <input type="text" size="7" name="yield" />
+          Calories:
+          <input type="text" size="7" name="cal" />
+          Fat:
+          <input type="text" size="7" name="fat" />
+          Cholesterol:
+          <input type="text" size="7" name="cholest" />
+        </p>
+        <p>
+          Ingredients: (one per line)
+        </p>
+        <p>
+          <textarea rows="5" cols="70" name="ingredients"></textarea>
+        </p>
+        <p>
+          Directions: (one per line, don't number)
+        </p>
+        <p>
+          <textarea rows="5" cols="70" name="directions"></textarea>
+        </p>
+        <p>
+          
+          <input type="submit" value="Add Recipe" />
+        </p>
+      </form>
+     
     </section>
+    <br />
     <section>
       <h2>Import from allrecipes.com:</h2>
       <p> Enter the URL to an allrecipes.com recipe into the box below: </p>
@@ -87,8 +161,8 @@
             <option value="Entree">Entree</option>
             <option value="Side Dish">Side Dish</option>
           </select>
-          keyword:
-          <input type="text" size="20" name="keyword" value="allrecipes"/>
+          Keywords:
+          <input type="text" size="19" name="keyword" value="allrecipes"/>
         </p>
         <p>
           URL:
@@ -96,7 +170,7 @@
           <input type="submit" value="fetch recipe" />
         </p>
       </form>
-      
+      <br />
       <p> Example: <a href="http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx">http://allrecipes.com/recipe/apple-pie-by-grandma-ople/detail.aspx</a> </p>
       
     </section>
