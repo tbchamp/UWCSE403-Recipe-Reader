@@ -2,6 +2,8 @@ package recipe_reader.view;
 
 import recipe_reader.model.Settings;
 import uwcse403.recipe_reader.R;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -61,8 +63,18 @@ public class SettingsTab extends Fragment {
 				String password = ((TextView) p).getText().toString();
 				try {
 					if(!settings.signIn(username, password)) {
-						settings.createUser(username, password);
-						settings.signIn(username, password);
+						if(!settings.createUser(username, password)) {
+							AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				    		builder.setMessage("Wrong User Name and Password combination")
+				    		       .setCancelable(false)
+				    		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				    		           public void onClick(DialogInterface dialog, int id) {
+				    		        	   dialog.cancel();
+				    		           }
+				    		       });
+				    		AlertDialog alert = builder.create();
+				    		alert.show();
+						}
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
