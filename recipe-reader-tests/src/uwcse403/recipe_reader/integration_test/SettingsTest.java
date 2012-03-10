@@ -20,7 +20,7 @@ public class SettingsTest extends AndroidTestCase {
 	 * 	These variables are needed for the createUser method. Increment
 	 * 	the user number before every run of tests.
 	 */
-	private final String TEST_USER = "TESTUSER3";
+	private final String TEST_USER = "TESTUSER4";
 	private final String TEST_PASSWORD = "TEST PASSWORD";
 	
 	public class UserStub {
