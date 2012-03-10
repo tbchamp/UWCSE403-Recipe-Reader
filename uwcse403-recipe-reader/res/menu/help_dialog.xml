@@ -15,40 +15,40 @@
 <TextView   android:id="@+id/TextView01" 
                 android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" 
-                android:text="Recipe Reader is an Android application for finding, viewing, and voice navigating recipes.
+                android:text="Recipe Reader is an Android application for finding, viewing, and voice navigating recipes.\n\n
 
-The app has 2 main parts or views. The 'Home' or 'Search' view and the 'Recipe' view.
+The app has 2 main parts or views. The 'Home' or 'Search' view and the 'Recipe' view.\n\n
 
-The 'Home' view is the first view users see when the app opens. This view has 4 tabs; the main keyword search, advanced search, favorites, and settings.
-	-The main keyword search allows users to search our database of recipes by keywords and displays results.
-	-The advanced search shows categories and allows users to choose what kind of food they are looking to make and displays results accordingly.
-	-The favorites tab shows the favorite recipes of the user currently logged in.
-	-The settings tab allows users to log in or out of their account.
+The 'Home' view is the first view users see when the app opens. This view has 4 tabs; the main keyword search, advanced search, favorites, and settings.\n
+	-The main keyword search allows users to search our database of recipes by keywords and displays results.\n
+	-The advanced search shows categories and allows users to choose what kind of food they are looking to make and displays results accordingly.\n
+	-The favorites tab shows the favorite recipes of the user currently logged in.\n
+	-The settings tab allows users to log in or out of their account.\n\n
 
-Search results in the 'Home' or 'Search' view are displayed as a list. Each item is shown with a picture for it's category, a favorite star, the name of the recipe, and the recipe's rating.
-	-Clicking on the favorite start will add or remove the recipe from the current user's favorites list.
-	-Clicking on the name of the recipe will open that recipe in the 'Recipe' view.
+Search results in the 'Home' or 'Search' view are displayed as a list. Each item is shown with a picture for it's category, a favorite star, the name of the recipe, and the recipe's rating.\n
+	-Clicking on the favorite start will add or remove the recipe from the current user's favorites list.\n
+	-Clicking on the name of the recipe will open that recipe in the 'Recipe' view.\n\n
 
-The 'Recipe' view shows the details of a recipe and allows the user to follow the recipe directions using their voice.
-The first screen the user sees when they open a recipe in the 'Recipe' view shows a picture of the recipe and some overview information.
-At the bottom on the screen there are 3 buttons. Start, Ingredients, and Instructions.
-	-The Ingredients and Instructions buttons show the corresponding information without voice control. This is useful for browsing recipes or while shopping for supplies.
-	-The Start button initiates the voice control feature.
-		-All the instructions will be shown in a list.
-		-The current step will always be highlighted.
-		-The first step will be read to the user.
-		-The user can user the 3 buttons at the top to navigate the recipe. (forward, backward, or repeat)
-		-The user can also make a noise louder than the 'threshold' (see below under settings button) and a voice analyzer will appear.
-			-the user can say any of these supported voice commands:
-				-forward
-				-back
-				-repeat
+The 'Recipe' view shows the details of a recipe and allows the user to follow the recipe directions using their voice.\n
+The first screen the user sees when they open a recipe in the 'Recipe' view shows a picture of the recipe and some overview information.\n
+At the bottom on the screen there are 3 buttons. Start, Ingredients, and Instructions.\n
+	-The Ingredients and Instructions buttons show the corresponding information without voice control. This is useful for browsing recipes or while shopping for supplies.\n
+	-The Start button initiates the voice control feature.\n
+		-All the instructions will be shown in a list.\n
+		-The current step will always be highlighted.\n
+		-The first step will be read to the user.\n
+		-The user can user the 3 buttons at the top to navigate the recipe. (forward, backward, or repeat)\n
+		-The user can also make a noise louder than the 'threshold' (see below under settings button) and a voice analyzer will appear.\n
+			-the user can say any of these supported voice commands:\n
+				-forward\n
+				-back\n
+				-repeat\n\n
 
-Android Buttons:
-	-The 'Back' button is used to move backward in the app. Such as: in the 'Recipe' view the back button can be used to return to search results.
-	-The 'Settings' button has 2 different uses depending on the current view.
-		-'Home' view: Shows these directions
-		-'Recipe' view: Allows the user to set the 'threshold' for noise that activates the voice input.
+Android Buttons:\n
+	-The 'Back' button is used to move backward in the app. Such as: in the 'Recipe' view the back button can be used to return to search results.\n
+	-The 'Settings' button has 2 different uses depending on the current view.\n
+		-'Home' view: Shows these directions\n
+		-'Recipe' view: Allows the user to set the 'threshold' for noise that activates the voice input.\n\n
 
 For install help, more directions, and recipe uploading please visit our website @ http://cubist.cs.washington.edu/projects/12wi/cse403/r/index.html
                 "></TextView>
