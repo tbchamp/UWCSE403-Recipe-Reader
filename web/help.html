@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Recipe Reader</title>
+<link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door|Gloria+Hallelujah|Delius' rel='stylesheet' type='text/css'>
+<link href="recipe_reader.css" rel="stylesheet" type="text/css">
+
+<!-- google analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29062294-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- google analytics -->
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+<div class="container">
+  <header>
+    <a href=""><img src="images/Cooking_Android.png" alt="Logo" id="logo"></a>
+    <ul>
+        <li><a href="help.html">Help</a></li>
+        <li><a href="upload.php">Upload Recipe</a></li>
+        <li><a href="install.html">Install</a></li>
+        <li><a href="index.html">Home</a></li>
+    </ul>
+    <h1>Recipe Reader</h1>
+    <h2>An Android cooking assistant to find and read recipes to you for hands-free cooking!</h2>
+  </header>
+  <div class="sidebar1">
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="install.html">Install</a></li>
+        <li><a href="upload.php">Upload Recipe</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+    </nav>
+    <aside>
+      <p> This app was developed as a class project for UW CSE 403. </p>
+      <p> By Tyler, Zach, Anton, Jon, Kristin, and Alisa </p>
+    </aside>
+  <!-- end .sidebar1 --></div>
+  <article class="content">
+    <h1>Recipe Reader Guide:</h1>
+    <section>
+     <p>Recipe Reader is an Android application for finding, viewing, and voice navigating recipes.</p>
+     <p>The app has 2 main parts or views. The 'Home' or 'Search' view and the 'Recipe' view.</p>
+     <p>The 'Home' view is the first view users see when the app opens. This view has 4 tabs; the main keyword search, advanced search, favorites, and settings.</p>
+	<ul>
+	<li>The main keyword search allows users to search our database of recipes by keywords and displays results.</li>
+	<li>The advanced search shows categories and allows users to choose what kind of food they are looking to make and displays results accordingly.</li>
+	<li>The favorites tab shows the favorite recipes of the user currently logged in.</li>
+	<li>The settings tab allows users to log in or out of their account.</li>
+	</ul>
+	
+	<p>Search results in the 'Home' or 'Search' view are displayed as a list. Each item is shown with a picture for it's category, a favorite star, the name of the recipe, and the recipe's rating.</p>
+	<ul>
+	<li>Clicking on the favorite start will add or remove the recipe from the current user's favorites list.</li>
+	<li>Clicking on the name of the recipe will open that recipe in the 'Recipe' view.</li>
+	</ul>
+
+	<p>The 'Recipe' view shows the details of a recipe and allows the user to follow the recipe directions using their voice.
+The first screen the user sees when they open a recipe in the 'Recipe' view shows a picture of the recipe and some overview information.
+At the bottom on the screen there are 3 buttons. Start, Ingredients, and Instructions.</p>
+	<ul>
+	<li>The Ingredients and Instructions buttons show the corresponding information without the voice control. This is useful for browsing recipes or while shopping for supplies.</li>
+	<li>The Start button initiates the voice control feature.</li>
+		<ul>
+		<li>All the instructions will be shown in a list.</li>
+		<li>The current step will always be highlighted.</li>
+		<li>The first step will be read to the user.</li>
+		<li>The user can user the 3 buttons at the top to navigate the recipe. (forward, backward, or repeat)</li>
+		<li>The user can also make a noise louder than the 'threshold' (see below under settings button) and a voice analyser will appear.</li>
+			<ul>
+			<li>the user can say any of these supported voice command:</li>
+				<ul>
+				<li>forward</li>
+				<li>back</li>
+				<li>repeat</li>
+				</ul>
+			</ul>
+		</ul>
+	</ul>
+
+<p>Android Buttons:</p>
+	<ul>
+	<li>The 'Back' button is used to move backward in the app. Such as if in the 'Recipe' view the back button can be used to return to search results.</li>
+	<li>The 'Settings' button has 2 different uses depending on the current view.</li>
+		<ul>
+		<li>'Home' view: Shows these directions</li>
+		<li>'Recipe' view: Allows the user to set the 'threshold' for noise that activates the voice input.</li>
+		</ul>
+	</ul>
+
+    </section>
+  <!-- end .content --></article>
+  
+  <footer>
+    <img src="images/HuskySoft.png" alt="HuskySoft" id="HuskySoft" height="50">
+    Recipe Reader by HuskySoft a CSE 403 winter quarter production.
+  </footer>
+  <!-- end .container --></div>
+</body>
+</html>
