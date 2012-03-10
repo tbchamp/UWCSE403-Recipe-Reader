@@ -18,13 +18,16 @@ public class Directions {
 	 * @param directions
 	 */
 	public Directions(List<String> directions){
+		if(directions == null) {
+			throw new IllegalArgumentException();
+		}
 		this.directions = directions;
 		numDirections = directions.size();
 		curr = 0;
 	}
 
 	/**
-	 * gets the next direction if one exists
+	 * Gets the current direction if it exists, with the direction number included
 	 * @return String corresponding to the next direction
 	 * @throws IllegalStateException if already on the last direction
 	 */
