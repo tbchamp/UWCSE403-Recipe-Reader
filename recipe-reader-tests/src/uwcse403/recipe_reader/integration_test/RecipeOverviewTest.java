@@ -1,4 +1,4 @@
-package uwcse403.recipe_reader.test;
+package uwcse403.recipe_reader.integration_test;
 
 /*
  * The following tests exercise the RecipeOverview class by calling its constructor,
@@ -16,16 +16,34 @@ import recipe_reader.model.Category;
 import recipe_reader.model.RecipeOverview;
 import android.test.AndroidTestCase;
 
+
 public class RecipeOverviewTest extends AndroidTestCase {
+	
+	public class CategoryStub extends Category
+	{
+	    public int numCallsToGetName;
+		public CategoryStub(String name){
+			super(name);
+			numCallsToGetName = 0;
+		}
+	    @Override
+	    public String getName() {
+	    	numCallsToGetName++; 
+	    	return super.getName();
+	    }
+	}
 	
 	private RecipeOverview testROWithRating;
 	private RecipeOverview testROWithoutRating;
+	private RecipeOverview specialRO;
 	
 	private Category cat1;
 	private Category cat2;
+	private CategoryStub cat3;
 	
 	@Override
 	public void setUp() {
+		
 		cat1 = new Category("Vegan");
 		testROWithRating = new RecipeOverview("Super Delicious Surprise", cat1, false, 75,
 				"It's not really all that delicious... Or vegan...", 747953);
@@ -33,6 +51,10 @@ public class RecipeOverviewTest extends AndroidTestCase {
 		cat2 = new Category("Beverage");
 		testROWithoutRating = new RecipeOverview("Water", cat2, true,
 				"It's water. There is no recipe.", 81237);
+		
+	    cat3 = new CategoryStub("Side Dish");
+	    specialRO = new RecipeOverview("Dee's Nuts", cat3, false, 65,
+				"Eat some of Dee's nuts! They're delicious!", 38738);
 	}
 	
 	
@@ -83,6 +105,16 @@ public class RecipeOverviewTest extends AndroidTestCase {
 	// Tests the getCategory method called on the RecipeOverview created without a rating
 	public void testsThatTheGetCategoryMethodReturnsTheCorrectCategoryForARecipeOverviewWithoutRating(){
 		assertEquals("Tests the getCategory method on a RecipeOverview created without a rating.", cat2, testROWithoutRating.getCategory());
+	}
+	
+	
+	
+	/***************************************************	getCategoryName TESTS	***************************************************/
+	
+	// Tests the getCategoryName method returns a valid category name
+	public void testsThatTheGetCategoryNameMethodWorks(){
+        specialRO.getCategoryName();
+        assertEquals(1, cat3.numCallsToGetName);
 	}
 	
 	

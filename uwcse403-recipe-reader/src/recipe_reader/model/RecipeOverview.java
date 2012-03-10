@@ -61,6 +61,14 @@ public class RecipeOverview {
 	public Category getCategory() {
 		return category;
 	}
+	
+	/**
+	 * returns the name of the Category
+	 * @returns Category's name
+	 */
+	public String getCategoryName(){
+		return category.getName();
+	}
 
 	/**
 	 * fetcher for favorite

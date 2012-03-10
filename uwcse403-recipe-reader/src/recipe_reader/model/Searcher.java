@@ -37,56 +37,61 @@ public class Searcher {
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","standard"));
 		String terms = "";
-		for (String s: keywords){
-			terms += s + "_";
-		}
-		terms = terms.substring(0, terms.length() - 1);
-		nameValuePairs.add(new BasicNameValuePair("terms",terms));
-		//http post
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/search.php");
-		try {
-			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			HttpResponse response = httpclient.execute(httppost);
-			HttpEntity entity = response.getEntity();
-			InputStream is = entity.getContent();
-
-			//convert response to string
-
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-			StringBuilder sb = new StringBuilder();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				sb.append(line + "\n");
+		
+		if (!keywords.isEmpty()){
+			for (String s: keywords){
+				terms += s + "_";
 			}
-			is.close();
-			result=sb.toString();
-			if (result.equals("search failed\n") || result.equals("null\n")){
+			terms = terms.substring(0, terms.length() - 1);
+			nameValuePairs.add(new BasicNameValuePair("terms",terms));
+			//http post
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpPost httppost = new HttpPost("http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/search.php");
+			try {
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				HttpResponse response = httpclient.execute(httppost);
+				HttpEntity entity = response.getEntity();
+				InputStream is = entity.getContent();
+
+				//convert response to string
+
+				BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line + "\n");
+				}
+				is.close();
+				result=sb.toString();
+				if (result.equals("search failed\n") || result.equals("null\n")){
+					return null;
+				}
+			} catch (IOException e) {
 				return null;
 			}
-		} catch (IOException e) {
-			return null;
-		}
-		List<Integer> ids = new ArrayList<Integer>();
-		//parse json data
-		try{
-			JSONArray jArray = new JSONArray(result);
-			for (int i = 0; i < jArray.length(); i++) {
-				JSONObject json_data = jArray.getJSONObject(i);
-				ids.add(json_data.getInt("recipe_id"));
-			}
-		} catch (JSONException e){
-			return null;
-		}
-		List<RecipeOverview> ovs = new ArrayList<RecipeOverview>();
-		for (int i = 0; i < ids.size() && i < 20; i++){
-			RecipeOverview temp = getOverviewFromId(ids.get(i), searcher);
-			if (temp == null){
+			List<Integer> ids = new ArrayList<Integer>();
+			//parse json data
+			try{
+				JSONArray jArray = new JSONArray(result);
+				for (int i = 0; i < jArray.length(); i++) {
+					JSONObject json_data = jArray.getJSONObject(i);
+					ids.add(json_data.getInt("recipe_id"));
+				}
+			} catch (JSONException e){
 				return null;
 			}
-			ovs.add(temp);
+			List<RecipeOverview> ovs = new ArrayList<RecipeOverview>();
+			for (int i = 0; i < ids.size() && i < 20; i++){
+				RecipeOverview temp = getOverviewFromId(ids.get(i), searcher);
+				if (temp == null){
+					return null;
+				}
+				ovs.add(temp);
+			}
+			return ovs;
+		} else {
+			return new ArrayList<RecipeOverview>();
 		}
-		return ovs;
 	}
 
 	/**

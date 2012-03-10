@@ -1,4 +1,4 @@
-package uwcse403.recipe_reader.test;
+package uwcse403.recipe_reader.integration_test;
 
 /*
  * The following tests exercise the Recipe class by calling its constructor,
