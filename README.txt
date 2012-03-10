@@ -12,3 +12,7 @@ Kristin Ivarson - kristini (at) cs.washington.edu
 Anton Osobov - aosobov (at) cs.washington.edu
 Jon Ramaswamy - ramasj (at) cs.washington.edu
 Alisa Yamanaka - yamana (at) cs.washington.edu
+
+Version 1 Features:
+
+???Kristin???
