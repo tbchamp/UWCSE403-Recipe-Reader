@@ -327,6 +327,13 @@ public class Searcher {
 		}
 	}
 
+	/* NOTICE:
+	 * 	Were originally going to have notes that users could add to recipes.
+	 *  We removed this feature and it may possibly be implemented in a 
+	 *  future release. It is commented out for code coverage measurement
+	 *  reasons, even though it has been marked deprecated.
+	 */
+	
 	/**
 	 * @deprecated
 	 * @param u
@@ -334,7 +341,7 @@ public class Searcher {
 	 * @param note
 	 * @return
 	 */
-	public static boolean addNoteForUserById(User u, int id, String note) {
+	/*public static boolean addNoteForUserById(User u, int id, String note) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","add"));
@@ -363,7 +370,7 @@ public class Searcher {
 		} catch (IOException e) {
 			return false;
 		}
-	}
+	}*/
 
 	/**
 	 * get all meals in the database
