@@ -9,7 +9,6 @@ import cgitb;
 import htmllib
 import httplib
 import re
-import shlex
 import sys
 import unicodedata
 import urllib
@@ -17,6 +16,25 @@ import urllib2
 
 from urlparse import urlparse
 from BeautifulSoup import BeautifulSoup
+
+#function for unescaping string for printing at the end
+def unescape(s):
+	if not s:
+		return s
+	p = htmllib.HTMLParser(None)
+	p.save_bgn()
+	p.feed(s)
+	return p.save_end()
+
+# function for makeing sure input is valid URL
+def exists(site, path):
+	conn = httplib.HTTPConnection(site)
+	conn.request('HEAD', path)
+	response = conn.getresponse()
+	conn.close()
+	return response.status == 200
+
+##  Code starts running here #############################
 
 #verify parameters is given
 form = cgi.FieldStorage()
@@ -32,34 +50,22 @@ else:
 	meal = cgi.escape(value_meal)
 	category = cgi.escape(value_category)
 	keyword = cgi.escape(value_keyword)
+	print "<a href=\"http://cubist.cs.washington.edu/projects/12wi/cse403/r/upload.php\"><--BACK</a>"
 	print "<h1> Input: </h1>"
 	print "<p> URL: " + input + " </p>"
 	print "<p> Meal: " + meal + " </p>"
 	print "<p> Category: " + category + " </p>"
 	print "<p> Keyword: " + keyword + " </p>"
 
-def unescape(s):
-	if not s:
-		return s
-	p = htmllib.HTMLParser(None)
-	p.save_bgn()
-	p.feed(s)
-	return p.save_end()
-
-#make sure input is valid URL
-def exists(site, path):
-	conn = httplib.HTTPConnection(site)
-	conn.request('HEAD', path)
-	response = conn.getresponse()
-	conn.close()
-	return response.status == 200
-
+# verify the page exists
 url = urlparse(input)
 if not exists(url.netloc, url.path):
 	print "URL is invalid"
 	sys.exit()
 
 #beautiful soup the page
+#this library makes elements of the given webpage searchable by html attributes
+#this allows us to find the different parts of the recipe
 page = urllib2.urlopen(input)
 soup = BeautifulSoup(page)
 
@@ -122,6 +128,7 @@ if directions:
 
 """
 ##notes
+##not used currently by RecipeReader
 notes = soup.find('div', attrs={"id":"ctl00_CenterColumnPlaceHolder_recipe_rptNotes_ctl01_noteContainer"})
 if notes:
 	temp = notes.contents
@@ -133,28 +140,35 @@ if notes:
 ##calories
 calories = soup.find('span', attrs={"class":"calories"})
 if calories:
-	calories = re.sub("\D", "", calories.text)
+	calories = re.sub("[^0-9\.]", "", calories.text)
 
 ##fat
 fat = soup.find('span', attrs={"class":"fat"})
 if fat:
-	fat = re.sub("\D", "", fat.text)
+	fat = re.sub("[^0-9\.]", "", fat.text)
 
 ##cholesterol
 cholesterol = soup.find('span', attrs={"class":"cholesterol"})
 if cholesterol:
-	cholesterol = re.sub("\D", "", cholesterol.text)
+	cholesterol = re.sub("[^0-9\.]", "", cholesterol.text)
 
 #add title to keywords
-title_temp = unicodedata.normalize('NFKD', title).encode('ascii','ignore')
-
-title_parts = shlex.split(title_temp)
 keywords = []
-keywords.append(keyword)
 
-for t_part in title_parts:
-	keywords.append(t_part)
+if title:
+	title_temp = unescape(title)
+		#depreciated since shelex.split does not work properly
+		#title_parts = shlex.split(title_temp)
+	title_parts = [t.strip('"') for t in re.findall(r'[^\s"]+|"[^"]*"', title_temp)]
+	for t_part in title_parts:
+		keywords.append(t_part)
 
+if keyword:
+	temp_keywords = [t.strip('"') for t in re.findall(r'[^\s"]+|"[^"]*"', keyword)]
+	for tmp_key in temp_keywords:
+		keywords.append(tmp_key)
+
+# print the keywords
 print "<p> keywords: "
 for word in keywords:
 	print " \"" + word + "\" "
@@ -165,14 +179,14 @@ print "</p>"
 
 print "<h1> Upload to DataBase Results: </h1>"
 
-db_url1 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php-test/add_recipe.php'
-db_url2 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php-test/addtorecipe.php'
+db_url1 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/add_recipe.php'
+db_url2 = 'http://cubist.cs.washington.edu/projects/12wi/cse403/r/php/addtorecipe.php'
 
 # 1. add overview info
 
 values = {
 'name' : title,
-'rating' : '50',
+'rating' : '5',
 'description' : description,
 'preptime' : prep_time,
 'cooktime' : cook_time,
@@ -214,7 +228,6 @@ for ingredient in ingredients:
 		if the_page != "Ingredient Inserted":
 			print the_page
 			#sys.exit()
-		print "added 1 ingredient"
 
 # 3. add directions
 count = 0
@@ -267,31 +280,66 @@ print "<h1> Scraped Data: </h1>"
 
 print "<p> </p>"
 
-print "<p> title: " + unescape(title) + " </p>"
+print "<p> title: "
+if title:
+	print unescape(title) 
+else:
+	print "<NONE>"
+print " </p>"
 
 print "<p> </p>"
 
-print "<p> picture: " + unescape(picture) + " </p>"
+print "<p> picture: "
+if picture:
+	print unescape(picture)
+else:
+	print "<NONE>"
+print " </p>"
 
 print "<p> </p>"
 
-print "<p> description: " + unescape(description) + " </p>"
+print "<p> description: "
+if description:
+	print unescape(description)
+else:
+	print "<NONE>"
+print " </p>"
 
 print "<p> </p>"
 
-print "<p> prep_time: " + unescape(prep_time) + " </p>"
+print "<p> prep_time: "
+if prep_time:
+	print unescape(prep_time)
+else:
+	print "<NONE>"
+print " </p>"
 
 print "<p> </p>"
 
-print "<p> cook_time: " + unescape(cook_time) + " </p>"
+print "<p> cook_time: "
+if cook_time:
+	print unescape(cook_time)
+else:
+	print "<NONE>"
+print " </p>"
 
 print "<p> </p>"
 
-print "<p> ready_time: " + unescape(ready_time) + " </p>"
+print "<p> ready_time: "
+if ready_time:
+	print unescape(ready_time)
+else:
+	print "<NONE>"
+print " </p>"
 
 print "<p> </p>"
 
-print "<p> yield_info: " + unescape(yield_info) + " </p>"
+print "<p> yield_info: "
+if yield_info:
+	print unescape(yield_info)
+else:
+	print "<NONE>"
+print " </p>"
 
 print "<p> </p>"
 

@@ -150,3 +150,8 @@ footer {
 header, section, footer, aside, nav, article, figure {
 	display: block;
 }
+
+#HuskySoft {
+	padding-left: 20px;
+	padding-right: 20px;
+}

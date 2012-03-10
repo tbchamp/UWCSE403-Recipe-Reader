@@ -33,7 +33,7 @@
   <header>
     <a href=""><img src="images/Cooking_Android.png" alt="Logo" id="logo"></a>
     <ul>
-        <li><a href="dev.html">For Developers</a></li>
+        <li><a href="help.html">Help</a></li>
         <li><a href="upload.php">Upload Recipe</a></li>
         <li><a href="install.html">Install</a></li>
         <li><a href="index.html">Home</a></li>
@@ -47,7 +47,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="install.html">Install</a></li>
         <li><a href="upload.php">Upload Recipe</a></li>
-        <li><a href="dev.html">For Developers</a></li>
+        <li><a href="help.html">Help</a></li>
       </ul>
     </nav>
     <aside>
@@ -103,7 +103,8 @@
   <!-- end .content --></article>
   
   <footer>
-    <p>Recipe Reader by HuskySoft a CSE 403 winter quarter production.</p>
+    <img src="images/HuskySoft.png" alt="HuskySoft" id="HuskySoft" height="50">
+    Recipe Reader by HuskySoft a CSE 403 winter quarter production.
   </footer>
   <!-- end .container --></div>
 </body>
