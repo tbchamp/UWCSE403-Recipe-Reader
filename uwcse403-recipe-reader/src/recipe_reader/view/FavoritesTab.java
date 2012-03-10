@@ -1,7 +1,3 @@
-/**
- * Fragment for displaying list of user's favorites.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
 
 import java.util.ArrayList;
@@ -19,6 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+/**
+ * FavoritesTab is a fragment for displaying a list of the user's favorite recipes
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class FavoritesTab extends ListFragment {
 	
 	@Override

@@ -1,7 +1,3 @@
-/**
- * Fragment for searching/browsing recipes by category
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
 
 import recipe_reader.model.Category;
@@ -18,6 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/**
+ * PowerSearchTab is a fragment used to search for recipes by category
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class PowerSearchTab extends ListFragment{
 	
 	private Fragment resultsFragment;

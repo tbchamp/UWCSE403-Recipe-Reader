@@ -1,9 +1,4 @@
-/**
- * Main activity for application; starts on application boot.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
-
 
 import recipe_reader.model.Settings;
 import uwcse403.recipe_reader.R;
@@ -26,7 +21,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
-
+/**
+ * RecipeReaderActivity is the main activity for the application
+ * Starts on application boot
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class RecipeReaderActivity extends FragmentActivity {
 	
 	public static Settings settings;

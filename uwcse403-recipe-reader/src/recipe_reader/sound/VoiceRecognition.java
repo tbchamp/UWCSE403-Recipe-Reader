@@ -1,10 +1,3 @@
-/**
- * @author aosobov
- * This class is responsible for Speech to Text processing
- * Some of this code is taken directly from an android demo showing an example
- * of using the speach processing intent
- */
-
 package recipe_reader.sound;
 
 import android.app.Activity;
@@ -21,8 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 
-/** 
- * Sample code that invokes the speech recognition intent API.
+/**
+ * VoiceRecognition is responsible for Speech to Text processing
+ * Some of this code is taken directly from an Android demo showing an example
+ * of using the speech processing intent
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
  */
 public class VoiceRecognition extends Observable {
     

@@ -1,8 +1,3 @@
-/**
- * Fragment for displaying an image and name for a 
- * recipe when it's first viewed.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
 
 import java.io.IOException;
@@ -19,6 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * LandingFragment is the home screen for a recipe view
+ * It displays an image and other information for a recipe
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class LandingFragment extends Fragment {
 	
 	@Override

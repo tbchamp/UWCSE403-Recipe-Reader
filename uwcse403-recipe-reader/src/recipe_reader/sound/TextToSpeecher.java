@@ -1,11 +1,3 @@
-/**
- * @author Alisa Yamanaka
- * @version March 6, 2012 - 11:19
- * 
- * This class uses the TextToSpeech class provided by android to convert text
- * 	to speech. Implements the OnInitListener so other classes do not have to.
- */
-
 package recipe_reader.sound;
 
 import java.util.HashMap;
@@ -19,6 +11,13 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * TextToSpeecher uses the TextToSpeech class provided by android to convert text
+ * to speech. Implements the OnInitListener so other classes do not have to.
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class TextToSpeecher implements OnInitListener {
 	
 	private Activity act;

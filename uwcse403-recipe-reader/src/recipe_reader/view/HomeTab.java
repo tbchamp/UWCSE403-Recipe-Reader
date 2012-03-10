@@ -1,7 +1,3 @@
-/**
- * Fragment shown on application load, with search box.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
 
 import uwcse403.recipe_reader.R;
@@ -15,6 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * HomeTab is the fragment shown on application load, and contains a search box
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class HomeTab extends Fragment {
 	
 	@Override

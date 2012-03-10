@@ -15,6 +15,12 @@ import recipe_reader.model.Category;
 import recipe_reader.comparator.RecipeRatingComparator;
 import recipe_reader.comparator.RecipeTitleComparator;
 
+/**
+ * RecipeOverviewComparatorTest tests the RecipeOverviewComparator class
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class RecipeOverviewComparatorTest extends AndroidTestCase {
 	
 	public void testSortByTitle() {

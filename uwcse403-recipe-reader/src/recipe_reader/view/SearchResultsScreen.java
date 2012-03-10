@@ -1,9 +1,4 @@
-/**
- * Fragment for displaying list of recipe search results.
- * @author Kristin Ivarson
- */
 package recipe_reader.view;
-
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -20,9 +15,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+/**
+ * SearchResultsScreen is a fragment that displays a list of recipe search results
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class SearchResultsScreen extends Fragment {
 	private List<String> searchKeywords;
 	private int catNumber;

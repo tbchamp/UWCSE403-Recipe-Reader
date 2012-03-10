@@ -1,7 +1,3 @@
-/**
-* Fragment for displaying list of recipe instructions.
-* @author Kristin Ivarson
-*/
 package recipe_reader.view;
 
 import recipe_reader.model.Directions;
@@ -16,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * InstructionsFragment is a fragment that displays the list of recipe instructions
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ *
+ */
 public class InstructionsFragment extends ListFragment {
 
 	private static final int HIGHLIGHTING_COLOR = Color.rgb(87, 174, 74);
