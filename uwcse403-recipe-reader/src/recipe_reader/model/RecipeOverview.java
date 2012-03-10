@@ -15,7 +15,8 @@ public class RecipeOverview {
 	private final String description;
 
 	/**
-	 * class constructor
+	 * Class constructor
+	 * 	Doesn't do error checking, as errors are handled by the database.
 	 * @param name
 	 * @param category
 	 * @param favorite
@@ -34,7 +35,7 @@ public class RecipeOverview {
 	}
 
 	/**
-	 * class constructor if no rating is supplied
+	 * Class constructor if no rating is supplied. Sets rating to 50.
 	 * @param name
 	 * @param category
 	 * @param favorite

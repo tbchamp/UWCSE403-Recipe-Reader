@@ -12,7 +12,7 @@ public class User {
 	private final int id;
 	
 	/**
-	 * Constructor for a User object
+	 * Constructor for a User object. Uniqueness of ids is handled by the database.
 	 * 
 	 * @param username - username of the user being created
 	 * @param id - non-negative integer id to identify the user by

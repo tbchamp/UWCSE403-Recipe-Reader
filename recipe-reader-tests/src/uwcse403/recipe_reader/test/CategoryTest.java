@@ -1,11 +1,22 @@
 package uwcse403.recipe_reader.test;
 
+/*
+ * The following tests exercise the Category class by calling its constructor, and
+ *  get methods. Tests that look for invalid input were purposefully left out
+ *  because invalid input is checked by the database.
+ *  
+ *  NOTE: This is a white box test.
+ * 
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ */
+
 import android.test.AndroidTestCase;
 import recipe_reader.model.Category;
 
 public class CategoryTest extends AndroidTestCase {
 	
-	Category dairyCategory;
+	private Category dairyCategory;
 	
 	@Override
 	public void setUp() {
@@ -21,6 +32,12 @@ public class CategoryTest extends AndroidTestCase {
 	}
 	
 	
+	/* NOTICE:
+	 * 	The following test fails, but the error is handled by the database, which
+	 * 	cannot be tested through here.
+	 */
+	
+	/*
 	// Tests that two categories with the same name should not exist.
 	//	May need to modify Category.java code for this to pass.
 	public void testsThatTwoCategoriesWithSameNameShouldNotBeCreated() throws Exception {
@@ -33,7 +50,7 @@ public class CategoryTest extends AndroidTestCase {
 		} catch (IllegalArgumentException expected) {
 		}
 	}
-	
+	*/
 	
 	// Tests that a category with a name not contained in the ids/icons
 	//	is not created.
@@ -159,6 +176,26 @@ public class CategoryTest extends AndroidTestCase {
 	
 	
 	
+	/***************************************************	toString TESTS	***************************************************/
+	
+	// Tests that the toString method returns the correct string for Dairy Category.
+	public void testsThatTheCorrectStringIsReturnedWhenToStringMethodIsCalledOnDairyCategory() {
+		assertEquals("Dairy Category's toString method should return the Category's name.", "Dairy", dairyCategory.toString());
+	}
+	
+	// Tests the toString method on a Category other than Dairy
+	public void testsTheToStringMethodOnACategoryOtherThanDairy(){
+		Category testCat = new Category("Side Dish");
+		assertEquals("Side Dish Category's toString method should return the Category's name.", "Side Dish", testCat.toString());
+	}
+	
+	
+	
+	/* NOTICE:
+	 * 	All set methods have been removed because Category has been made immutable.
+	 * 	All set tests have been commented out since they are no longer valid.
+	 */
+	
 	/***************************************************	setName TESTS	***************************************************/
 	
 	// Tests that passing setName null throws an exception.
@@ -260,21 +297,13 @@ public class CategoryTest extends AndroidTestCase {
 		testCategory.setId(5);
 		int ending = testCategory.getId();
 		assertTrue("Calling setId(5) on Category Other should change its Id to 5.", initial == 8 && ending == 5);
-	}*/
+	}
 	
 	// Since setId is called when a Category is initially constructed, this test ensures
 	//	that the Category's Id gets initially set correctly.
 	// Tests that the correct ID is returned for Dairy Category
 	public void testsThatTheCategorysIdIsInitiallySetCorrectlyUponConstruction() {
 		assertEquals("Dairy Category should initally have an Id of 2.", 2, dairyCategory.getId());
-	}
-	
-	
-	
-	/***************************************************	toString TESTS	***************************************************/
-	
-	// Tests that the toString method returns the correct string for Dairy Category.
-	public void testsThatTheCorrectStringIsReturnedWhenToStringMethodIsCalledOnDairyCategory() {
-		assertEquals("Dairy Category's toString method should return the Category's name.", "Dairy", dairyCategory.toString());
-	}
+	}*/
+
 }

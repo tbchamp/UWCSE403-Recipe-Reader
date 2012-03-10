@@ -1,10 +1,13 @@
 package uwcse403.recipe_reader.test;
 
-/**
- * Tests for 3 comparators for sorting recipe overview objects
- * that contain the information needed to display a list of
- * search results. White-box test.
- * Kristin Ivarson (kristini@cs)
+/*
+ * The following tests exercise the comparator classes that sort RecipeOverview
+ * 	objects that contain the information needed to display a list of search results.
+ *  
+ *  NOTE: This is a white box test.
+ * 
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
  */
 
 import java.util.*;

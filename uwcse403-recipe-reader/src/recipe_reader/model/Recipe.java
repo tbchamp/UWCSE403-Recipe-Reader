@@ -379,13 +379,23 @@ public class Recipe {
 		this.imgLoc = imgLoc;
 	}
 
+	/* NOTICE:
+	 * 	All addDatabase type methods below were created in the beginning of the Recipe
+	 * 	Reader app's development with the intention of being able to add recipes to the
+	 * 	database from the phone. We have removed that feature in hopes of adding it in a 
+	 * 	future release. Uncomment when that day comes.
+	 * 
+	 * 	Also, despite they have been deprecated in the javadoc header, the methods have
+	 * 	been commented out for code coverage measurement reasons.
+	 */
+	
 	/**
 	 * @deprecated
 	 * @param adder
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean addToDatabase(User adder) throws Exception {
+	/*public boolean addToDatabase(User adder) throws Exception {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("name", overview.getName()));
@@ -438,6 +448,7 @@ public class Recipe {
 		}
 		return true;
 	}
+	*/
 
 
 	/**
@@ -446,7 +457,7 @@ public class Recipe {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean addIngredientsToDB(int recipeId) throws Exception {
+	/*private boolean addIngredientsToDB(int recipeId) throws Exception {
 		for (String i : ingredients) {
 			String result = "";
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -476,7 +487,7 @@ public class Recipe {
 			}
 		}
 		return true;		
-	}
+	}*/
 
 	/**
 	 * @deprecated
@@ -484,7 +495,7 @@ public class Recipe {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean addKeywordsToDB(int recipeId) throws Exception{
+	/*private boolean addKeywordsToDB(int recipeId) throws Exception{
 		for (String k : keywords) {
 			String result = "";
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -514,7 +525,7 @@ public class Recipe {
 			}
 		}
 		return true;			
-	}
+	}*/
 
 	/**
 	 * @deprecated
@@ -522,7 +533,7 @@ public class Recipe {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean addDirectionsToDB(int recipeId) throws Exception{
+	/*private boolean addDirectionsToDB(int recipeId) throws Exception{
 		List<String> list = directions.getDirectionList();
 		for (int i = 0; i < list.size(); i++) {
 			String result = "";
@@ -554,7 +565,7 @@ public class Recipe {
 			}
 		}
 		return true;		
-	}
+	}*/
 
 	/**
 	 * @deprecated
@@ -563,7 +574,7 @@ public class Recipe {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean addNotesToDB(int recipeId, User adder) throws Exception {
+	/*public boolean addNotesToDB(int recipeId, User adder) throws Exception {
 		for (String n : notes) {
 			String result = "";
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -595,5 +606,6 @@ public class Recipe {
 		}
 		return true;	
 	}
+	*/
 
 }

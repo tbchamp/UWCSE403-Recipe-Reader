@@ -12,18 +12,18 @@ import recipe_reader.model.*;
 
 public class RecipeTest extends AndroidTestCase {
 	
-	List<String> directions;
-	List<String> ingredients;
-	List<String> notes;
-	List<String> keywords;
+	private List<String> directions;
+	private List<String> ingredients;
+	private List<String> notes;
+	private List<String> keywords;
 	
-	Recipe testRecipeOverviewRecipe;
-	Recipe testFullRecipe;
-	Category testCategory;
-	Directions testDirections;
-	RecipeOverview testRecipeOverview;
+	private Recipe testRecipeOverviewRecipe;
+	private Recipe testFullRecipe;
+	private Category testCategory;
+	private Directions testDirections;
+	private RecipeOverview testRecipeOverview;
 	
-	User user;
+	private User user;
 	
 	@Override
 	public void setUp() throws Exception {
@@ -291,12 +291,17 @@ public class RecipeTest extends AndroidTestCase {
 	}
 
 	
-	
+	/* NOTICE:
+	 * 	All addDatabase type methods were created in the beginning of the Recipe
+	 * 	Reader app's development with the intention of being able to add recipes to the
+	 * 	database from the phone. We have removed that feature in hopes of adding it in a 
+	 * 	future release. Uncomment when that day comes.
+	 */
 	
 	/***************************************************	addToDatabase TESTS		***************************************************/
 	
 	// Tests that a Recipe with an invalid meal name isn't added to the database
-	public void testsThatARecipeWithInvalidMealNameIsNotAddedToTheDatabase() {
+	/*public void testsThatARecipeWithInvalidMealNameIsNotAddedToTheDatabase() {
 		Recipe tempRecipe = new Recipe("Test Recipe2! DELETE ME LATER", "10 minutes", "45 minutes", "8 servings", ingredients,
 				testDirections, notes, keywords, 5240, 5000, 240, testCategory, false, "Delete this recipe if it makes it to the database at some point.",
 				"INVALID MEAL NAME", "Never", "http://i.imgur.com/dUWmF.jpg");
@@ -381,10 +386,6 @@ public class RecipeTest extends AndroidTestCase {
 		}
 	}
 	
-	/* *******  THE TESTS ENCLOSED SHOULD SUCCESSFULLY ADD RECIPES TO THE DATABASE. NOT RUNNING THESE
-	   				UNTIL I KNOW THEY WON'T F UP THE DATABASE!
-	   				I NEED MORE DOCUMENTATION!!!!!
-	
 	// Tests that a Recipe is successfully added to the database
 	public void testsThatAValidRecipeIsAddedToTheDatabase() {
 		Recipe testRecipe = new Recipe("Tester Recipe1! DELETE ME LATER", "10 minutes", "45 minutes", "8 servings", ingredients,
@@ -440,6 +441,6 @@ public class RecipeTest extends AndroidTestCase {
 		}
 	}
 	
-	*********************** END OF ENCLOSURE */
+	*/
 	
 }

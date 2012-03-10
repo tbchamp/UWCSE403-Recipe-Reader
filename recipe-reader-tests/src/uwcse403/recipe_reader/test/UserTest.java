@@ -1,7 +1,14 @@
 package uwcse403.recipe_reader.test;
 
 /*
- * Black Box Test
+ * The following tests exercise the User class by calling its constructor,
+ *  get, and set methods. Tests that look for invalid input were purposefully left out
+ *  because invalid input is checked by the database.
+ *  
+ *  NOTE: This is a black box test.
+ * 
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
  */
 
 import android.test.AndroidTestCase;
@@ -9,7 +16,7 @@ import recipe_reader.model.User;
 
 public class UserTest extends AndroidTestCase {
 	
-	User testUser;
+	private User testUser;
 	
 	@Override
 	public void setUp() throws Exception{
