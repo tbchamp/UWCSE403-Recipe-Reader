@@ -8,6 +8,7 @@
     <string name="sort_title">Sort by \nTitle</string>
     <string name="sort_cat">Sort by \nCategory</string>
     <string name="sort_rating">Sort by \nRating</string>
+    <string name="create">Sign In or Create New User</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
     <string name="log_in">Log In</string>

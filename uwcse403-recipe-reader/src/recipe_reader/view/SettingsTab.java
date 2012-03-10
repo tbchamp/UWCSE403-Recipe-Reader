@@ -60,7 +60,10 @@ public class SettingsTab extends Fragment {
 				View p = ((View) v.getParent()).findViewById(R.id.passwordEntry);
 				String password = ((TextView) p).getText().toString();
 				try {
-					settings.signIn(username, password);
+					if(!settings.signIn(username, password)) {
+						settings.createUser(username, password);
+						settings.signIn(username, password);
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
