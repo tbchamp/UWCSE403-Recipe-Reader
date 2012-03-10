@@ -110,7 +110,7 @@ public class Generator {
 		r.setIngredients(getIngredients(id));
 		r.setDirections(getDirections(id));
 		r.setKeywords(getKeywords(id));
-		r.setNotes(getNotes(id));
+		//r.setNotes(getNotes(id));
 		return r;
 	}
 
@@ -271,10 +271,18 @@ public class Generator {
 		return k;
 	}
 
+	
+	/* NOTICE:
+	 * 	Were originally going to have notes that users could add to recipes.
+	 *  We removed this feature and it may possibly be implemented in a 
+	 *  future release. It is commented out for code coverage measurement
+	 *  reasons, even though it has been marked deprecated.
+	 */
+	
 	/**
 	 * @deprecated
 	 */
-	private static List<String> getNotes(int id) {
+	/*private static List<String> getNotes(int id) {
 		String result = "";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("type","notes"));
@@ -314,5 +322,5 @@ public class Generator {
 			return null;
 		}
 		return n;
-	}
+	}*/
 }
