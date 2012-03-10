@@ -1,8 +1,16 @@
 package uwcse403.recipe_reader.test;
 
-// White box test
-
-// NO NEGATIVE TESTS FOR SET METHODS, WAITING ON SOLUTION FOR INVALID INPUTS
+/*
+ * The following tests exercise the Recipe class by calling its constructor,
+ * 	set, and get methods. Tests that look for invalid input were purposefully
+ * 	left out because invalid input is checked either in another class or by
+ * 	the database.
+ *  
+ *  NOTE: This is a white box test.
+ * 
+ * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
+ * Anton Osobov, Jonathan Ramaswamy, Alisa Yamanaka
+ */
 
 import java.util.ArrayList;
 import java.util.List;
