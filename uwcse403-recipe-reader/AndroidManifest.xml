@@ -31,9 +31,9 @@
         
     </application>
     
-    <instrumentation
+    <!--<instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="uwcse403.recipe_reader" />
+        android:targetPackage="uwcse403.recipe_reader" />-->
 
 	
 </manifest>
