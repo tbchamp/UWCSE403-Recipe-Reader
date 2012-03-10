@@ -51,6 +51,7 @@ public class PowerSearchTab extends ListFragment{
 		int catID = c.getId();
 		((SearchResultsScreen) resultsFragment).setCatNumber(catID);
 		ft.replace(android.R.id.content, resultsFragment, "Search Results");
+		ft.addToBackStack("Search Results");
 		ft.commit();
 	}
 

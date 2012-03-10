@@ -46,6 +46,7 @@ public class HomeTab extends Fragment {
 			String search = ((TextView) box).getText().toString();
 			((SearchResultsScreen) resultsFragment).setSearchPhrase(search);
 			ft.replace(android.R.id.content, resultsFragment, "Search Results");
+			ft.addToBackStack("Search Results");
 			ft.commit();
 		}
 	}
