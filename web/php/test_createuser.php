@@ -1,4 +1,5 @@
 <?php
+//testing class for createuser.php using simpletest php testing protocol
 require_once('simpletest/autorun.php');
 require_once('simpletest/web_tester.php');
 

@@ -1,7 +1,9 @@
 <?php
+//get mysql connections
 mysql_connect("cubist.cs.washington.edu","zaphans","uvwSL97k");
 mysql_select_db("zaphans_recipe_reader");
 
+//grab all variables from request and scrub for php insertion
 $unsafe_name =  $_REQUEST['name'];
 $safe_name = mysql_real_escape_string($unsafe_name);
 
@@ -41,27 +43,27 @@ $safe_category = mysql_real_escape_string($unsafe_category);
 $unsafe_img_loc =  $_REQUEST['img_loc'];
 $safe_img_loc = mysql_real_escape_string($unsafe_img_loc);
 
+//execute the insert
 $result = mysql_query("insert into recipe(name, rating, description, prep_time, cook_time, ready_time, yield, calories, fat, colesterol, img_loc)
 							values ('" . $safe_name . "', " . $safe_rating . ", '" . $safe_description . "', '" .
 							$safe_preptime . "', '" . $safe_cooktime . "', '" . $safe_readytime . "', '" . $safe_yield . "', " . $safe_calories . ", "
 							 . $safe_fat . ", " . $safe_cholesterol . ", '" . $safe_img_loc . "')");
 if (!$result) {
-print("insert into recipe(name, rating, description, prep_time, cook_time, ready_time, yield, calories, fat, colesterol, img_loc)
-							values ('" . $safe_name . "', " . $safe_rating . ", '" . $safe_description . "', '" .
-							$safe_preptime . "', '" . $safe_cooktime . "', '" . $safe_readytime . "', '" . $safe_yield . "', " . $safe_calories . ", "
-							 . $safe_fat . ", " . $safe_cholesterol . ", '" . $safe_img_loc . "')");
 	print("Recipe Create Failed!");
-} else {
-	$id = mysql_insert_id();
+} else { //if successful
+	$id = mysql_insert_id(); //grab id from previous insert
+	//make sure passed meal is valid
 	$q = mysql_query("select id from meals where name = '" . $safe_meal . "';");
 	if (mysql_num_rows($q) == 0) {
 		print("Invalid Meal Name");
 	} else {
+		//get meal id from previous select set recipe mealid to this
 		$meal_id = mysql_fetch_assoc($q);
 		$q = mysql_query("update recipe set meal_id = " . $meal_id['id'] . " where id = " . $id);
 		if (!$q) {
 			print("Add Meal Failed");
 		} else {
+			//do the same as previous step for categories
 			$t = mysql_query("select id from categories where cat = '" . $safe_category . "';");
 			if (mysql_num_rows($t) == 0) {
 				print("Invalid Category Name");
@@ -71,6 +73,7 @@ print("insert into recipe(name, rating, description, prep_time, cook_time, ready
 				if (!$s) {
 					print("Add Category Failed");
 				} else {
+					//if everything works output the id of the recipe
 					print($id);
 				}
 			}

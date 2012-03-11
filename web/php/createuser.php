@@ -1,11 +1,15 @@
 <?php
+//get mysql connections
 mysql_connect("cubist.cs.washington.edu","zaphans","uvwSL97k");
 mysql_select_db("zaphans_recipe_reader");
 
+//scrub user input
 $unsafe_username =  $_REQUEST['username'];
 $safe_username = mysql_real_escape_string($unsafe_username);
 $unsafe_password =  $_REQUEST['password'];
 $safe_password = mysql_real_escape_string($unsafe_password);
+
+//insert user using sha256 of password, and sha256 of username+password+server salt for unique id
 $result = mysql_query("insert into user(username, password, unique_id) values( '" . $safe_username . "', '" . hash("sha256", $safe_password) . "', '" . hash("sha256", $safe_username . $safe_password . "salt") . "')");
 if (!$result) {
 	print("Create User Failed!");

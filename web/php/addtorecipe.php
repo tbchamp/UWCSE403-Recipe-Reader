@@ -1,11 +1,15 @@
 <?php
+//get mysql connections
 mysql_connect("cubist.cs.washington.edu","zaphans","uvwSL97k");
 mysql_select_db("zaphans_recipe_reader");
 
+//type variable doesnt need escaped
 $type = $_REQUEST['type'];
 
+//recipe_id used by all branches
 $unsafe_id =  $_REQUEST['recipe_id'];
 $safe_id = mysql_real_escape_string($unsafe_id);
+
 
 if (strcmp($type, 'ingredient') == 0){
 	$unsafe_text =  $_REQUEST['text'];

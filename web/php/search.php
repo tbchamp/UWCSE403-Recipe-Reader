@@ -1,11 +1,14 @@
 <?php
+//get mysql connection
 mysql_connect("cubist.cs.washington.edu","zaphans","uvwSL97k");
 mysql_select_db("zaphans_recipe_reader");
 
 $type = $_REQUEST['type'];
 
 if (strcmp($type, 'standard') == 0){
+	//main keyword based search function
 	$terms = $_REQUEST['terms'];
+	//build query
 	$term_array = explode("_", $terms);
 	$num_terms = sizeof($term_array);
 	$query_text = "select recipe_id, count(phrase) from keywords where ";
@@ -16,6 +19,7 @@ if (strcmp($type, 'standard') == 0){
 			$query_text = $query_text . " or ";
 		}
 	}
+	//sort based on relevance
 	$query_text = $query_text . " group by recipe_id order by count(phrase) desc";
 	$q = mysql_query($query_text);
 	if (!$q) {
@@ -27,6 +31,7 @@ if (strcmp($type, 'standard') == 0){
 		print(json_encode($output));
 	}
 } else if (strcmp($type, 'getOverview') == 0){
+	//get overview by id
 	$id = $_REQUEST['id'];
 	$safe_id = mysql_real_escape_string($id);
 	$q = mysql_query("select r.name, r.rating, r.description, c.cat, c.id from
@@ -41,6 +46,7 @@ if (strcmp($type, 'standard') == 0){
 		print(json_encode($output));
 	}
 } else if (strcmp($type, 'getCategories') == 0){
+	//get all categories
 	$q = mysql_query("select * from categories");
 	if (!$q) {
 		print("get categories failed");
@@ -51,6 +57,7 @@ if (strcmp($type, 'standard') == 0){
 		print(json_encode($output));
 	}
 } else if (strcmp($type, 'getMeals') == 0){
+	//get all meals
 	$q = mysql_query("select * from meals");
 	if (!$q) {
 		print("get meals failed");
@@ -61,6 +68,7 @@ if (strcmp($type, 'standard') == 0){
 		print(json_encode($output));
 	}
 } else if (strcmp($type, 'getIdsByCatMeal') == 0){
+	//get all meals with a category and meal
 	$categoryid = $_REQUEST['categoryid'];
 	$safe_categoryid = mysql_real_escape_string($categoryid);
 	$mealid = $_REQUEST['mealid'];
@@ -76,6 +84,7 @@ if (strcmp($type, 'standard') == 0){
 		print(json_encode($output));
 	}
 } else if (strcmp($type, 'getIdsByCat') == 0){
+	//get all meals for a category
 	$categoryid = $_REQUEST['categoryid'];
 	$safe_categoryid = mysql_real_escape_string($categoryid);
 	$q = mysql_query("select id, rating from recipe where category_id = "

@@ -1,5 +1,7 @@
 package recipe_reader.model;
 
+import java.util.Random;
+
 /**
  * RecipeOverview contains information about a recipe to be display in a list of other recipes
  * @author Tyler Beauchamp, Zach Evans, Kristin Ivarson, 
@@ -35,7 +37,7 @@ public class RecipeOverview {
 	}
 
 	/**
-	 * Class constructor if no rating is supplied. Sets rating to 50.
+	 * Class constructor if no rating is supplied. Sets rating to random.
 	 * @param name
 	 * @param category
 	 * @param favorite
@@ -43,7 +45,14 @@ public class RecipeOverview {
 	 * @param id
 	 */
 	public RecipeOverview(String name, Category category, Boolean favorite, String description, int id) {
-		this(name, category, favorite, 50, description, id);
+		Random rand = new Random();
+		int rating = rand.nextInt(100);
+		this.name = name;
+		this.category = category;
+		this.favorite = favorite;
+		this.rating = rating;
+		this.description = description;
+		this.id = id;
 	}
 
 	/**

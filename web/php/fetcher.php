@@ -1,4 +1,5 @@
 <?php
+//get mysql connection
 mysql_connect("cubist.cs.washington.edu","zaphans","uvwSL97k");
 mysql_select_db("zaphans_recipe_reader");
 
@@ -6,7 +7,9 @@ $type =  $_REQUEST['type'];
 
 $unsafe_recipeid = $_REQUEST['recipeid'];
 $safe_recipeid = mysql_real_escape_string($unsafe_recipeid);
+
 if (strcmp($type, 'getMain') == 0){
+	//get recipe info that is contained by recipe table
 	$q=mysql_query("select r.prep_time, r.cook_time, r.yield,
 		r.calories, r.fat, r.colesterol, m.name, r.ready_time, r.img_loc from recipe r, meals m
 		where r.id = " . $safe_recipeid . " and m.id = r.meal_id");
@@ -18,6 +21,7 @@ if (strcmp($type, 'getMain') == 0){
 		print(json_encode($output));
 	}
 } elseif (strcmp($type, 'ingredients') == 0){
+	//get all ingredients
 	$q = mysql_query("select text from ingredients
 		where recipe_id = " . $safe_recipeid);
 	if (!$q){
@@ -29,6 +33,7 @@ if (strcmp($type, 'getMain') == 0){
 	}
 
 } elseif (strcmp($type, 'directions') == 0){
+	//get all directions in order
 	$q = mysql_query("select order_number, text from instructions
 		where recipe_id = " . $safe_recipeid . " order by order_number asc");
 	if (!$q){
@@ -39,6 +44,7 @@ if (strcmp($type, 'getMain') == 0){
 		print(json_encode($output));
 	}
 } elseif (strcmp($type, 'keywords') == 0){
+	//get keywords for a recipe
 	$q = mysql_query("select phrase from instructions where recipe_id = " . $safe_recipeid);
 	if (!$q){
 		print("get keywords failed");
@@ -48,6 +54,7 @@ if (strcmp($type, 'getMain') == 0){
 		print(json_encode($output));
 	}
 } elseif (strcmp($type, 'notes') == 0){
+	//get all notes for a recipe
 	$q = mysql_query("select text from notes where recipe_id = " . $safe_recipeid);
 	if (!$q){
 		print("get notes failed");
