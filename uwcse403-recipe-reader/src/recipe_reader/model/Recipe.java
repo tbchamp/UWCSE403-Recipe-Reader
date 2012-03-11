@@ -133,6 +133,14 @@ public class Recipe {
 	public Directions getDirections() {
 		return directions;
 	}
+	
+	/**
+	 * fetcher for directions list
+	 * @return directions list for this recipe
+	 */
+	public List<String> getDirectionsList() {
+		return directions.getDirectionList();
+	}
 
 	/**
 	 * fetcher for notes

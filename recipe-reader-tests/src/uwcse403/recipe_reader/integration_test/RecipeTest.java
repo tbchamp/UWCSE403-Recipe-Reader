@@ -18,6 +18,12 @@ import java.util.List;
 import android.test.AndroidTestCase;
 import recipe_reader.model.*;
 
+// Uncomment out when running with JDave and running mock test
+/*import org.jmock.Mockery;
+import org.jmock.Expectations;
+import org.jmock.lib.legacy.ClassImposteriser;
+*/
+
 public class RecipeTest extends AndroidTestCase {
 	
 	private List<String> directions;
@@ -31,7 +37,8 @@ public class RecipeTest extends AndroidTestCase {
 	private Directions testDirections;
 	private RecipeOverview testRecipeOverview;
 	
-	private User user;
+	// User is no longer needed due to deprecated database methods.
+	//private User user;
 	
 	@Override
 	public void setUp() throws Exception {
@@ -63,11 +70,11 @@ public class RecipeTest extends AndroidTestCase {
 				testDirections, notes, keywords, 5280, 5000, 280, testCategory, false, "Delete this recipe if it makes it to the database at some point.",
 				"Lunch", "Never", "http://i.imgur.com/dUWmF.jpg");
 		
-		try{
+		/*try{
 			user = new User("TestUser", 777777, "TestUserID");
 		} catch (IllegalArgumentException unexpected){
 			fail("Setup was not performed successfully.");
-		}
+		}*/
 
 	}
 	
@@ -131,7 +138,39 @@ public class RecipeTest extends AndroidTestCase {
 	
 	// Tests the getDirection method
 	public void testsTheGetDirectionsMethodReturnsTheCorrectDirectionsForTheRecipe() {
-		assertEquals("The getPrep method should return the list of directions for a Recipe.", testDirections, testFullRecipe.getDirections());
+		assertEquals("The getDirections method should return the Directions object for a Recipe.", testDirections, testFullRecipe.getDirections());
+	}
+	
+	/* NOTICE:
+	 * 	This test must be run from command line in use with JDave unfinalizer.
+	 * 	Uncomment when running with those. Otherwise, leaving it commented out
+	 *  for code coverage purposes.
+	 */
+	// Tests the getDirectionsList method
+	/*public void testTheGetDirectionsListMethodCallsTheDirectionsGetListMethodForTheRecipe(){
+		
+		final Mockery context = new Mockery() {{
+	        setImposteriser(ClassImposteriser.INSTANCE);
+	    }};
+	    
+		final Directions d = context.mock(recipe_reader.model.Directions.class);
+
+		Recipe testRecipe = new Recipe("Tester Pie", "13 minutes", "20 minutes", "20 servings", ingredients,
+				d, notes, keywords, 5280, 5000, 280, testCategory, false, "Bark bark, meow.",
+				"Lunch", "Always", "http://i.imgur.com/dUWmF.jpg");
+		
+		context.checking(new Expectations() {{
+		    oneOf ((Directions)(d)).getDirectionList();
+		}});
+		
+		testRecipe.getDirectionsList();
+		
+		context.assertIsSatisfied();
+	}*/
+	
+	// Tests the getDirectionsList method
+	public void testsTheGetDirectionsListMethodReturnsTheCorrectDirectionsForTheRecipe() {
+		assertEquals("The getDirectionsList method should return the list of directions for a Recipe.", directions, testFullRecipe.getDirectionsList());
 	}
 	
 	// Tests the getNotes method
